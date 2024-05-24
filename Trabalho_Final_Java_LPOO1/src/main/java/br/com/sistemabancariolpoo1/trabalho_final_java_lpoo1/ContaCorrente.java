@@ -27,10 +27,22 @@ public class ContaCorrente extends Conta {
     public void setLimit(double limit) {
         this.limit = limit;
     }
-
+    
+     @Override
+    public boolean saca(double valor) {
+        if(valor > limit) {
+            System.out.println("Valor solicitado para saque maior do que o limite dado");
+            return false;
+        }
+        System.out.println("Saque realizado com sucesso!");
+        return true;
+    }
+    
     @Override
     public void remunera() {
-        System.out.println("abc"); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       double saldoAtual = getSaldo();
+        double novoSaldo = saldoAtual + (saldoAtual * 0.01);
+        setSaldo(novoSaldo);
     }
     
     
