@@ -12,6 +12,22 @@ public abstract class Conta implements ContaI {
     private int numeroConta;
     private double saldo;
     private Cliente cliente;
+    
+    @Override
+    public boolean deposita(double valor) {
+        if(valor < 0) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean saca(double valor) {
+        if(valor < 0) {
+            return false;
+        }
+        return true;
+    }
 
     public int getNumeroConta() {
         return numeroConta;
