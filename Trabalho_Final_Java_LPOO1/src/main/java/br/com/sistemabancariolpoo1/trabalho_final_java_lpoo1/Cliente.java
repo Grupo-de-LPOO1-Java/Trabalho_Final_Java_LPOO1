@@ -76,11 +76,11 @@ public class Cliente {
         return listaClientes;
     }
 
-    public boolean atualizarCliente(String nome, String sobrenome, String rg, String endereco) {
+    public boolean atualizarCliente(String nome, String sobrenome, String rg, Endereco endereco) {
         this.setNome(nome);
         this.setSobrenome(sobrenome);
         this.setRg(rg);
-        this.setEndereco(new Endereco(endereco));
+        this.setEndereco(endereco);
         return true;
     }
 
