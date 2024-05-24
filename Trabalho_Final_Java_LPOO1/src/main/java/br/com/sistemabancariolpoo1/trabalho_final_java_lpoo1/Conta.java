@@ -9,9 +9,9 @@ package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
  * @author rafae
  */
 public abstract class Conta implements ContaI {
-    private int numeroConta;
+    private int numero;
     private double saldo;
-    private Cliente cliente;
+    private Cliente dono;
     
     @Override
     public boolean deposita(double valor) {
@@ -30,13 +30,8 @@ public abstract class Conta implements ContaI {
     }
     
     @Override
-    public Cliente getDono() {
-        return cliente;
-    };
-    
-    @Override
     public int getNumero() {
-        return numeroConta;
+        return numero;
     };
     
     @Override
@@ -47,24 +42,22 @@ public abstract class Conta implements ContaI {
     @Override
     public abstract void remunera();
 
-    public int getNumeroConta() {
-        return numeroConta;
-    }
-
-    public void setNumeroConta(int numeroConta) {
-        this.numeroConta = numeroConta;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-
-    public Cliente getCliente() {
-        return cliente;
+    
+    @Override
+    public Cliente getDono() {
+        return dono;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    
+    public void setDono(Cliente dono) {
+        this.dono = dono;
     }
     
     
