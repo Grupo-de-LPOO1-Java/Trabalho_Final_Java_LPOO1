@@ -28,6 +28,24 @@ public abstract class Conta implements ContaI {
         }
         return true;
     }
+    
+    @Override
+    public Cliente getDono() {
+        return cliente;
+    };
+    
+    @Override
+    public int getNumero() {
+        return numeroConta;
+    };
+    
+    @Override
+    public double getSaldo() {
+        return saldo;
+    };
+    
+    @Override
+    public abstract void remunera();
 
     public int getNumeroConta() {
         return numeroConta;
