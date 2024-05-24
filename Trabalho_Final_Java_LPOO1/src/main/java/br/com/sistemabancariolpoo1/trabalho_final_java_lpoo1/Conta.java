@@ -55,10 +55,6 @@ public abstract class Conta implements ContaI {
         this.numeroConta = numeroConta;
     }
 
-    public double getSaldo() {
-        return saldo;
-    }
-
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }

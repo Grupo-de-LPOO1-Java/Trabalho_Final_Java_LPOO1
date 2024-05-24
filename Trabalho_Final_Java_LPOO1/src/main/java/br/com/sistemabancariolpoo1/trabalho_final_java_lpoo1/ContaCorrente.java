@@ -27,6 +27,11 @@ public class ContaCorrente extends Conta {
     public void setLimit(double limit) {
         this.limit = limit;
     }
+
+    @Override
+    public void remunera() {
+        System.out.println("abc"); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 

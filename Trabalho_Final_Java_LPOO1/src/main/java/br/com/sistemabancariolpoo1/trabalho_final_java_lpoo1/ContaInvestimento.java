@@ -36,6 +36,11 @@ public class ContaInvestimento extends Conta {
     public void setDepositoInicial(double depositoInicial) {
         this.depositoInicial = depositoInicial;
     }
+
+    @Override
+    public void remunera() {
+        System.out.println("abc");
+    }
     
     
 }
