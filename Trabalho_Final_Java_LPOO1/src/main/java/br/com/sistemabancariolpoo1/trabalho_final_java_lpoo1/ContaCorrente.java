@@ -30,11 +30,12 @@ public class ContaCorrente extends Conta {
     
      @Override
     public boolean saca(double valor) {
-        if(valor > limit) {
+        if(valor > (limit + getSaldo())) {
             System.out.println("Valor solicitado para saque maior do que o limite dado");
             return false;
         }
         System.out.println("Saque realizado com sucesso!");
+        super.saca(valor);
         return true;
     }
     
