@@ -39,9 +39,31 @@ public class ContaInvestimento extends Conta {
 
     @Override
     public void remunera() {
-        System.out.println("abc");
+        double saldoAtual = getSaldo();
+        double novoSaldo = saldoAtual + (saldoAtual * 0.02);
+        setSaldo(novoSaldo);
     }
-    
-    
+    @Override
+    public boolean saca(double valor) {
+          if (valor > 0 && (getSaldo() - valor) >= montanteMinimo) {
+            super.saca(valor);
+            System.out.println("Saque efetuado com sucesso!");
+            return true;
+        } else {
+            System.out.println("Saque falhou: saldo insuficiente ou abaixo do montante mínimo permitido.");
+            return false;
+        }
+    }
+    @Override
+    public boolean deposita(double valor) {
+        if(valor >=depositoMinimo){
+            super.deposita(valor);
+            System.out.println("Deposito realizado!");
+            return true;
+        } else {
+            System.out.println("Deposito falhou: valor abaixo do mínimo permitido!");
+            return false;
+        }
+}
 }
 

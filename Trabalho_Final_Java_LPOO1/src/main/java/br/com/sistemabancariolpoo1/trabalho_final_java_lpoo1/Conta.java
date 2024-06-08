@@ -18,6 +18,7 @@ public abstract class Conta implements ContaI {
         if(valor < 0) {
             return false;
         }
+        this.saldo+=valor;
         return true;
     }
     
@@ -26,6 +27,7 @@ public abstract class Conta implements ContaI {
         if(valor < 0) {
             return false;
         }
+        this.saldo -= valor;
         return true;
     }
     
