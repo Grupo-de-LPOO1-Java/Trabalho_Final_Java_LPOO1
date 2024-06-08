@@ -120,7 +120,7 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jLabel20.setText("CEP");
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AL", "AP", "AC", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,7 +130,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 15, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -158,11 +158,10 @@ public class SistemaBanco extends javax.swing.JFrame {
                                 .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(107, 107, 107))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(textCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(textRua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnCadastrar)
                                     .addGap(18, 18, 18)
@@ -171,9 +170,10 @@ public class SistemaBanco extends javax.swing.JFrame {
                                     .addComponent(jButton3)
                                     .addGap(18, 18, 18)
                                     .addComponent(jButton6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton5))))
-                        .addGap(0, 107, Short.MAX_VALUE))))
+                                    .addGap(27, 27, 27)
+                                    .addComponent(jButton5)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 95, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,9 +213,9 @@ public class SistemaBanco extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton6)
                     .addComponent(jButton5))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(52, 52, 52)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Cliente", jPanel1);
@@ -305,7 +305,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("CriarConta", jPanel2);
@@ -394,7 +394,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jButton10))
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("EditarConta", jPanel3);
@@ -407,7 +407,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab4", jPanel4);
@@ -423,8 +423,8 @@ public class SistemaBanco extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 433, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 226, Short.MAX_VALUE))
         );
 
         pack();
@@ -443,18 +443,23 @@ public class SistemaBanco extends javax.swing.JFrame {
         String sobreNome = textSobrenome.getText();
         String rg = textRG.getText();
         String cpf = textCPF.getText();
-        String endereco = textRua.getText();
+        String rua = textRua.getText();
+        String cep = textCEP.getText();
+        String estado = cmbEstado.getSelectedItem().toString();
+        
         
         if(cpf.equals("")){
             JOptionPane.showMessageDialog(null,"CPF não pode ser vazio.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;            
         }
-        
-        Cliente c = new Cliente(nome,sobreNome,rg,cpf,new Endereco(new Estado(""),"","",""));
-        Sistema.hashClientes.put(cpf, c);
+        Estado est = new Estado(estado);
+                Endereco end = new Endereco(est,cep,rua, "");
+                Cliente cli = new Cliente(nome,sobreNome,rg,cpf,end);
+                
+        Sistema.hashClientes.put(cpf, cli);
         this.tabModel.setListaContatos(Sistema.hashClientes);
         this.tabCliente.setRowSelectionInterval(Sistema.hashClientes.size()-1, Sistema.hashClientes.size()-1);
-        this.clienteSelecionadoParaAtualizacao = c;
+        this.clienteSelecionadoParaAtualizacao = cli;
         linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
