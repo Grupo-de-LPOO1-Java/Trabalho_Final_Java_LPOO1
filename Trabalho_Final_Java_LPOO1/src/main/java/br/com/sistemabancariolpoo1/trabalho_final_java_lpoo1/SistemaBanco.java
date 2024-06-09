@@ -44,10 +44,10 @@ public class SistemaBanco extends javax.swing.JFrame {
         textCPF = new javax.swing.JTextField();
         textRua = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabCliente = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
@@ -84,7 +84,6 @@ public class SistemaBanco extends javax.swing.JFrame {
         jTextField13 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,13 +104,33 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Atualizar");
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Excluir");
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Listar");
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Limpar");
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         tabCliente.setModel(tabModel);
         jScrollPane1.setViewportView(tabCliente);
@@ -165,13 +184,13 @@ public class SistemaBanco extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnCadastrar)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton2)
+                                    .addComponent(btnAtualizar)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton3)
+                                    .addComponent(btnExcluir)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton6)
+                                    .addComponent(btnLimpar)
                                     .addGap(27, 27, 27)
-                                    .addComponent(jButton5)))
+                                    .addComponent(btnListar)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 95, Short.MAX_VALUE))))
         );
@@ -209,10 +228,10 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5))
+                    .addComponent(btnAtualizar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnLimpar)
+                    .addComponent(btnListar))
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -399,19 +418,6 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("EditarConta", jPanel3);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("tab4", jPanel4);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -430,13 +436,55 @@ public class SistemaBanco extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        textNome.setText("");
+        textSobrenome.setText("");
+        textRG.setText("");
+        textCPF.setText("");
+        textRua.setText("");
+        textCEP.setText("");
+        cmbEstado.setSelectedItem("AL");
+        tabModel.setListaContatos(Sistema.hashClientes);
+        this.clienteSelecionadoParaAtualizacao = null;
+        linhaClicadaParaAtualizacao=-1;
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        tabModel.setListaContatos(Sistema.hashClientes);
+        this.clienteSelecionadoParaAtualizacao = null;
+        linhaClicadaParaAtualizacao=-1;
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        List<Cliente> listaExcluir = getClienteParaExcluirDaTabela();
+        if(listaExcluir.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Selecione alguma linha para excluir.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        this.tabModel.removeClientes(listaExcluir);
+        for(Cliente cli:listaExcluir)
+        Sistema.hashClientes.remove(cli.getCpf());
+        this.clienteSelecionadoParaAtualizacao = null;
+        linhaClicadaParaAtualizacao=-1;
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        Cliente cli = this.getClienteParaAtualizar();
+        if(cli==null){
+            return;
+        }
+        Sistema.hashClientes.replace(cli.getCpf(), cli);
+        this.tabModel.atualizarCliente(linhaClicadaParaAtualizacao);
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         String nome = textNome.getText();
@@ -446,23 +494,55 @@ public class SistemaBanco extends javax.swing.JFrame {
         String rua = textRua.getText();
         String cep = textCEP.getText();
         String estado = cmbEstado.getSelectedItem().toString();
-        
-        
+
         if(cpf.equals("")){
             JOptionPane.showMessageDialog(null,"CPF não pode ser vazio.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;            
+            return;
+        }
+        if(Sistema.hashClientes.containsKey(cpf)){
+            JOptionPane.showMessageDialog(null,"Já há esse CPF cadastrado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         Estado est = new Estado(estado);
-                Endereco end = new Endereco(est,cep,rua, "");
-                Cliente cli = new Cliente(nome,sobreNome,rg,cpf,end);
-                
+        Endereco end = new Endereco(est,cep,rua, "");
+        Cliente cli = new Cliente(nome,sobreNome,rg,cpf,end);
+
         Sistema.hashClientes.put(cpf, cli);
         this.tabModel.setListaContatos(Sistema.hashClientes);
         this.tabCliente.setRowSelectionInterval(Sistema.hashClientes.size()-1, Sistema.hashClientes.size()-1);
         this.clienteSelecionadoParaAtualizacao = cli;
         linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
+   
+    private Cliente getClienteParaAtualizar() {
+        if(clienteSelecionadoParaAtualizacao==null){
+            JOptionPane.showMessageDialog(null,"Selecione um cliente na tabela para atualizar.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return null;
+        }
+        if(!textCPF.getText().equals(clienteSelecionadoParaAtualizacao.getCpf())){
+            JOptionPane.showMessageDialog(null,"Você não pode atualizar o CPF!!!!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            textCPF.setText(clienteSelecionadoParaAtualizacao.getCpf());
+            return null;
+        }
+        clienteSelecionadoParaAtualizacao.getEndereco().setRua(textRua.getText());
+        clienteSelecionadoParaAtualizacao.getEndereco().setCep(textCEP.getText());
+        clienteSelecionadoParaAtualizacao.getEndereco().getEstado().setNome(cmbEstado.getSelectedItem().toString());
+        clienteSelecionadoParaAtualizacao.setNome(textNome.getText());
+        clienteSelecionadoParaAtualizacao.setRg(textRG.getText());
+        clienteSelecionadoParaAtualizacao.setSobrenome(textSobrenome.getText());
+        return clienteSelecionadoParaAtualizacao;
+                
+    }
+    
+    private List<Cliente> getClienteParaExcluirDaTabela() {
+        int[] linhasSelecionadas = this.tabCliente.getSelectedRows();
+        List<Cliente> listaExcluir = new ArrayList();
+        for (int i = 0; i < linhasSelecionadas.length; i++) {
+            Cliente contato = this.tabModel.getCliente(linhasSelecionadas[i]);
+            listaExcluir.add(contato);
+        }
+        return listaExcluir;
+    }
     /**
      * @param args the command line arguments
      */
@@ -499,14 +579,14 @@ public class SistemaBanco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -535,7 +615,6 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField10;
