@@ -4,6 +4,7 @@
  */
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -12,4 +13,5 @@ import java.util.HashMap;
  */
 public class Sistema {
     public static HashMap<String,Cliente> hashClientes = new HashMap<>();
+    public static ArrayList<Conta> listaContas = new ArrayList<>();
 }
