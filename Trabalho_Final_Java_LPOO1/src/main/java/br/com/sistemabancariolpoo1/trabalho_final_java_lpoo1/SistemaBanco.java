@@ -84,6 +84,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         jTextField13 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        teste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -241,7 +242,7 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jLabel6.setText("Cliente");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -368,6 +369,8 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jButton10.setText("Remunerar");
 
+        teste.setText("Teste");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -404,6 +407,10 @@ public class SistemaBanco extends javax.swing.JFrame {
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton10))))
                 .addGap(52, 52, 52))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(teste)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,7 +439,9 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jButton10))
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addGap(96, 96, 96)
+                .addComponent(teste)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("EditarConta", jPanel3);
@@ -531,6 +540,9 @@ public class SistemaBanco extends javax.swing.JFrame {
         this.tabCliente.setRowSelectionInterval(Sistema.hashClientes.size()-1, Sistema.hashClientes.size()-1);
         this.clienteSelecionadoParaAtualizacao = cli;
         linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
+        for (String key : Sistema.hashClientes.keySet()) {
+            jComboBox1.addItem(key);
+        }
     }//GEN-LAST:event_btnCadastrarctionPerformed
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
@@ -581,7 +593,8 @@ public class SistemaBanco extends javax.swing.JFrame {
             Sistema.listaContas.add(conta);
             jComboBox2.setSelectedItem("--");
             MensagemErro.setText("Conta corrente cadastrada");
-        }else{
+            jComboBox1.setSelectedItem("--");
+        }else if(jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Investimento")){
             ContaInvestimento conta = new ContaInvestimento();
             conta.setDepositoMinimo(Double.parseDouble(txtSegundo.getText()));
             conta.setNumero(Sistema.listaContas.size()+1);
@@ -594,6 +607,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             Sistema.listaContas.add(conta);
             jComboBox2.setSelectedItem("--");
             MensagemErro.setText("Conta Investimento cadaastrada");
+            jComboBox1.setSelectedItem("--");
         }
     }//GEN-LAST:event_btnCadastrarContaActionPerformed
    
@@ -706,6 +720,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTable tabCliente;
+    private javax.swing.JLabel teste;
     private javax.swing.JTextField textCEP;
     private javax.swing.JTextField textCPF;
     private javax.swing.JTextField textNome;
