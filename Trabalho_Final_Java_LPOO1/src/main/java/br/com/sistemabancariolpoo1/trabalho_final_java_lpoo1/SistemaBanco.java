@@ -58,19 +58,19 @@ public class SistemaBanco extends javax.swing.JFrame {
         textCEP = new javax.swing.JTextField();
         btnOrdenar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        clienteCPF = new javax.swing.JLabel();
+        lCliente = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        lConta = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
-        Campo1 = new javax.swing.JLabel();
-        Campo2 = new javax.swing.JLabel();
-        Campo3 = new javax.swing.JLabel();
+        lDepIni = new javax.swing.JLabel();
+        lLimite = new javax.swing.JLabel();
+        lMonMin = new javax.swing.JLabel();
         txtPrimeiro = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtSegundo = new javax.swing.JTextField();
         txtTerceiro = new javax.swing.JTextField();
-        CadastrarConta = new javax.swing.JButton();
+        bCadastrarConta = new javax.swing.JButton();
         MensagemErro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -251,7 +251,7 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cliente", jPanel1);
 
-        clienteCPF.setText("Cliente");
+        lCliente.setText("Cliente");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -260,7 +260,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Conta");
+        lConta.setText("Conta");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Corrente", "Investimento" }));
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
@@ -274,16 +274,16 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         });
 
-        Campo1.setText("Deposito Inicial");
+        lDepIni.setText("Deposito Inicial");
 
-        Campo2.setText("Limite");
+        lLimite.setText("Limite");
 
-        Campo3.setText("Montante Minimo");
+        lMonMin.setText("Montante Minimo");
 
-        CadastrarConta.setText("Cadastrar");
-        CadastrarConta.addActionListener(new java.awt.event.ActionListener() {
+        bCadastrarConta.setText("Cadastrar");
+        bCadastrarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarContaActionPerformed(evt);
+                btnbCadastrarContaActionPerformed(evt);
             }
         });
 
@@ -296,12 +296,12 @@ public class SistemaBanco extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lConta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(Campo2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Campo1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(Campo3)
-                    .addComponent(clienteCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lLimite, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lDepIni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lMonMin)
+                    .addComponent(lCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jComboBox1, 0, 360, Short.MAX_VALUE)
@@ -314,7 +314,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
-                                .addComponent(CadastrarConta)
+                                .addComponent(bCadastrarConta)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -329,24 +329,24 @@ public class SistemaBanco extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clienteCPF)
+                    .addComponent(lCliente)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lConta)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Campo1)
+                    .addComponent(lDepIni)
                     .addComponent(txtPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Campo2))
+                    .addComponent(lLimite))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTerceiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Campo3))
+                    .addComponent(lMonMin))
                 .addGap(51, 51, 51)
                 .addComponent(MensagemErro)
                 .addGap(18, 18, 18)
@@ -354,7 +354,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CadastrarConta)
+                .addComponent(bCadastrarConta)
                 .addContainerGap(156, Short.MAX_VALUE))
         );
 
@@ -569,18 +569,18 @@ public class SistemaBanco extends javax.swing.JFrame {
                 txtTerceiro.setEnabled(false);
                 Integer numero = Sistema.listaContas.size()+ 1; 
                 txtTerceiro.setText(numero.toString());
-                Campo1.setText("Deposito Inicial");
-                Campo2.setText("Limite");
-                Campo3.setText("Numero da conta");
+                lDepIni.setText("Deposito Inicial");
+                lLimite.setText("Limite");
+                lMonMin.setText("Numero da conta");
             }else if (tipoDeConta.equalsIgnoreCase("Investimento")){
                 MensagemErro.setText("Status");
                 txtPrimeiro.setEnabled(true);
                 txtSegundo.setEnabled(true);
                 txtTerceiro.setEnabled(true);
                 txtTerceiro.setText("");
-                Campo1.setText("Montante Mínimo");
-                Campo2.setText("Depósito Minimo");
-                Campo3.setText("Deposito Inicial");
+                lDepIni.setText("Montante Mínimo");
+                lLimite.setText("Depósito Minimo");
+                lMonMin.setText("Deposito Inicial");
             }else if (tipoDeConta.equalsIgnoreCase("--")){
                 MensagemErro.setText("Status");
                 txtPrimeiro.setEnabled(false);
@@ -590,48 +590,75 @@ public class SistemaBanco extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
-    private void btnCadastrarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarContaActionPerformed
+    private void btnbCadastrarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbCadastrarContaActionPerformed
         
         String cpf = jComboBox1.getSelectedItem().toString();
         Cliente cliente = Sistema.hashClientes.get(cpf);
         
-        if (cliente.getConta() != null){
-            MensagemErro.setText("Somente 1 conta por cliente permitida");
-        }else if(Campo1.getText().equalsIgnoreCase("")||Campo2.getText().equalsIgnoreCase("")||Campo3.getText().equalsIgnoreCase("")){
-            MensagemErro.setText("Todos os campos devem estrar preenchidos!!");
-        }else if (jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Corrente")){
+        if (cliente.getConta() != null) {
+    MensagemErro.setText("Somente 1 conta por cliente permitida");
+} else if (lDepIni.getText().trim().equals("") || lLimite.getText().trim().equals("") || lMonMin.getText().trim().equals("")) {
+    MensagemErro.setText("Todos os campos devem estar preenchidos!!");
+} else {
+    String contaTipo = jComboBox2.getSelectedItem().toString();
+
+    if (contaTipo.equalsIgnoreCase("Corrente")) {
+        try {
+            double depositoInicial = Double.parseDouble(txtPrimeiro.getText().trim());
+            double limite = Double.parseDouble(txtSegundo.getText().trim());
+            int numeroConta = Integer.parseInt(txtTerceiro.getText().trim());
+
             ContaCorrente conta = new ContaCorrente();
-            conta.setDepositoInicial(Double.parseDouble(txtPrimeiro.getText()));
-            conta.setSaldo(conta.getDepositoInicial());
-            conta.setLimit(Double.parseDouble(txtSegundo.getText()));
-            conta.setNumero(Integer.parseInt(txtTerceiro.getText()));
+            conta.setDepositoInicial(depositoInicial);
+            conta.setSaldo(depositoInicial);
+            conta.setLimit(limite);
+            conta.setNumero(numeroConta);
+
             txtPrimeiro.setText("");
             txtSegundo.setText("");
             txtTerceiro.setText("");
+
             Sistema.listaContas.add(conta);
             jComboBox2.setSelectedItem("--");
             MensagemErro.setText("Conta corrente cadastrada");
             jComboBox1.setSelectedItem("--");
+
             cliente.setConta(conta);
             conta.setDono(cliente);
-        }else if(jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Investimento")){
+        } catch (NumberFormatException e) {
+            MensagemErro.setText("Valores numéricos inválidos ou bloco obrigatório sem preenchimento!");
+        }
+    } else if (contaTipo.equalsIgnoreCase("Investimento")) {
+        try {
+            double depositoMinimo = Double.parseDouble(txtSegundo.getText().trim());
+            double depositoInicial = Double.parseDouble(txtTerceiro.getText().trim());
+            double montanteMinimo = Double.parseDouble(txtPrimeiro.getText().trim());
+
             ContaInvestimento conta = new ContaInvestimento();
-            conta.setDepositoMinimo(Double.parseDouble(txtSegundo.getText()));
-            conta.setNumero(Sistema.listaContas.size()+1);
-            conta.setDepositoInicial(Double.parseDouble(txtTerceiro.getText()));
-            conta.setSaldo(conta.getDepositoInicial());
-            conta.setMontanteMinimo(Double.parseDouble(txtPrimeiro.getText()));
+            conta.setDepositoMinimo(depositoMinimo);
+            conta.setNumero(Sistema.listaContas.size() + 1);
+            conta.setDepositoInicial(depositoInicial);
+            conta.setSaldo(depositoInicial);
+            conta.setMontanteMinimo(montanteMinimo);
+
             txtPrimeiro.setText("");
             txtSegundo.setText("");
             txtTerceiro.setText("");
+
             Sistema.listaContas.add(conta);
             jComboBox2.setSelectedItem("--");
-            MensagemErro.setText("Conta Investimento cadaastrada");
+            MensagemErro.setText("Conta Investimento cadastrada");
             jComboBox1.setSelectedItem("--");
+
             cliente.setConta(conta);
             conta.setDono(cliente);
+        } catch (NumberFormatException e) {
+            MensagemErro.setText("Valores numéricos inválidos ou campo não preenchido!");
         }
-    }//GEN-LAST:event_btnCadastrarContaActionPerformed
+    }
+}
+
+    }//GEN-LAST:event_btnbCadastrarContaActionPerformed
 
     private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
         HashMap<String, Cliente> hashClientes = Sistema.hashClientes;
@@ -707,18 +734,14 @@ public class SistemaBanco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadastrarConta;
-    private javax.swing.JLabel Campo1;
-    private javax.swing.JLabel Campo2;
-    private javax.swing.JLabel Campo3;
     private javax.swing.JLabel MensagemErro;
+    private javax.swing.JButton bCadastrarConta;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnOrdenar;
-    private javax.swing.JLabel clienteCPF;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton4;
@@ -741,7 +764,6 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -751,6 +773,11 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
+    private javax.swing.JLabel lCliente;
+    private javax.swing.JLabel lConta;
+    private javax.swing.JLabel lDepIni;
+    private javax.swing.JLabel lLimite;
+    private javax.swing.JLabel lMonMin;
     private javax.swing.JTable tabCliente;
     private javax.swing.JTextField textCEP;
     private javax.swing.JTextField textCPF;

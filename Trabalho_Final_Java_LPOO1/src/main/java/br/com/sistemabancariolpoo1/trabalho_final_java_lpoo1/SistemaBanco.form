@@ -340,13 +340,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel7" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="lConta" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="Campo2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Campo1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lLimite" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lDepIni" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="Campo3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="clienteCPF" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                          <Component id="lMonMin" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lCliente" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="36" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -360,7 +360,7 @@
                                   <Component id="jLabel13" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                                      <Component id="CadastrarConta" min="-2" max="-2" attributes="0"/>
+                                      <Component id="bCadastrarConta" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -382,28 +382,28 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="clienteCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lConta" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Campo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lDepIni" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPrimeiro" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtSegundo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Campo2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lLimite" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtTerceiro" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Campo3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Component id="MensagemErro" min="-2" max="-2" attributes="0"/>
@@ -413,14 +413,14 @@
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="CadastrarConta" min="-2" max="-2" attributes="0"/>
+                      <Component id="bCadastrarConta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="156" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="clienteCPF">
+            <Component class="javax.swing.JLabel" name="lCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
@@ -440,7 +440,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel7">
+            <Component class="javax.swing.JLabel" name="lConta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conta"/>
               </Properties>
@@ -463,17 +463,17 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="Campo1">
+            <Component class="javax.swing.JLabel" name="lDepIni">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Deposito Inicial"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="Campo2">
+            <Component class="javax.swing.JLabel" name="lLimite">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Limite"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="Campo3">
+            <Component class="javax.swing.JLabel" name="lMonMin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Montante Minimo"/>
               </Properties>
@@ -488,12 +488,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtTerceiro">
             </Component>
-            <Component class="javax.swing.JButton" name="CadastrarConta">
+            <Component class="javax.swing.JButton" name="bCadastrarConta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarContaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbCadastrarContaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="MensagemErro">
