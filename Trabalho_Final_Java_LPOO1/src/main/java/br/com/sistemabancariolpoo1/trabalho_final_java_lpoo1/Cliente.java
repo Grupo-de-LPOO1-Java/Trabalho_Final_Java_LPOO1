@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente> {
     private String nome;
     private String sobrenome;
     private String rg;
@@ -87,7 +87,7 @@ public class Cliente {
     public static boolean excluirCliente(String cpf) {
         return listaClientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
     }
-
+    /*
     public static List<Cliente> ordenarClientes(int criterio) {
         switch (criterio) {
             case 1:
@@ -104,8 +104,18 @@ public class Cliente {
         }
         return listaClientes;
     }
+    */
 
     public static void adicionarCliente(Cliente cliente) {
         listaClientes.add(cliente);
+    }
+
+    @Override
+    public int compareTo(Cliente outroCliente) {
+        int nomeComparacao = this.nome.compareTo(outroCliente.nome);
+        if (nomeComparacao != 0) {
+            return nomeComparacao;
+        }
+        return this.sobrenome.compareTo(outroCliente.sobrenome);
     }
 }
