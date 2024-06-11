@@ -55,7 +55,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         cmbEstado = new javax.swing.JComboBox<>();
         textCEP = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        clienteCPF = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -84,7 +84,6 @@ public class SistemaBanco extends javax.swing.JFrame {
         jTextField13 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        teste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -240,7 +239,7 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cliente", jPanel1);
 
-        jLabel6.setText("Cliente");
+        clienteCPF.setText("Cliente");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +289,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                         .addComponent(Campo2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Campo1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(Campo3)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clienteCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jComboBox1, 0, 360, Short.MAX_VALUE)
@@ -318,7 +317,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(clienteCPF)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -369,8 +368,6 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jButton10.setText("Remunerar");
 
-        teste.setText("Teste");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -407,10 +404,6 @@ public class SistemaBanco extends javax.swing.JFrame {
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton10))))
                 .addGap(52, 52, 52))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addComponent(teste)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,9 +432,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jButton10))
-                .addGap(96, 96, 96)
-                .addComponent(teste)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("EditarConta", jPanel3);
@@ -579,7 +570,12 @@ public class SistemaBanco extends javax.swing.JFrame {
 
     private void btnCadastrarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarContaActionPerformed
         
-        if (Campo1.getText().equalsIgnoreCase("")||Campo2.getText().equalsIgnoreCase("")||Campo3.getText().equalsIgnoreCase("")){
+        String cpf = jComboBox1.getSelectedItem().toString();
+        Cliente cliente = Sistema.hashClientes.get(cpf);
+        
+        if (cliente.getConta() != null){
+            MensagemErro.setText("Somente 1 conta por cliente permitida");
+        }else if(Campo1.getText().equalsIgnoreCase("")||Campo2.getText().equalsIgnoreCase("")||Campo3.getText().equalsIgnoreCase("")){
             MensagemErro.setText("Todos os campos devem estrar preenchidos!!");
         }else if (jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Corrente")){
             ContaCorrente conta = new ContaCorrente();
@@ -594,6 +590,8 @@ public class SistemaBanco extends javax.swing.JFrame {
             jComboBox2.setSelectedItem("--");
             MensagemErro.setText("Conta corrente cadastrada");
             jComboBox1.setSelectedItem("--");
+            cliente.setConta(conta);
+            conta.setDono(cliente);
         }else if(jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Investimento")){
             ContaInvestimento conta = new ContaInvestimento();
             conta.setDepositoMinimo(Double.parseDouble(txtSegundo.getText()));
@@ -608,6 +606,8 @@ public class SistemaBanco extends javax.swing.JFrame {
             jComboBox2.setSelectedItem("--");
             MensagemErro.setText("Conta Investimento cadaastrada");
             jComboBox1.setSelectedItem("--");
+            cliente.setConta(conta);
+            conta.setDono(cliente);
         }
     }//GEN-LAST:event_btnCadastrarContaActionPerformed
    
@@ -686,6 +686,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnListar;
+    private javax.swing.JLabel clienteCPF;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton4;
@@ -708,7 +709,6 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -720,7 +720,6 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTable tabCliente;
-    private javax.swing.JLabel teste;
     private javax.swing.JTextField textCEP;
     private javax.swing.JTextField textCPF;
     private javax.swing.JTextField textNome;
