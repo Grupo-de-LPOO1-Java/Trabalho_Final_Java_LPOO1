@@ -443,7 +443,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,12 +488,14 @@ public class SistemaBanco extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Selecione alguma linha para excluir.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        this.tabModel.removeClientes(listaExcluir);
-        for(Cliente cli:listaExcluir)
-        Sistema.hashClientes.remove(cli.getCpf());
-        this.clienteSelecionadoParaAtualizacao = null;
-        linhaClicadaParaAtualizacao=-1;
-
+        int resposta = JOptionPane.showConfirmDialog(null, "Todas as contas vinculadas a este(s) cliente(s) serão apagadas", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (resposta == JOptionPane.YES_OPTION) {
+            this.tabModel.removeClientes(listaExcluir);
+            for(Cliente cli:listaExcluir)
+            Sistema.hashClientes.remove(cli.getCpf());
+            this.clienteSelecionadoParaAtualizacao = null;
+            linhaClicadaParaAtualizacao=-1;
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -509,17 +511,25 @@ public class SistemaBanco extends javax.swing.JFrame {
         String nome = textNome.getText();
         String sobreNome = textSobrenome.getText();
         String rg = textRG.getText();
-        String cpf = textCPF.getText();
+        String cpf = textCPF.getText().replaceAll("\\D", "");
         String rua = textRua.getText();
         String cep = textCEP.getText();
         String estado = cmbEstado.getSelectedItem().toString();
 
+        if (nome.isEmpty() || sobreNome.isEmpty() || rg.isEmpty() || cpf.isEmpty() || rua.isEmpty() || cep.isEmpty() || estado.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         if(cpf.equals("")){
             JOptionPane.showMessageDialog(null,"CPF não pode ser vazio.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
+        if(!CPFValidator.isCPF(cpf)) {
+            JOptionPane.showMessageDialog(null,"CPF não é válido.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         if(Sistema.hashClientes.containsKey(cpf)){
-            JOptionPane.showMessageDialog(null,"Já há esse CPF cadastrado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"CPF já cadastrado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         Estado est = new Estado(estado);
