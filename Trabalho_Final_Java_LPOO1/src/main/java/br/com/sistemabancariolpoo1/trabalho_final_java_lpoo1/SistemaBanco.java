@@ -59,17 +59,17 @@ public class SistemaBanco extends javax.swing.JFrame {
         btnOrdenar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lCliente = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbCliente = new javax.swing.JComboBox<>();
         lConta = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbConta = new javax.swing.JComboBox<>();
         lDepIni = new javax.swing.JLabel();
         lLimite = new javax.swing.JLabel();
         lMonMin = new javax.swing.JLabel();
-        txtPrimeiro = new javax.swing.JTextField();
+        textDepIni = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtSegundo = new javax.swing.JTextField();
-        txtTerceiro = new javax.swing.JTextField();
+        textLimite = new javax.swing.JTextField();
+        textMonMin = new javax.swing.JTextField();
         bCadastrarConta = new javax.swing.JButton();
         MensagemErro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -253,24 +253,24 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         lCliente.setText("Cliente");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmbCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cmbCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmbClienteActionPerformed(evt);
             }
         });
 
         lConta.setText("Conta");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Corrente", "Investimento" }));
-        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+        cmbConta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Corrente", "Investimento" }));
+        cmbConta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+                cmbContaItemStateChanged(evt);
             }
         });
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        cmbConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                cmbContaActionPerformed(evt);
             }
         });
 
@@ -304,11 +304,11 @@ public class SistemaBanco extends javax.swing.JFrame {
                     .addComponent(lCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jComboBox1, 0, 360, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, 360, Short.MAX_VALUE)
-                    .addComponent(txtPrimeiro, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSegundo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTerceiro, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbCliente, 0, 360, Short.MAX_VALUE)
+                    .addComponent(cmbConta, javax.swing.GroupLayout.Alignment.LEADING, 0, 360, Short.MAX_VALUE)
+                    .addComponent(textDepIni, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textLimite, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textMonMin, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -330,22 +330,22 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCliente)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lConta)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lDepIni)
-                    .addComponent(txtPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textDepIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textLimite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lLimite))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTerceiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textMonMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lMonMin))
                 .addGap(51, 51, 51)
                 .addComponent(MensagemErro)
@@ -467,13 +467,13 @@ public class SistemaBanco extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void cmbContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbContaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_cmbContaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cmbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cmbClienteActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         textNome.setText("");
@@ -554,45 +554,45 @@ public class SistemaBanco extends javax.swing.JFrame {
         this.clienteSelecionadoParaAtualizacao = cli;
         linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
         for (String key : Sistema.hashClientes.keySet()) {
-            jComboBox1.addItem(key);
+            cmbCliente.addItem(key);
         }
     }//GEN-LAST:event_btnCadastrarctionPerformed
 
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+    private void cmbContaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbContaItemStateChanged
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED){
-            String tipoDeConta = (String) jComboBox2.getSelectedItem();
+            String tipoDeConta = (String) cmbConta.getSelectedItem();
             
             if (tipoDeConta.equalsIgnoreCase("Corrente")){
                 MensagemErro.setText("Status");
-                txtPrimeiro.setEnabled(true);
-                txtSegundo.setEnabled(true);
-                txtTerceiro.setEnabled(false);
+                textDepIni.setEnabled(true);
+                textLimite.setEnabled(true);
+                textMonMin.setEnabled(false);
                 Integer numero = Sistema.listaContas.size()+ 1; 
-                txtTerceiro.setText(numero.toString());
+                textMonMin.setText(numero.toString());
                 lDepIni.setText("Deposito Inicial");
                 lLimite.setText("Limite");
                 lMonMin.setText("Numero da conta");
             }else if (tipoDeConta.equalsIgnoreCase("Investimento")){
                 MensagemErro.setText("Status");
-                txtPrimeiro.setEnabled(true);
-                txtSegundo.setEnabled(true);
-                txtTerceiro.setEnabled(true);
-                txtTerceiro.setText("");
+                textDepIni.setEnabled(true);
+                textLimite.setEnabled(true);
+                textMonMin.setEnabled(true);
+                textMonMin.setText("");
                 lDepIni.setText("Montante Mínimo");
                 lLimite.setText("Depósito Minimo");
                 lMonMin.setText("Deposito Inicial");
             }else if (tipoDeConta.equalsIgnoreCase("--")){
                 MensagemErro.setText("Status");
-                txtPrimeiro.setEnabled(false);
-                txtSegundo.setEnabled(false);
-                txtTerceiro.setEnabled(false);
+                textDepIni.setEnabled(false);
+                textLimite.setEnabled(false);
+                textMonMin.setEnabled(false);
             }
         }
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
+    }//GEN-LAST:event_cmbContaItemStateChanged
 
     private void btnbCadastrarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbCadastrarContaActionPerformed
         
-        String cpf = jComboBox1.getSelectedItem().toString();
+        String cpf = cmbCliente.getSelectedItem().toString();
         Cliente cliente = Sistema.hashClientes.get(cpf);
         
         if (cliente.getConta() != null) {
@@ -600,13 +600,13 @@ public class SistemaBanco extends javax.swing.JFrame {
 } else if (lDepIni.getText().trim().equals("") || lLimite.getText().trim().equals("") || lMonMin.getText().trim().equals("")) {
     MensagemErro.setText("Todos os campos devem estar preenchidos!!");
 } else {
-    String contaTipo = jComboBox2.getSelectedItem().toString();
+    String contaTipo = cmbConta.getSelectedItem().toString();
 
     if (contaTipo.equalsIgnoreCase("Corrente")) {
         try {
-            double depositoInicial = Double.parseDouble(txtPrimeiro.getText().trim());
-            double limite = Double.parseDouble(txtSegundo.getText().trim());
-            int numeroConta = Integer.parseInt(txtTerceiro.getText().trim());
+            double depositoInicial = Double.parseDouble(textDepIni.getText().trim());
+            double limite = Double.parseDouble(textLimite.getText().trim());
+            int numeroConta = Integer.parseInt(textMonMin.getText().trim());
 
             ContaCorrente conta = new ContaCorrente();
             conta.setDepositoInicial(depositoInicial);
@@ -614,14 +614,14 @@ public class SistemaBanco extends javax.swing.JFrame {
             conta.setLimit(limite);
             conta.setNumero(numeroConta);
 
-            txtPrimeiro.setText("");
-            txtSegundo.setText("");
-            txtTerceiro.setText("");
+            textDepIni.setText("");
+            textLimite.setText("");
+            textMonMin.setText("");
 
             Sistema.listaContas.add(conta);
-            jComboBox2.setSelectedItem("--");
+            cmbConta.setSelectedItem("--");
             MensagemErro.setText("Conta corrente cadastrada");
-            jComboBox1.setSelectedItem("--");
+            cmbCliente.setSelectedItem("--");
 
             cliente.setConta(conta);
             conta.setDono(cliente);
@@ -630,9 +630,9 @@ public class SistemaBanco extends javax.swing.JFrame {
         }
     } else if (contaTipo.equalsIgnoreCase("Investimento")) {
         try {
-            double depositoMinimo = Double.parseDouble(txtSegundo.getText().trim());
-            double depositoInicial = Double.parseDouble(txtTerceiro.getText().trim());
-            double montanteMinimo = Double.parseDouble(txtPrimeiro.getText().trim());
+            double depositoMinimo = Double.parseDouble(textLimite.getText().trim());
+            double depositoInicial = Double.parseDouble(textMonMin.getText().trim());
+            double montanteMinimo = Double.parseDouble(textDepIni.getText().trim());
 
             ContaInvestimento conta = new ContaInvestimento();
             conta.setDepositoMinimo(depositoMinimo);
@@ -641,14 +641,14 @@ public class SistemaBanco extends javax.swing.JFrame {
             conta.setSaldo(depositoInicial);
             conta.setMontanteMinimo(montanteMinimo);
 
-            txtPrimeiro.setText("");
-            txtSegundo.setText("");
-            txtTerceiro.setText("");
+            textDepIni.setText("");
+            textLimite.setText("");
+            textMonMin.setText("");
 
             Sistema.listaContas.add(conta);
-            jComboBox2.setSelectedItem("--");
+            cmbConta.setSelectedItem("--");
             MensagemErro.setText("Conta Investimento cadastrada");
-            jComboBox1.setSelectedItem("--");
+            cmbCliente.setSelectedItem("--");
 
             cliente.setConta(conta);
             conta.setDono(cliente);
@@ -742,14 +742,14 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnOrdenar;
+    private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbConta;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -781,12 +781,12 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTable tabCliente;
     private javax.swing.JTextField textCEP;
     private javax.swing.JTextField textCPF;
+    private javax.swing.JTextField textDepIni;
+    private javax.swing.JTextField textLimite;
+    private javax.swing.JTextField textMonMin;
     private javax.swing.JTextField textNome;
     private javax.swing.JTextField textRG;
     private javax.swing.JTextField textRua;
     private javax.swing.JTextField textSobrenome;
-    private javax.swing.JTextField txtPrimeiro;
-    private javax.swing.JTextField txtSegundo;
-    private javax.swing.JTextField txtTerceiro;
     // End of variables declaration//GEN-END:variables
 }

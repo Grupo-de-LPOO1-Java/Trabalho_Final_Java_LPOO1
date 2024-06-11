@@ -350,11 +350,11 @@
                       </Group>
                       <EmptySpace pref="36" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jComboBox1" pref="360" max="32767" attributes="0"/>
-                          <Component id="jComboBox2" alignment="0" pref="360" max="32767" attributes="0"/>
-                          <Component id="txtPrimeiro" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtSegundo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtTerceiro" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cmbCliente" pref="360" max="32767" attributes="0"/>
+                          <Component id="cmbConta" alignment="0" pref="360" max="32767" attributes="0"/>
+                          <Component id="textDepIni" alignment="0" max="32767" attributes="0"/>
+                          <Component id="textLimite" alignment="0" max="32767" attributes="0"/>
+                          <Component id="textMonMin" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel13" max="32767" attributes="0"/>
@@ -383,26 +383,26 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lConta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbConta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lDepIni" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimeiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textDepIni" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtSegundo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textLimite" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lLimite" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTerceiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
@@ -425,7 +425,7 @@
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="cmbCliente">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
@@ -434,7 +434,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbClienteActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -445,7 +445,7 @@
                 <Property name="text" type="java.lang.String" value="Conta"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="cmbConta">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -456,8 +456,8 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox2ItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbContaItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbContaActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -478,15 +478,15 @@
                 <Property name="text" type="java.lang.String" value="Montante Minimo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimeiro">
+            <Component class="javax.swing.JTextField" name="textDepIni">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundo">
+            <Component class="javax.swing.JTextField" name="textLimite">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtTerceiro">
+            <Component class="javax.swing.JTextField" name="textMonMin">
             </Component>
             <Component class="javax.swing.JButton" name="bCadastrarConta">
               <Properties>

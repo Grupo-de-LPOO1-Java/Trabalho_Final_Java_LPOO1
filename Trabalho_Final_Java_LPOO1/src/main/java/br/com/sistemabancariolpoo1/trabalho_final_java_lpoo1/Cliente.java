@@ -87,24 +87,6 @@ public class Cliente implements Comparable<Cliente> {
     public static boolean excluirCliente(String cpf) {
         return listaClientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
     }
-    /*
-    public static List<Cliente> ordenarClientes(int criterio) {
-        switch (criterio) {
-            case 1:
-                Collections.sort(listaClientes, Comparator.comparing(Cliente::getNome));
-                break;
-            case 2:
-                Collections.sort(listaClientes, Comparator.comparing(Cliente::getSobrenome));
-                break;
-            case 3:
-                Collections.sort(listaClientes, Comparator.comparing(Cliente::getCpf));
-                break;
-            default:
-                throw new IllegalArgumentException("Critério de ordenação inválido");
-        }
-        return listaClientes;
-    }
-    */
 
     public static void adicionarCliente(Cliente cliente) {
         listaClientes.add(cliente);
