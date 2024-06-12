@@ -480,7 +480,20 @@ public class SistemaBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        tabModel.setListaContatos(Sistema.hashClientes);
+        String nome = textNome.getText().trim();
+        String sobrenome = textSobrenome.getText().trim();
+        String rg = textRG.getText().trim();
+        String cpf = textCPF.getText().trim();
+        List<Cliente> clientesEncontrados = new ArrayList<>();
+        for (Cliente cliente : Sistema.hashClientes.values()) {
+        if ((nome.isEmpty() || cliente.getNome().contains(nome)) &&
+            (sobrenome.isEmpty() || cliente.getSobrenome().contains(sobrenome)) &&
+            (rg.isEmpty() || cliente.getRg().contains(rg)) &&
+            (cpf.isEmpty() || cliente.getCpf().contains(cpf))) {
+            clientesEncontrados.add(cliente);
+            }
+        }
+        tabModel.setListaContatos(clientesEncontrados);
         this.clienteSelecionadoParaAtualizacao = null;
         linhaClicadaParaAtualizacao=-1;
     }//GEN-LAST:event_btnListarActionPerformed
