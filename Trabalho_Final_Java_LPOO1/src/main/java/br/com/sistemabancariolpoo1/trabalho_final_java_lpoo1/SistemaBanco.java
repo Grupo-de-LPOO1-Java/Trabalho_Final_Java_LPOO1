@@ -631,8 +631,20 @@ public class SistemaBanco extends javax.swing.JFrame {
     } else if (contaTipo.equalsIgnoreCase("Investimento")) {
         try {
             double depositoMinimo = Double.parseDouble(textLimite.getText().trim());
+            if(depositoMinimo<0){
+                JOptionPane.showMessageDialog(null, "Deposito minimo não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
             double depositoInicial = Double.parseDouble(textMonMin.getText().trim());
+            if(depositoInicial<0){
+                JOptionPane.showMessageDialog(null, "Deposito inicial não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
             double montanteMinimo = Double.parseDouble(textDepIni.getText().trim());
+            if(montanteMinimo<0){
+                JOptionPane.showMessageDialog(null, "Montante mínimo não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
 
             ContaInvestimento conta = new ContaInvestimento();
             conta.setDepositoMinimo(depositoMinimo);
