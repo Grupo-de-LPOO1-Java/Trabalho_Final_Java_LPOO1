@@ -544,6 +544,8 @@ public class SistemaBanco extends javax.swing.JFrame {
         this.tabCliente.setRowSelectionInterval(Sistema.hashClientes.size()-1, Sistema.hashClientes.size()-1);
         this.clienteSelecionadoParaAtualizacao = cli;
         linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
+        
+        cmbCliente.removeAllItems();
         for (String key : Sistema.hashClientes.keySet()) {
             cmbCliente.addItem(key);
         }
