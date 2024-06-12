@@ -348,7 +348,7 @@
                           <Component id="lMonMin" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lCliente" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace pref="48" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="cmbCliente" pref="360" max="32767" attributes="0"/>
                           <Component id="cmbConta" alignment="0" pref="360" max="32767" attributes="0"/>
@@ -369,11 +369,6 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="MensagemErro" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -405,16 +400,14 @@
                           <Component id="textMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="MensagemErro" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="bCadastrarConta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="156" max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -495,11 +488,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbCadastrarContaActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="MensagemErro">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Status"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

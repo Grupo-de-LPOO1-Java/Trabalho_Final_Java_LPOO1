@@ -71,7 +71,6 @@ public class SistemaBanco extends javax.swing.JFrame {
         textLimite = new javax.swing.JTextField();
         textMonMin = new javax.swing.JTextField();
         bCadastrarConta = new javax.swing.JButton();
-        MensagemErro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
@@ -287,8 +286,6 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         });
 
-        MensagemErro.setText("Status");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -302,7 +299,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                         .addComponent(lDepIni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lMonMin)
                     .addComponent(lCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cmbCliente, 0, 360, Short.MAX_VALUE)
                     .addComponent(cmbConta, javax.swing.GroupLayout.Alignment.LEADING, 0, 360, Short.MAX_VALUE)
@@ -319,10 +316,6 @@ public class SistemaBanco extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(31, 31, 31))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(MensagemErro)
-                .addGap(235, 235, 235))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,15 +340,13 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textMonMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lMonMin))
-                .addGap(51, 51, 51)
-                .addComponent(MensagemErro)
-                .addGap(18, 18, 18)
+                .addGap(85, 85, 85)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bCadastrarConta)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("CriarConta", jPanel2);
@@ -563,7 +554,6 @@ public class SistemaBanco extends javax.swing.JFrame {
             String tipoDeConta = (String) cmbConta.getSelectedItem();
             
             if (tipoDeConta.equalsIgnoreCase("Corrente")){
-                MensagemErro.setText("Status");
                 textDepIni.setEnabled(true);
                 textLimite.setEnabled(true);
                 textMonMin.setEnabled(false);
@@ -573,7 +563,6 @@ public class SistemaBanco extends javax.swing.JFrame {
                 lLimite.setText("Limite");
                 lMonMin.setText("Numero da conta");
             }else if (tipoDeConta.equalsIgnoreCase("Investimento")){
-                MensagemErro.setText("Status");
                 textDepIni.setEnabled(true);
                 textLimite.setEnabled(true);
                 textMonMin.setEnabled(true);
@@ -582,7 +571,6 @@ public class SistemaBanco extends javax.swing.JFrame {
                 lLimite.setText("Depósito Minimo");
                 lMonMin.setText("Deposito Inicial");
             }else if (tipoDeConta.equalsIgnoreCase("--")){
-                MensagemErro.setText("Status");
                 textDepIni.setEnabled(false);
                 textLimite.setEnabled(false);
                 textMonMin.setEnabled(false);
@@ -596,16 +584,27 @@ public class SistemaBanco extends javax.swing.JFrame {
         Cliente cliente = Sistema.hashClientes.get(cpf);
         
         if (cliente.getConta() != null) {
-    MensagemErro.setText("Somente 1 conta por cliente permitida");
-} else if (lDepIni.getText().trim().equals("") || lLimite.getText().trim().equals("") || lMonMin.getText().trim().equals("")) {
-    MensagemErro.setText("Todos os campos devem estar preenchidos!!");
+            JOptionPane.showMessageDialog(null, "Só é permitida uma conta por cliente!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
+ else if (lDepIni.getText().trim().equals("") || lLimite.getText().trim().equals("") || lMonMin.getText().trim().equals("")) {
+    JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
 } else {
     String contaTipo = cmbConta.getSelectedItem().toString();
 
     if (contaTipo.equalsIgnoreCase("Corrente")) {
         try {
             double depositoInicial = Double.parseDouble(textDepIni.getText().trim());
+            if(depositoInicial<0){
+                JOptionPane.showMessageDialog(null, "Deposito inicial não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
             double limite = Double.parseDouble(textLimite.getText().trim());
+            if(limite<0){
+                JOptionPane.showMessageDialog(null, "Limite não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
             int numeroConta = Integer.parseInt(textMonMin.getText().trim());
 
             ContaCorrente conta = new ContaCorrente();
@@ -620,13 +619,14 @@ public class SistemaBanco extends javax.swing.JFrame {
 
             Sistema.listaContas.add(conta);
             cmbConta.setSelectedItem("--");
-            MensagemErro.setText("Conta corrente cadastrada");
+            JOptionPane.showMessageDialog(null, "Conta Corrente cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             cmbCliente.setSelectedItem("--");
 
             cliente.setConta(conta);
             conta.setDono(cliente);
         } catch (NumberFormatException e) {
-            MensagemErro.setText("Valores numéricos inválidos ou bloco obrigatório sem preenchimento!");
+           JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
     } else if (contaTipo.equalsIgnoreCase("Investimento")) {
         try {
@@ -647,13 +647,14 @@ public class SistemaBanco extends javax.swing.JFrame {
 
             Sistema.listaContas.add(conta);
             cmbConta.setSelectedItem("--");
-            MensagemErro.setText("Conta Investimento cadastrada");
+            JOptionPane.showMessageDialog(null, "Conta investimento cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             cmbCliente.setSelectedItem("--");
 
             cliente.setConta(conta);
             conta.setDono(cliente);
         } catch (NumberFormatException e) {
-            MensagemErro.setText("Valores numéricos inválidos ou campo não preenchido!");
+            JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios !\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
     }
 }
@@ -734,7 +735,6 @@ public class SistemaBanco extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MensagemErro;
     private javax.swing.JButton bCadastrarConta;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
