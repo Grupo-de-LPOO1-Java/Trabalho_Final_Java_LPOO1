@@ -209,6 +209,9 @@
             <Component class="javax.swing.JTextField" name="textRG">
             </Component>
             <Component class="javax.swing.JTextField" name="textCPF">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCPFActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="textRua">
             </Component>
@@ -354,7 +357,6 @@
                           <Component id="cmbConta" alignment="0" pref="360" max="32767" attributes="0"/>
                           <Component id="textDepIni" alignment="0" max="32767" attributes="0"/>
                           <Component id="textLimite" alignment="0" max="32767" attributes="0"/>
-                          <Component id="textMonMin" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel13" max="32767" attributes="0"/>
@@ -367,6 +369,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel12" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="textMonMin" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
@@ -397,8 +400,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="textMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textMonMin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -479,11 +482,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textLimite">
             </Component>
-            <Component class="javax.swing.JTextField" name="textMonMin">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textMonMinActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="bCadastrarConta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
@@ -491,6 +489,8 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbCadastrarContaActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="textMonMin">
             </Component>
           </SubComponents>
         </Container>
@@ -512,7 +512,7 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Component id="jLabel14" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField10" min="-2" pref="289" max="-2" attributes="0"/>
+                              <Component id="textCPF_editar" min="-2" pref="289" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton4" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
@@ -527,21 +527,21 @@
                               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jTextField11" min="-2" pref="289" max="-2" attributes="0"/>
+                                      <Component id="textSaque" min="-2" pref="289" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton7" min="-2" pref="93" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jTextField12" min="-2" pref="289" max="-2" attributes="0"/>
+                                      <Component id="textDeposito" min="-2" pref="289" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton8" min="-2" pref="93" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jTextField13" min="-2" pref="289" max="-2" attributes="0"/>
+                                      <Component id="textSaldo" min="-2" pref="289" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButton9" min="-2" pref="93" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bRemunera" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -555,31 +555,31 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textCPF_editar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textSaque" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textDeposito" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bRemunera" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="284" max="32767" attributes="0"/>
                   </Group>
@@ -592,7 +592,10 @@
                 <Property name="text" type="java.lang.String" value="CPF"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField10">
+            <Component class="javax.swing.JTextField" name="textCPF_editar">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCPF_editarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton4">
               <Properties>
@@ -619,9 +622,9 @@
                 <Property name="text" type="java.lang.String" value="Remunera"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField11">
+            <Component class="javax.swing.JTextField" name="textSaque">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField12">
+            <Component class="javax.swing.JTextField" name="textDeposito">
             </Component>
             <Component class="javax.swing.JButton" name="jButton7">
               <Properties>
@@ -633,17 +636,20 @@
                 <Property name="text" type="java.lang.String" value="Depositar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField13">
+            <Component class="javax.swing.JTextField" name="textSaldo">
             </Component>
             <Component class="javax.swing.JButton" name="jButton9">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Saldo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton10">
+            <Component class="javax.swing.JButton" name="bRemunera">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remunerar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRemuneraActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
