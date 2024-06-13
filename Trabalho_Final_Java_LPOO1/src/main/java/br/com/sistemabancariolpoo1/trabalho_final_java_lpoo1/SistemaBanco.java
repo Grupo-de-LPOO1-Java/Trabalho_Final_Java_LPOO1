@@ -772,7 +772,17 @@ public class SistemaBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_textCPFActionPerformed
 
     private void bRemuneraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemuneraActionPerformed
-
+        String cpf = cmbClienteEditar.getSelectedItem().toString();
+        
+        Cliente cliente = Sistema.hashClientes.get(cpf);
+        Conta conta = cliente.getConta();
+        
+        if(conta.getSaldo() < 0)
+            JOptionPane.showMessageDialog(null,"Não pode remunerar saldos negativos.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        else{
+            conta.remunera();
+            JOptionPane.showMessageDialog(null,"Conta remunerada.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_bRemuneraActionPerformed
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
@@ -784,8 +794,10 @@ public class SistemaBanco extends javax.swing.JFrame {
             if (Double.parseDouble(valorSaque.getText()) < 0.0){
                 JOptionPane.showMessageDialog(null,"Valor do saque deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                conta.saca(Double.parseDouble(valorSaque.getText()));
-                JOptionPane.showMessageDialog(null,"Saque realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                if (conta.saca(Double.parseDouble(valorSaque.getText())))
+                    JOptionPane.showMessageDialog(null,"Saque realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(null,"Saldo não pode ser menor que o Limite.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
                 valorSaque.setText("");
             }
         } catch (Exception e){
