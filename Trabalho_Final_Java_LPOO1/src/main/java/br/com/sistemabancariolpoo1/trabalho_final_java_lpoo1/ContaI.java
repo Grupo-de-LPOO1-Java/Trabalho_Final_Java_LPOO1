@@ -6,7 +6,10 @@ package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
 
 /**
  *
- * @author rafae
+ * @author Rafael Cecyn Mendes
+ * @author Joao Pedro Paes
+ * @author Eduardo Kuritza
+ * @author Mateus Bazan
  */
 public interface ContaI {
     public boolean deposita(double valor);

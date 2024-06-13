@@ -62,15 +62,15 @@
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel4" min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Component id="lCpf" min="-2" pref="57" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="textCPF" min="-2" pref="359" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel3" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel1" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <Component id="lRg" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <Component id="lSobrenome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lNome" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
@@ -83,9 +83,9 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel5" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
-                                          <Component id="jLabel19" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
-                                          <Component id="jLabel20" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <Component id="lRua" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <Component id="lEstado" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
+                                          <Component id="lCep" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -126,37 +126,37 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="textNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="textSobrenome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lSobrenome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lRg" min="-2" max="-2" attributes="0"/>
                           <Component id="textRG" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="lCpf" min="-2" max="-2" attributes="0"/>
                           <Component id="textCPF" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lRua" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="textRua" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lCep" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="textCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -177,27 +177,27 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="lNome">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="lSobrenome">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sobrenome"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="lRg">
               <Properties>
                 <Property name="text" type="java.lang.String" value="RG"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="lCpf">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CPF"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="lRua">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Rua"/>
               </Properties>
@@ -268,12 +268,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel19">
+            <Component class="javax.swing.JLabel" name="lEstado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Estado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel20">
+            <Component class="javax.swing.JLabel" name="lCep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CEP"/>
               </Properties>
@@ -513,7 +513,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel16" min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Component id="lDeposito" min="-2" pref="57" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="valorDeposita" min="-2" pref="289" max="-2" attributes="0"/>
                                   </Group>
@@ -530,7 +530,7 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel18" min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="lRemunera" min="-2" pref="57" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="bRemunera" min="-2" pref="114" max="-2" attributes="0"/>
                           </Group>
@@ -541,7 +541,7 @@
                                       <Component id="cmbClienteEditar" min="-2" pref="289" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel15" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="lSaque" min="-2" pref="45" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="valorSaque" min="-2" pref="289" max="-2" attributes="0"/>
                                   </Group>
@@ -568,13 +568,13 @@
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lSaque" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="valorSaque" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSacar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lDeposito" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="valorDeposita" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnDepositar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -586,7 +586,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lRemunera" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bRemunera" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="291" max="32767" attributes="0"/>
@@ -608,12 +608,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel15">
+            <Component class="javax.swing.JLabel" name="lSaque">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Saque"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel16">
+            <Component class="javax.swing.JLabel" name="lDeposito">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Deposito"/>
               </Properties>
@@ -623,7 +623,7 @@
                 <Property name="text" type="java.lang.String" value="Saldo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel18">
+            <Component class="javax.swing.JLabel" name="lRemunera">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remunera"/>
               </Properties>

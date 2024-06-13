@@ -12,7 +12,10 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Rafael
+ * @author Rafael Cecyn Mendes
+ * @author Joao Pedro Paes
+ * @author Eduardo Kuritza
+ * @author Mateus Bazan
  */
 public class ClienteTableModel extends AbstractTableModel{
     private String[] colunas=new String[]{"Nome","SobreNome", "RG", "CPF","Rua","Estado","CEP"};

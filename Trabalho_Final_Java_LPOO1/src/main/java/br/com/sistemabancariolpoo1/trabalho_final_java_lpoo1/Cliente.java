@@ -1,5 +1,13 @@
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
 
+/**
+ *
+ * @author Rafael Cecyn Mendes
+ * @author Joao Pedro Paes
+ * @author Eduardo Kuritza
+ * @author Mateus Bazan
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
