@@ -9,7 +9,10 @@ import java.util.HashMap;
 
 /**
  *
- * @author rafae
+ * @author Rafael Cecyn Mendes
+ * @author Joao Pedro Paes
+ * @author Eduardo Kuritza
+ * @author Mateus Bazan
  */
 public class Sistema {
     public static HashMap<String,Cliente> hashClientes = new HashMap<>();
