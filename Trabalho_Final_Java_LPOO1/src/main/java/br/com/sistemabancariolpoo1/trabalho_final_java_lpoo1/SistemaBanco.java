@@ -73,19 +73,19 @@ public class SistemaBanco extends javax.swing.JFrame {
         textMonMin = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        textCPF_editar = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        textSaque = new javax.swing.JTextField();
-        textDeposito = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        textSaldo = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        valorSaque = new javax.swing.JTextField();
+        valorDeposita = new javax.swing.JTextField();
+        btnSacar = new javax.swing.JButton();
+        btnDepositar = new javax.swing.JButton();
+        valorSaldo = new javax.swing.JTextField();
+        btnSaldo = new javax.swing.JButton();
         bRemunera = new javax.swing.JButton();
+        cmbClienteEditar = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -359,12 +359,6 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jLabel14.setText("CPF");
 
-        textCPF_editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCPF_editarActionPerformed(evt);
-            }
-        });
-
         jButton4.setText("Pesquisar");
 
         jLabel15.setText("Saque");
@@ -375,11 +369,26 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jLabel18.setText("Remunera");
 
-        jButton7.setText("Sacar");
+        btnSacar.setText("Sacar");
+        btnSacar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSacarActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("Depositar");
+        btnDepositar.setText("Depositar");
+        btnDepositar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDepositarActionPerformed(evt);
+            }
+        });
 
-        jButton9.setText("Saldo");
+        btnSaldo.setText("Saldo");
+        btnSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSaldoActionPerformed(evt);
+            }
+        });
 
         bRemunera.setText("Remunerar");
         bRemunera.addActionListener(new java.awt.event.ActionListener() {
@@ -388,6 +397,8 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         });
 
+        cmbClienteEditar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -395,58 +406,66 @@ public class SistemaBanco extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textCPF_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(valorDeposita, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(valorSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bRemunera)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbClienteEditar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(valorSaque, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(textSaque, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(textDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSacar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(textSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(bRemunera))))
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(52, 52, 52))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jButton4))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cmbClienteEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(textCPF_editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(textSaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSacar)
+                    .addComponent(valorSaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(textDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDepositar)
+                    .addComponent(valorDeposita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(textSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSaldo)
+                    .addComponent(valorSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -657,6 +676,8 @@ public class SistemaBanco extends javax.swing.JFrame {
             cmbConta.setSelectedItem("--");
             JOptionPane.showMessageDialog(null, "Conta Corrente cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             cmbCliente.setSelectedItem("--");
+            
+            cmbClienteEditar.addItem(cpf);
 
             cliente.setConta(conta);
             conta.setDono(cliente);
@@ -700,6 +721,9 @@ public class SistemaBanco extends javax.swing.JFrame {
 
             cliente.setConta(conta);
             conta.setDono(cliente);
+            
+            cmbClienteEditar.addItem(cpf);
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios !\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -722,13 +746,56 @@ public class SistemaBanco extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textCPFActionPerformed
 
-    private void textCPF_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCPF_editarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCPF_editarActionPerformed
-
     private void bRemuneraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemuneraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bRemuneraActionPerformed
+
+    private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
+        String cpf = cmbClienteEditar.getSelectedItem().toString();
+        
+        Cliente cliente = Sistema.hashClientes.get(cpf);
+        Conta conta = cliente.getConta();
+        try {
+            if (Double.parseDouble(valorSaque.getText()) < 0.0){
+                JOptionPane.showMessageDialog(null,"Valor do saque deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                conta.saca(Double.parseDouble(valorSaque.getText()));
+                JOptionPane.showMessageDialog(null,"Saque realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                valorSaque.setText("");
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_btnSacarActionPerformed
+
+    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
+        String cpf = cmbClienteEditar.getSelectedItem().toString();
+        
+        Cliente cliente = Sistema.hashClientes.get(cpf);
+        Conta conta = cliente.getConta();
+        try {
+            if (Double.parseDouble(valorDeposita.getText()) < 0.0){
+                JOptionPane.showMessageDialog(null,"Valor do depósito deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            
+            } else {
+                conta.deposita(Double.parseDouble(valorDeposita.getText()));
+                JOptionPane.showMessageDialog(null,"Depósito realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                valorDeposita.setText("");
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Por favor digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDepositarActionPerformed
+
+    private void bntSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSaldoActionPerformed
+        String cpf = cmbClienteEditar.getSelectedItem().toString();
+        
+        Cliente cliente = Sistema.hashClientes.get(cpf);
+        Conta conta = cliente.getConta();
+        
+        valorSaldo.setText(Double.toString(conta.getSaldo()));
+    }//GEN-LAST:event_bntSaldoActionPerformed
    
     private Cliente getClienteParaAtualizar() {
         if(clienteSelecionadoParaAtualizacao==null){
@@ -799,17 +866,18 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JButton bRemunera;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnDepositar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnOrdenar;
+    private javax.swing.JButton btnSacar;
+    private javax.swing.JButton btnSaldo;
     private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbClienteEditar;
     private javax.swing.JComboBox<String> cmbConta;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -837,16 +905,15 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTable tabCliente;
     private javax.swing.JTextField textCEP;
     private javax.swing.JTextField textCPF;
-    private javax.swing.JTextField textCPF_editar;
     private javax.swing.JTextField textDepIni;
-    private javax.swing.JTextField textDeposito;
     private javax.swing.JTextField textLimite;
     private javax.swing.JTextField textMonMin;
     private javax.swing.JTextField textNome;
     private javax.swing.JTextField textRG;
     private javax.swing.JTextField textRua;
-    private javax.swing.JTextField textSaldo;
-    private javax.swing.JTextField textSaque;
     private javax.swing.JTextField textSobrenome;
+    private javax.swing.JTextField valorDeposita;
+    private javax.swing.JTextField valorSaldo;
+    private javax.swing.JTextField valorSaque;
     // End of variables declaration//GEN-END:variables
 }
