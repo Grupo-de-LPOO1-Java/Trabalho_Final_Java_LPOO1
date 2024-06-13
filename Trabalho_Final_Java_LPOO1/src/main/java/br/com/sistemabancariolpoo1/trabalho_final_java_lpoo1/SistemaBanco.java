@@ -73,7 +73,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         textMonMin = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         lSaldo = new javax.swing.JLabel();
@@ -305,7 +305,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                         .addComponent(lDepIni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lMonMin)
                     .addComponent(lCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cmbCliente, 0, 360, Short.MAX_VALUE)
                     .addComponent(cmbConta, javax.swing.GroupLayout.Alignment.LEADING, 0, 360, Short.MAX_VALUE)
@@ -359,10 +359,10 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         jLabel14.setText("CPF");
 
-        jButton4.setText("Pesquisar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
@@ -453,7 +453,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSacar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -463,7 +463,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbClienteEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jButton4))
+                    .addComponent(btnPesquisar))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -494,7 +494,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -767,8 +767,8 @@ public class SistemaBanco extends javax.swing.JFrame {
         Cliente cliente = Sistema.hashClientes.get(cpf);
         Conta conta = cliente.getConta();
         
-        if(conta.getSaldo() < 0)
-            JOptionPane.showMessageDialog(null,"Não pode remunerar saldos negativos.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        if(conta.getSaldo() <= 0)
+            JOptionPane.showMessageDialog(null,"Não pode remunerar saldos negativos ou 0.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
         else{
             conta.remunera();
             JOptionPane.showMessageDialog(null,"Conta remunerada.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
@@ -804,12 +804,23 @@ public class SistemaBanco extends javax.swing.JFrame {
         try {
             if (Double.parseDouble(valorDeposita.getText()) < 0.0){
                 JOptionPane.showMessageDialog(null,"Valor do depósito deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            
-            } else {
+            }
+            if (conta instanceof ContaInvestimento) {
+                if (Double.parseDouble(valorDeposita.getText()) < ((ContaInvestimento) conta).getDepositoMinimo()) {
+                    JOptionPane.showMessageDialog(null,"Valor do depósito deve ser maior que o mínimo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    conta.deposita(Double.parseDouble(valorDeposita.getText()));
+                    JOptionPane.showMessageDialog(null,"Depósito realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    valorDeposita.setText("");
+                }
+            }
+            else {
                 conta.deposita(Double.parseDouble(valorDeposita.getText()));
                 JOptionPane.showMessageDialog(null,"Depósito realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
                 valorDeposita.setText("");
             }
+            
         } catch (Exception e){
             JOptionPane.showMessageDialog(null,"Por favor digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -824,9 +835,11 @@ public class SistemaBanco extends javax.swing.JFrame {
         valorSaldo.setText(Double.toString(conta.getSaldo()));
     }//GEN-LAST:event_bntSaldoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        valorSaque.setText(""); 
+        valorDeposita.setText("");
+        valorSaldo.setText("");
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void cmbClienteEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClienteEditarActionPerformed
         // TODO add your handling code here:
@@ -910,13 +923,13 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnOrdenar;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSacar;
     private javax.swing.JButton btnSaldo;
     private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbClienteEditar;
     private javax.swing.JComboBox<String> cmbConta;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
