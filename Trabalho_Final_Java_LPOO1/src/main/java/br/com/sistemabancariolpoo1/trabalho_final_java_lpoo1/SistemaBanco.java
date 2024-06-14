@@ -624,6 +624,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
         
         cmbCliente.removeAllItems();
+        cmbCliente.addItem("--");
         for (String key : Sistema.hashClientes.keySet()) {
             cmbCliente.addItem(key);
         }
@@ -661,6 +662,11 @@ public class SistemaBanco extends javax.swing.JFrame {
     private void btnbCadastrarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbCadastrarContaActionPerformed
         
         String cpf = cmbCliente.getSelectedItem().toString();
+        
+        if (cmbCliente.getSelectedItem().equals("--")){
+            JOptionPane.showMessageDialog(null, "Selecione um cliente!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
         Cliente cliente = Sistema.hashClientes.get(cpf);
         
         if (cliente.getConta() != null) {
