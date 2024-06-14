@@ -526,7 +526,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         textCEP.setText("");
         cmbEstado.setSelectedItem("AL");
         tabModel.setListaContatos(Sistema.hashClientes);
-        this.clienteSelecionadoParaAtualizacao = null;
+
         linhaClicadaParaAtualizacao=-1;
     }//GEN-LAST:event_btnLimparActionPerformed
 
@@ -570,7 +570,18 @@ public class SistemaBanco extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         Cliente cli = this.getClienteParaAtualizar();
+        String nome = textNome.getText();
+        String sobreNome = textSobrenome.getText();
+        String rg = textRG.getText();
+        String cpf = textCPF.getText().replaceAll("\\D", "");
+        String rua = textRua.getText();
+        String cep = textCEP.getText();
+        String estado = cmbEstado.getSelectedItem().toString();
         if(cli==null){
+            return;
+        }
+        if (nome.isEmpty() || sobreNome.isEmpty() || rg.isEmpty() || cpf.isEmpty() || rua.isEmpty() || cep.isEmpty() || estado.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         Sistema.hashClientes.replace(cli.getCpf(), cli);
