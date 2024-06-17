@@ -1,1 +1,1 @@
-Trabalho Final de Java LPOO1
+Trabalho Final de Java LPOO1 - foco em aplicação bancária envolvendo criação do usuário, criação de conta (corrente/investimento), validações de informações e métodos que envolvem ações bancárias (saque, depósito e afins)
