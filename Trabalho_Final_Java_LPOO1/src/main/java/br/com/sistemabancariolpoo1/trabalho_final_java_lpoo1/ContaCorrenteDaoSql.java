@@ -15,20 +15,18 @@ import java.util.List;
  *
  * @author joaop
  */
-public class ContaDaoSql implements ContaDao {
+public class ContaCorrenteDaoSql implements ContaDao {
     
     private ConnectionFactory connectionFactory;
-    private final String insert = "insert into Conta "
-            + "(NUMERO,SALDO,DONO) values (?,?,?)";
-    private final String selectAll = "select "
-            + "NUMERO,SALDO,DONO from Conta";
-    private final String selectById = "select "
-            + "SALDO,DONO from Conta where NUMERO=?";
-    private final String selectByName = "select "
-            + "NUMERO,SALDO from Conta where DONO=?";
-    private final String update = "update Conta "
+    private final String insert = "insert into ContaCorrente "
+            + "(numero,depositoInicial,limite) values (?,?,?)";
+    private final String update_saque = "update Conta "
             + "set SALDO=?, DONO=? WHERE NUMERO=?";
-    private final String delete = "delete from Conta WHERE NUMERO=?";
+    private final String update_deposito = "update Conta "
+            + "set depositoInicial=?, DONO=? WHERE NUMERO=?";
+    private final String update_remunera = "update Conta "
+            + "set SALDO=?, DONO=? WHERE NUMERO=?";
+    private final String delete = "delete from ContaCorrente WHERE NUMERO=?";
     private final String deleteAll = "TRUNCATE Conta";
     
     private static ContaDaoSql dao;
