@@ -12,10 +12,10 @@ import java.util.List;
  * @param <T>
  */
 public interface Dao<T> {
-    public void add(T objeto) throws Exception; 
+    public int add(T objeto) throws Exception; 
     public List<T> getAll() throws Exception;
-    public T getById(long id) throws Exception;
+    public T getById(int id) throws Exception;
     public void update(T objeto) throws Exception;
-    public void delete(T objeto) throws Exception;
+    public void delete(int objeto) throws Exception;
     public void deleteAll() throws Exception;
 }

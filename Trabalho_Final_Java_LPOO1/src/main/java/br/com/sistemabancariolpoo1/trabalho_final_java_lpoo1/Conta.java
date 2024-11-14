@@ -43,9 +43,6 @@ public abstract class Conta implements ContaI {
     public double getSaldo() {
         return saldo;
     };
-    
-    @Override
-    public abstract void remunera();
 
     public void setNumero(int numero) {
         this.numero = numero;

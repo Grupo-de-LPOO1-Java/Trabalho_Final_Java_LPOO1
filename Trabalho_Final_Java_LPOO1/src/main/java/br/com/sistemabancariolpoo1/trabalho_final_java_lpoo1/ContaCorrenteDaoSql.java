@@ -15,121 +15,157 @@ import java.util.List;
  *
  * @author joaop
  */
-public class ContaCorrenteDaoSql implements ContaDao {
+public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into ContaCorrente "
-            + "(numero,depositoInicial,limite) values (?,?,?)";
-    private final String update_saque = "update Conta "
-            + "set SALDO=?, DONO=? WHERE NUMERO=?";
-    private final String update_deposito = "update Conta "
-            + "set depositoInicial=?, DONO=? WHERE NUMERO=?";
-    private final String update_remunera = "update Conta "
-            + "set SALDO=?, DONO=? WHERE NUMERO=?";
+            + "(depositoInicial,limite) values (?,?)";
+    private final String update_movimenta = "update ContaCorrente "
+            + "set SALDO=? WHERE NUMERO=?";
     private final String delete = "delete from ContaCorrente WHERE NUMERO=?";
-    private final String deleteAll = "TRUNCATE Conta";
+    private final String deleteAll = "TRUNCATE ContaCorrente";
+    private final String getContaCorrenteByID = "SELECT * from ContaCorrente WHERE numero = ?";
     
-    private static ContaDaoSql dao;
+    private static ContaCorrenteDaoSql dao;
     
-    private ContaDaoSql(){
+    private ContaCorrenteDaoSql(){
     }
-    public static ContaDaoSql getContaDaoSql(){
+    public static ContaCorrenteDaoSql getContaDaoSql(){
         if(dao==null)
-            return dao = new ContaDaoSql();
+            return dao = new ContaCorrenteDaoSql();
         else
             return dao;
     }
     
-    public ContaDaoSql(ConnectionFactory conFactory){
+    public ContaCorrenteDaoSql(ConnectionFactory conFactory){
         this();connectionFactory = conFactory;
     }
     
     
-    public void add(Conta conta) throws Exception{
+    public int add(ContaCorrente conta) throws Exception{
         //https://pt.stackoverflow.com/questions/172909/como-funciona-o-try-with-resources
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             )
         {
-            // seta os valores
-            stmtAdiciona.setInt(1, conta.getNumero());
-            stmtAdiciona.setDouble(2, conta.getSaldo());
-            stmtAdiciona.setObject(3, conta.getDono());
-            // executa
+            stmtAdiciona.setDouble(1,conta.getSaldo());
+            stmtAdiciona.setDouble(2,conta.getLimit());
+            
             stmtAdiciona.execute();
-            //Seta o id do contato
+            
             ResultSet rs = stmtAdiciona.getGeneratedKeys();
             rs.next();
             long i = rs.getLong(1);
             conta.setNumero((int) i);
             
+            return conta.getNumero();
         }
     }
 
-    public List<Conta> getAll() throws Exception{
+    /*public ContaCorrente getContaCorrenteByID(int id) throws Exception{
+        ContaCorrente conta = new ContaCorrente();
         try (Connection connection=ConnectionFactory.getConnection();
-             PreparedStatement stmtLista = connection.prepareStatement(selectAll);
-             ResultSet rs = stmtLista.executeQuery();   
+             PreparedStatement stmtLista = connection.prepareStatement(getContaCorrenteByID);
             ){
-            List<Conta> conta = new ArrayList();
-            while (rs.next()) {
-                // criando o objeto Contato
-                //Contato contato = new Contato();
-                long numero = rs.getLong("numero");
-                Double saldo= rs.getDouble("saldo");
-                Cliente dono = (Cliente) rs.getObject("dono");
+            
+                stmtLista.setInt(1,id);
+                ResultSet rs = stmtLista.executeQuery();   
+                Double saldo = rs.getDouble("saldo");
+                Double limite = rs.getDouble("limite");
                 
                 // adicionando o objeto à lista
-                conta.add(new Conta(numero,saldo,dono));
+                conta.setLimit(limite);
+                conta.setNumero(id);
+                conta.setSaldo(saldo);
             }
             
             return conta;
-        }
-
-    }
+        }*/ //Método ja implementado da interface
 
 
-    public void update(Conta conta) throws Exception{
+    /*public void update_movimenta(ContaCorrente conta) throws Exception{
         try(    Connection connection=ConnectionFactory.getConnection();
-                PreparedStatement stmtAtualiza = connection.prepareStatement(update);
+                PreparedStatement stmtAtualiza = connection.prepareStatement(update_movimenta);
                 ){
 
-            stmtAtualiza.setInt(1, conta.getNumero());
-            stmtAtualiza.setDouble(2, conta.getSaldo());
-            stmtAtualiza.setObject(3, conta.getDono());      
+            stmtAtualiza.setDouble(1, conta.getSaldo());
+            stmtAtualiza.setObject(2, conta.getNumero());      
             stmtAtualiza.executeUpdate();
         } 
-    }
+    }*/ //Implementado no método da interface
     
     @Override
     public void delete(List<Conta> contas) throws Exception {
         for(Conta conta:contas){
-            delete(conta);
+            try (Connection connection=ConnectionFactory.getConnection();
+             PreparedStatement stmtExcluir = connection.prepareStatement(delete);
+            ){
+                stmtExcluir.setInt(1, conta.getNumero());
+                stmtExcluir.executeUpdate();
+            }
         }
     }
 
-    public void delete(Conta conta) throws Exception {
+    public void delete(int numero) throws Exception {
         
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtExcluir = connection.prepareStatement(delete);
             ){
-            stmtExcluir.setInt(1, conta.getNumero());
-            stmtExcluir.executeUpdate();
+                stmtExcluir.setInt(1, numero);
+                stmtExcluir.executeUpdate();
         }
     }    
 
 
 
-    @Override
-    public Conta getById(long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ContaCorrente getById(int id) throws Exception {
+        ContaCorrente conta = new ContaCorrente();
+        try (Connection connection=ConnectionFactory.getConnection();
+             PreparedStatement stmtLista = connection.prepareStatement(getContaCorrenteByID);
+            ){
+            
+                stmtLista.setInt(1,id);
+                ResultSet rs = stmtLista.executeQuery();   
+                Double saldo = rs.getDouble("saldo");
+                Double limite = rs.getDouble("limite");
+                
+                // adicionando o objeto à lista
+                conta.setLimit(limite);
+                conta.setNumero(id);
+                conta.setSaldo(saldo);
+            }
+            
+            return conta;    
     }
 
 
 
     @Override
     public void deleteAll() throws Exception {
+        try(Connection connection=ConnectionFactory.getConnection();
+             PreparedStatement stmtExcluir = connection.prepareStatement(deleteAll);
+            ){
+                stmtExcluir.executeUpdate();
+        }
+    }
+
+    @Override
+    public List<ContaCorrente> getAll() throws Exception { 
+        //Método irrelevante para as contas, não queremos pegar todas as contas;
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public void update(ContaCorrente conta) throws Exception {
+        try(    Connection connection=ConnectionFactory.getConnection();
+                PreparedStatement stmtAtualiza = connection.prepareStatement(update_movimenta);
+                ){
+
+            stmtAtualiza.setDouble(1, conta.getSaldo());
+            stmtAtualiza.setObject(2, conta.getNumero());      
+            stmtAtualiza.executeUpdate();
+        }     
+    }
+    
 }
 
