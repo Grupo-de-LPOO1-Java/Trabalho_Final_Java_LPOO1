@@ -131,5 +131,10 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
                 stmtExcluir.executeUpdate();
         }
     }
+
+    @Override
+    public ContaInvestimento getByCPF(String cpf) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

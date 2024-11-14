@@ -140,7 +140,6 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
 
 
 
-    @Override
     public void deleteAll() throws Exception {
         try(Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtExcluir = connection.prepareStatement(deleteAll);
@@ -149,13 +148,11 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
         }
     }
 
-    @Override
     public List<ContaCorrente> getAll() throws Exception { 
         //Método irrelevante para as contas, não queremos pegar todas as contas;
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public void update(ContaCorrente conta) throws Exception {
         try(    Connection connection=ConnectionFactory.getConnection();
                 PreparedStatement stmtAtualiza = connection.prepareStatement(update_movimenta);
@@ -165,6 +162,12 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             stmtAtualiza.setObject(2, conta.getNumero());      
             stmtAtualiza.executeUpdate();
         }     
+    }
+
+    @Override
+    public ContaCorrente getByCPF(String cpf) throws Exception {
+        //Irrelevante para conta no momento
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
