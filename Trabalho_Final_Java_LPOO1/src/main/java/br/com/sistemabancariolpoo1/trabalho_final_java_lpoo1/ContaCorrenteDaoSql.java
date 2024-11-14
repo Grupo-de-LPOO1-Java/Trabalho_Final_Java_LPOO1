@@ -21,7 +21,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     private final String insert = "insert into ContaCorrente "
             + "(depositoInicial,limite) values (?,?)";
     private final String update_movimenta = "update ContaCorrente "
-            + "set SALDO=? WHERE NUMERO=?";
+            + "set depositoInicial=? WHERE NUMERO=?";
     private final String delete = "delete from ContaCorrente WHERE NUMERO=?";
     private final String deleteAll = "TRUNCATE ContaCorrente";
     private final String getContaCorrenteByID = "SELECT * from ContaCorrente WHERE numero = ?";
@@ -95,8 +95,8 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     }*/ //Implementado no método da interface
     
     @Override
-    public void delete(List<Conta> contas) throws Exception {
-        for(Conta conta:contas){
+    public void delete(List<ContaCorrente> contas) throws Exception {
+        for(ContaCorrente conta:contas){
             try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtExcluir = connection.prepareStatement(delete);
             ){
@@ -126,7 +126,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             
                 stmtLista.setInt(1,id);
                 ResultSet rs = stmtLista.executeQuery();   
-                Double saldo = rs.getDouble("saldo");
+                Double saldo = rs.getDouble("depositoInicial");
                 Double limite = rs.getDouble("limite");
                 
                 // adicionando o objeto à lista

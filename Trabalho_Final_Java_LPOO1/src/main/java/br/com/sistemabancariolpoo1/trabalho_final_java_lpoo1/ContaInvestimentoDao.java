@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author joaop
  */
-public interface ContaDao extends Dao<Conta> {
-    public void delete(List<Conta> lista) throws Exception; 
+public interface ContaInvestimentoDao extends Dao<ContaInvestimento> {
+    public void delete(List<ContaInvestimento> lista) throws Exception; 
     
 }

@@ -11,6 +11,6 @@ import java.util.List;
  * @author mateus
  */
 public interface ContaCorrenteDao extends Dao<ContaCorrente>  {
-        public void delete(List<Conta> lista) throws Exception; 
+        public void delete(List<ContaCorrente> lista) throws Exception; 
 
 }
