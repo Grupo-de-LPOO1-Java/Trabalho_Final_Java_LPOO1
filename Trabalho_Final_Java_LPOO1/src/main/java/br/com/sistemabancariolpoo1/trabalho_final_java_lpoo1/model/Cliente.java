@@ -1,4 +1,4 @@
-package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
+package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model;
 
 /**
  *

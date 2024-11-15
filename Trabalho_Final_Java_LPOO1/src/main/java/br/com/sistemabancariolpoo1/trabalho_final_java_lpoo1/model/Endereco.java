@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
+package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Endereco {
     private Estado estado;
     private String cep,rua,complemento;
     
-    Endereco(Estado estado,String cep, String rua, String complemento){
+    public Endereco(Estado estado,String cep, String rua, String complemento){
         this.cep = cep;
         this.complemento = complemento;
         this.estado = estado;

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1;
+package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
