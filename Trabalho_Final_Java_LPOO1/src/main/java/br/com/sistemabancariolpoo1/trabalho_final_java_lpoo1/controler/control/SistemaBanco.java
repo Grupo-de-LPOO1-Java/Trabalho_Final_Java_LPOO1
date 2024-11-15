@@ -28,6 +28,8 @@ public class SistemaBanco extends javax.swing.JFrame {
     private ClienteTableModel tabModel = new ClienteTableModel();
     private int linhaClicadaParaAtualizacao = -1;
     private Cliente clienteSelecionadoParaAtualizacao;
+    
+    private Controller control = new Controller();
     /**
      * Creates new form SistemaBanco
      */
@@ -527,6 +529,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbClienteActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        control.limpar(); // o metodo tem que ser implementado de forma correta aidna;
         textNome.setText("");
         textSobrenome.setText("");
         textRG.setText("");
@@ -941,6 +944,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadastrarConta;
