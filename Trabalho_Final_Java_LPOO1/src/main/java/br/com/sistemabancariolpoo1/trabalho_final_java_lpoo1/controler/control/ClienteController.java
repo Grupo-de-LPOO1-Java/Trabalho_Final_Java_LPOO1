@@ -8,7 +8,7 @@ package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control;
  *
  * @author mateus
  */
-public class Controller {
+public class ClienteController {
     
     //private SistemaBanco sys = new SystemaBanco();
 

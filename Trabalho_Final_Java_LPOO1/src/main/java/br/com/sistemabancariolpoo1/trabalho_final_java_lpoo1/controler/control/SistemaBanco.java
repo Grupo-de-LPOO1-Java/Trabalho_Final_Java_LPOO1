@@ -29,7 +29,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private int linhaClicadaParaAtualizacao = -1;
     private Cliente clienteSelecionadoParaAtualizacao;
     
-    private Controller control = new Controller();
+    private ClienteController control = new ClienteController();
     /**
      * Creates new form SistemaBanco
      */
@@ -993,7 +993,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTextField textDepIni;
     private javax.swing.JTextField textLimite;
     private javax.swing.JTextField textMonMin;
-    private javax.swing.JTextField textNome;
+    javax.swing.JTextField textNome;
     private javax.swing.JTextField textRG;
     private javax.swing.JTextField textRua;
     private javax.swing.JTextField textSobrenome;
