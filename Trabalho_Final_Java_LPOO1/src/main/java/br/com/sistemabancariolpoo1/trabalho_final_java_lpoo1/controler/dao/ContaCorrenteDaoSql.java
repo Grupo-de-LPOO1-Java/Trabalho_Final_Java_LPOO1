@@ -4,6 +4,7 @@
  */
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao;
 
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaCorrente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,9 +21,9 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into ContaCorrente "
-            + "(depositoInicial,limite) values (?,?)";
+            + "(numero,depositoInicial,limite,saldo) values (?,?,?,?)";
     private final String update_movimenta = "update ContaCorrente "
-            + "set depositoInicial=? WHERE NUMERO=?";
+            + "set saldo=? WHERE NUMERO=?";
     private final String delete = "delete from ContaCorrente WHERE NUMERO=?";
     private final String deleteAll = "TRUNCATE ContaCorrente";
     private final String getContaCorrenteByID = "SELECT * from ContaCorrente WHERE numero = ?";
@@ -43,24 +44,20 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     }
     
     
-    public int add(ContaCorrente conta) throws Exception{
-        //https://pt.stackoverflow.com/questions/172909/como-funciona-o-try-with-resources
+    public int add(ContaCorrente conta, Cliente cli) throws Exception{
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             )
         {
-            stmtAdiciona.setDouble(1,conta.getSaldo());
-            stmtAdiciona.setDouble(2,conta.getLimit());
+            stmtAdiciona.setDouble(1,cli.getId());
+            stmtAdiciona.setDouble(2,conta.getDepositoInicial());
+            stmtAdiciona.setDouble(3,conta.getLimit());
+            stmtAdiciona.setDouble(4,conta.getSaldo());
             
             stmtAdiciona.execute();
-            
-            ResultSet rs = stmtAdiciona.getGeneratedKeys();
-            rs.next();
-            long i = rs.getLong(1);
-            conta.setNumero((int) i);
-            
-            return conta.getNumero();
+ 
         }
+        return 1;
     }
 
     /*public ContaCorrente getContaCorrenteByID(int id) throws Exception{
@@ -127,13 +124,15 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             
                 stmtLista.setInt(1,id);
                 ResultSet rs = stmtLista.executeQuery();   
-                Double saldo = rs.getDouble("depositoInicial");
+                Double saldo = rs.getDouble("saldo");
                 Double limite = rs.getDouble("limite");
+                Double depositoInicial = rs.getDouble("depositoInicial");
                 
                 // adicionando o objeto à lista
                 conta.setLimit(limite);
                 conta.setNumero(id);
                 conta.setSaldo(saldo);
+                conta.setDepositoInicial(depositoInicial);
             }
             
             return conta;    
@@ -168,6 +167,11 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     @Override
     public ContaCorrente getByCPF(String cpf) throws Exception {
         //Irrelevante para conta no momento
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int add(ContaCorrente objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

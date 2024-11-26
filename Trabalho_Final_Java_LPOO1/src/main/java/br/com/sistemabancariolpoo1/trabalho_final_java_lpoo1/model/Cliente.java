@@ -20,8 +20,37 @@ public class Cliente implements Comparable<Cliente> {
     private String cpf;
     private Endereco endereco;
     private Conta conta;
+    private int is_corente;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIs_corente() {
+        return is_corente;
+    }
+
+    public void setIs_corente(int is_corente) {
+        this.is_corente = is_corente;
+    }
+
 
     private static List<Cliente> listaClientes = new ArrayList<>();
+
+    public Cliente(String nome, String sobrenome, String rg, String cpf, Endereco endereco, int is_corrente) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.conta = null;
+        this.is_corente = is_corrente;
+    }
 
     public Cliente(String nome, String sobrenome, String rg, String cpf, Endereco endereco) {
         this.nome = nome;
@@ -30,7 +59,8 @@ public class Cliente implements Comparable<Cliente> {
         this.cpf = cpf;
         this.endereco = endereco;
         this.conta = null;
-    }
+        this.is_corente = -1;
+    }    
 
     public String getNome() {
         return nome;
@@ -84,11 +114,12 @@ public class Cliente implements Comparable<Cliente> {
         return listaClientes;
     }
 
-    public boolean atualizarCliente(String nome, String sobrenome, String rg, Endereco endereco) {
+    public boolean atualizarCliente(String nome, String sobrenome, String rg, Endereco endereco, int is_corrente) {
         this.setNome(nome);
         this.setSobrenome(sobrenome);
         this.setRg(rg);
         this.setEndereco(endereco);
+        this.setIs_corente(is_corrente);
         return true;
     }
 

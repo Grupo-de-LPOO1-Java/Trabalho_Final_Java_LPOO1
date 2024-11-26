@@ -4,6 +4,7 @@
  */
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao;
 
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaInvestimento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,9 +20,9 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
     
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into ContaInvestimento "
-            + "(montanteMinimo,depositoMinimo,depositoInicial) values (?,?,?)";
+            + "(numero,montanteMinimo,depositoMinimo,depositoInicial,saldo) values (?,?,?,?,?)";
     private final String update_movimenta = "update ContaInvestimento "
-            + "set montanteMinimo=? WHERE NUMERO=?";
+            + "set saldo=? WHERE NUMERO=?";
     private final String delete = "delete from ContaInvestimento WHERE NUMERO=?";
     private final String deleteAll = "TRUNCATE ContaInvestimento";
     private final String getContaInvestimentoByID = "SELECT * from ContaInvestimento WHERE numero = ?";
@@ -53,25 +54,22 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
         }
     }
 
-    @Override
-    public int add(ContaInvestimento objeto) throws Exception {
+    public int add(ContaInvestimento objeto, Cliente cli) throws Exception {
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             )
         {
-            stmtAdiciona.setDouble(1,objeto.getDepositoMinimo());
+            stmtAdiciona.setInt(1,cli.getId());
             stmtAdiciona.setDouble(2,objeto.getMontanteMinimo());
-            stmtAdiciona.setDouble(3,objeto.getDepositoInicial());
+            stmtAdiciona.setDouble(3,objeto.getDepositoMinimo());
+            stmtAdiciona.setDouble(4,objeto.getDepositoInicial());
+            stmtAdiciona.setDouble(5,objeto.getSaldo());
             
             stmtAdiciona.execute();
             
-            ResultSet rs = stmtAdiciona.getGeneratedKeys();
-            rs.next();
-            long i = rs.getLong(1);
-            objeto.setNumero((int) i);
-            
-            return objeto.getNumero();
-        }    }
+           return 1;
+        }    
+    }
 
     @Override
     public List<ContaInvestimento> getAll() throws Exception {
@@ -88,14 +86,16 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
             
                 stmtLista.setInt(1,id);
                 ResultSet rs = stmtLista.executeQuery();   
-                Double saldo = rs.getDouble("depositoInicial");
+                Double depositoInicial = rs.getDouble("depositoInicial");
                 Double montanteMinimo = rs.getDouble("montanteMinimo");
                 Double depositoMinimo = rs.getDouble("depositoMinimo");
+                double saldo = rs.getDouble("saldo");
                 
                 conta.setSaldo(saldo);
                 conta.setNumero(id);
                 conta.setDepositoMinimo(depositoMinimo);
                 conta.setMontanteMinimo(montanteMinimo);
+                conta.setDepositoInicial(depositoInicial);
             }
             
             return conta;   
@@ -107,8 +107,8 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
                 PreparedStatement stmtAtualiza = connection.prepareStatement(update_movimenta);
                 ){
 
-            stmtAtualiza.setDouble(1, objeto.getDepositoMinimo());
-            stmtAtualiza.setObject(2, objeto.getNumero());      
+            stmtAtualiza.setDouble(1, objeto.getSaldo());
+            stmtAtualiza.setObject(2, objeto.getNumero());
             stmtAtualiza.executeUpdate();
         }      
     }
@@ -135,6 +135,11 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
 
     @Override
     public ContaInvestimento getByCPF(String cpf) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int add(ContaInvestimento objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

@@ -25,10 +25,11 @@ import java.util.List;
 public class ClienteDaoSql implements ClienteDao {
     
     private ConnectionFactory connectionFactory;
-    private final String insert = "insert into cliente (nome,sobrenome,rg,cpf,rua,estado,cep) values (?,?,?,?,?,?,?)";
+    private final String insert = "insert into cliente (nome,sobrenome,rg,cpf,rua,estado,cep,is_corrente) values (?,?,?,?,?,?,?,?)";
     private final String selectAll = "select * from cliente";
-    private final String selectByCPF = "select nome,sobrenome,rg,rua,estado,cep from cliente WHERE cpf=?";
+    private final String selectByCPF = "select nome,sobrenome,rg,rua,estado,cep,is_corrente from cliente WHERE cpf=?";
     private final String update = "update cliente set nome=?, sobrenome=?, rg=?, rua=?, estado=?, cep=? WHERE cpf=?";
+    private final String updateConta = "update cliente SET is_corrente = ? WHERE cpf = ?";
     private final String delete = "delete from cliente WHERE cpf=?";
     private final String deleteAll = "Truncate cliente";
     private static ClienteDaoSql dao;
@@ -55,6 +56,7 @@ public class ClienteDaoSql implements ClienteDao {
             stmtAdiciona.setString(5, cliente.getEndereco().getRua());
             stmtAdiciona.setString(6, cliente.getEndereco().getEstado().getNome());
             stmtAdiciona.setString(7, cliente.getEndereco().getCep());
+            stmtAdiciona.setInt(8, cliente.getIs_corente());
             // executa
             stmtAdiciona.execute();
             //Seta o id do aluno
@@ -85,8 +87,9 @@ public class ClienteDaoSql implements ClienteDao {
                 String estado = rs.getString("estado");
                 String cep = rs.getString("cep");
                 Estado est = new Estado(estado);
+                int is_corrente = rs.getInt("is_corrente");
                 Endereco end = new Endereco(est,cep,rua, "");
-                clientes.add(new Cliente(nome, sobrenome, rg, cpf, end));
+                clientes.add(new Cliente(nome, sobrenome, rg, cpf, end, is_corrente));
             }
             
             return clientes;
@@ -110,7 +113,8 @@ public class ClienteDaoSql implements ClienteDao {
                     String cep = rs.getString("cep");
                     Estado est = new Estado(estado);
                     Endereco end = new Endereco(est,cep,rua, "");
-                    return new Cliente(nome, sobrenome, rg, cpf, end);
+                    int is_corrente = rs.getInt("is_corrente");
+                    return new Cliente(nome, sobrenome, rg, cpf, end,is_corrente);
                 } else {
                     throw new SQLException("Cliente não encontrado com cpf=" + cpf);
                 }
@@ -168,6 +172,26 @@ public class ClienteDaoSql implements ClienteDao {
     @Override
     public void delete(int objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public void updateContaCliente(String tipo, String cpf) throws Exception{
+          try(    Connection connection=ConnectionFactory.getConnection();
+                PreparedStatement stmtAtualizaConta = connection.prepareStatement(updateConta);
+                ){
+              //Coloca o cpf do cliente para atualizar
+            stmtAtualizaConta.setString(2, cpf);
+            switch(tipo){
+                case "Corrente": //se a conta criadafor corrente chama para ser corrente
+                    stmtAtualizaConta.setInt(1,1);
+                    break;
+                case "Investimento": // se for investimento chama para ser investimento
+                    stmtAtualizaConta.setInt(1,0);
+                    break;
+                default:
+                    System.out.println("Erro de tipo de conta!");
+            }
+            stmtAtualizaConta.executeUpdate();
+        } 
     }
     
 }
