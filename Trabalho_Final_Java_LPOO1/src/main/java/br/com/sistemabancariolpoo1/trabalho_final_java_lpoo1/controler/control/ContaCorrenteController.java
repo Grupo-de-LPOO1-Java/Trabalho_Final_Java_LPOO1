@@ -14,10 +14,14 @@ import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaCorrente
  * @author joaop
  */
 public class ContaCorrenteController {
-    private SistemaBanco sys = new SistemaBanco();
+    private SistemaBanco sys;
     private ContaCorrenteDaoSql modelDao = ContaCorrenteDaoSql.getContaDaoSql(); // Exemplo de acesso ao DAO
     //private View view; // Exemplo de ligação com a view
     private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
+    
+    public ContaCorrenteController(SistemaBanco sys) {
+        this.sys = sys;
+    }
     
 
 public void criarContaCorrente() throws Exception {

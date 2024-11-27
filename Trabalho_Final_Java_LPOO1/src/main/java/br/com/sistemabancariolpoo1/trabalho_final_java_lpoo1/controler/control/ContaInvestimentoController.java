@@ -16,9 +16,12 @@ import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaInvestim
 public class ContaInvestimentoController {
     private ContaInvestimentoDaoSql modelDao = ContaInvestimentoDaoSql.getContaDaoSql(); // DAO da Conta Investimento
     //private ContaInvestimentoView view = new ContaInvestimentoView(); // Simulação de View fictícia
-    private SistemaBanco sys = new SistemaBanco();
+    private SistemaBanco sys;
     private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
     
+    public ContaInvestimentoController(SistemaBanco sys) {
+        this.sys = sys;
+    }
 
 public void criarContaInvestimento() throws Exception{
     String cpf = sys.cmbCliente.getSelectedItem().toString();

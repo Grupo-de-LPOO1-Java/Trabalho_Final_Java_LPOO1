@@ -29,14 +29,17 @@ public class SistemaBanco extends javax.swing.JFrame {
     public int linhaClicadaParaAtualizacao = -1;
     public Cliente clienteSelecionadoParaAtualizacao;
     
-    private ClienteController control = new ClienteController();
-    private ContaCorrenteController correnteControl = new ContaCorrenteController();
-    private ContaInvestimentoController investimentoControl = new ContaInvestimentoController();
+    private ClienteController control;
+    private ContaCorrenteController correnteControl;
+    private ContaInvestimentoController investimentoControl;
     /**
      * Creates new form SistemaBanco
      */
     public SistemaBanco() {
         ClienteTableModel tabCliente = new ClienteTableModel();
+        this.control = new ClienteController(this);
+        this.correnteControl = new ContaCorrenteController(this);
+        this.investimentoControl = new ContaInvestimentoController(this);
         initComponents();
     }
 

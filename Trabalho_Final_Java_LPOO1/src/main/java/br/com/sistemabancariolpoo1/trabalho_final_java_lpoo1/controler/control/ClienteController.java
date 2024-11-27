@@ -22,13 +22,14 @@ import java.util.List;
 public class ClienteController {
     
 
-    private SistemaBanco sys = new SistemaBanco();
+    private SistemaBanco sys;
     private ClienteDaoSql modelDao = ClienteDaoSql.getClienteDaoSQL();
 
     private ClienteDaoSql clienteDao;
     
-    public ClienteController() {
+    public ClienteController(SistemaBanco sys) {
         this.clienteDao = ClienteDaoSql.getClienteDaoSQL();
+        this.sys = sys;
     }
     
     public void criarCliente(Cliente cliente) {
