@@ -628,7 +628,8 @@ public class SistemaBanco extends javax.swing.JFrame {
         Estado est = new Estado(estado);
         Endereco end = new Endereco(est,cep,rua, "");
         Cliente cli = new Cliente(nome,sobreNome,rg,cpf,end);
-
+        ClienteController controller = new ClienteController();
+        controller.criarCliente(cli);
         Sistema.hashClientes.put(cpf, cli);
         this.tabModel.setListaContatos(Sistema.hashClientes);
         this.tabCliente.setRowSelectionInterval(Sistema.hashClientes.size()-1, Sistema.hashClientes.size()-1);
