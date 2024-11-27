@@ -68,5 +68,10 @@ public class ContaInvestimento extends Conta {
             return false;
         }
 }
+
+    @Override
+    public String getCpfCliente() {
+        return getCpfCliente();
+    }
 }
 

@@ -25,9 +25,9 @@ import javax.swing.JOptionPane;
  * @author Mateus Bazan
  */
 public class SistemaBanco extends javax.swing.JFrame {
-    private ClienteTableModel tabModel = new ClienteTableModel();
-    private int linhaClicadaParaAtualizacao = -1;
-    private Cliente clienteSelecionadoParaAtualizacao;
+    public ClienteTableModel tabModel = new ClienteTableModel();
+    public int linhaClicadaParaAtualizacao = -1;
+    public Cliente clienteSelecionadoParaAtualizacao;
     
     private ClienteController control = new ClienteController();
     /**
@@ -299,6 +299,12 @@ public class SistemaBanco extends javax.swing.JFrame {
 
         lMonMin.setText("Montante Minimo");
 
+        textDepIni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDepIniActionPerformed(evt);
+            }
+        });
+
         bCadastrarConta.setText("Cadastrar");
         bCadastrarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -529,36 +535,17 @@ public class SistemaBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbClienteActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        control.limpar(); // o metodo tem que ser implementado de forma correta aidna;
-        textNome.setText("");
-        textSobrenome.setText("");
-        textRG.setText("");
-        textCPF.setText("");
-        textRua.setText("");
-        textCEP.setText("");
-        cmbEstado.setSelectedItem("AL");
+        control.limpar(); 
+        //chama o metodo do controler de clientes...
         tabModel.setListaContatos(Sistema.hashClientes);
 
         linhaClicadaParaAtualizacao=-1;
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        String nome = textNome.getText().trim();
-        String sobrenome = textSobrenome.getText().trim();
-        String rg = textRG.getText().trim();
-        String cpf = textCPF.getText().trim();
-        List<Cliente> clientesEncontrados = new ArrayList<>();
-        for (Cliente cliente : Sistema.hashClientes.values()) {
-        if ((nome.isEmpty() || cliente.getNome().contains(nome)) &&
-            (sobrenome.isEmpty() || cliente.getSobrenome().contains(sobrenome)) &&
-            (rg.isEmpty() || cliente.getRg().contains(rg)) &&
-            (cpf.isEmpty() || cliente.getCpf().contains(cpf))) {
-            clientesEncontrados.add(cliente);
-            }
-        }
-        tabModel.setListaContatos(clientesEncontrados);
-        this.clienteSelecionadoParaAtualizacao = null;
-        linhaClicadaParaAtualizacao=-1;
+        
+        control.listaClientes();
+        
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -569,77 +556,30 @@ public class SistemaBanco extends javax.swing.JFrame {
         }
         int resposta = JOptionPane.showConfirmDialog(null, "Todas as contas vinculadas a este(s) cliente(s) serão apagadas", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (resposta == JOptionPane.YES_OPTION) {
-            this.tabModel.removeClientes(listaExcluir);
             for(Cliente cli:listaExcluir) {
-                Sistema.hashClientes.remove(cli.getCpf());
-                cmbCliente.removeItem(cli.getCpf());
-                cmbClienteEditar.removeItem(cli.getCpf());
+                control.excluirCliente(cli);
             }
+            this.tabModel.removeClientes(listaExcluir);
+            
             this.clienteSelecionadoParaAtualizacao = null;
             linhaClicadaParaAtualizacao=-1;
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        Cliente cli = this.getClienteParaAtualizar();
-        String nome = textNome.getText();
-        String sobreNome = textSobrenome.getText();
-        String rg = textRG.getText();
-        String cpf = textCPF.getText().replaceAll("\\D", "");
-        String rua = textRua.getText();
-        String cep = textCEP.getText();
-        String estado = cmbEstado.getSelectedItem().toString();
-        if(cli==null){
-            return;
-        }
-        if (nome.isEmpty() || sobreNome.isEmpty() || rg.isEmpty() || cpf.isEmpty() || rua.isEmpty() || cep.isEmpty() || estado.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        Sistema.hashClientes.replace(cli.getCpf(), cli);
-        this.tabModel.atualizarCliente(linhaClicadaParaAtualizacao);
+       try{
+           control.atualizarCliente();
+       }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);           
+       }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnCadastrarctionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarctionPerformed
-        String nome = textNome.getText();
-        String sobreNome = textSobrenome.getText();
-        String rg = textRG.getText();
-        String cpf = textCPF.getText().replaceAll("\\D", "");
-        String rua = textRua.getText();
-        String cep = textCEP.getText();
-        String estado = cmbEstado.getSelectedItem().toString();
-
-        if (nome.isEmpty() || sobreNome.isEmpty() || rg.isEmpty() || cpf.isEmpty() || rua.isEmpty() || cep.isEmpty() || estado.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        if(cpf.equals("")){
-            JOptionPane.showMessageDialog(null,"CPF não pode ser vazio.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        if(!CPFValidator.isCPF(cpf)) {
-            JOptionPane.showMessageDialog(null,"CPF não é válido.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        if(Sistema.hashClientes.containsKey(cpf)){
-            JOptionPane.showMessageDialog(null,"CPF já cadastrado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        Estado est = new Estado(estado);
-        Endereco end = new Endereco(est,cep,rua, "");
-        Cliente cli = new Cliente(nome,sobreNome,rg,cpf,end);
-
-        Sistema.hashClientes.put(cpf, cli);
-        this.tabModel.setListaContatos(Sistema.hashClientes);
-        this.tabCliente.setRowSelectionInterval(Sistema.hashClientes.size()-1, Sistema.hashClientes.size()-1);
-        this.clienteSelecionadoParaAtualizacao = cli;
-        linhaClicadaParaAtualizacao = Sistema.hashClientes.size()-1;
-        
-        cmbCliente.removeAllItems();
-        cmbCliente.addItem("--");
-        for (String key : Sistema.hashClientes.keySet()) {
-            cmbCliente.addItem(key);
-        }
+       try{              
+        control.cadastrarCliente();
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+       }
     }//GEN-LAST:event_btnCadastrarctionPerformed
 
     private void cmbContaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbContaItemStateChanged
@@ -713,7 +653,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             conta.setDepositoInicial(depositoInicial);
             conta.setSaldo(depositoInicial);
             conta.setLimit(limite);
-            conta.setNumero(numeroConta);
+            conta.setCpfCliente(cpf);
 
             textDepIni.setText("");
             textLimite.setText("");
@@ -752,7 +692,7 @@ public class SistemaBanco extends javax.swing.JFrame {
 
             ContaInvestimento conta = new ContaInvestimento();
             conta.setDepositoMinimo(depositoMinimo);
-            conta.setNumero(Sistema.listaContas.size() + 1);
+            conta.setCpfCliente(cpf);
             conta.setDepositoInicial(depositoInicial);
             conta.setSaldo(depositoInicial);
             conta.setMontanteMinimo(montanteMinimo);
@@ -880,8 +820,12 @@ public class SistemaBanco extends javax.swing.JFrame {
     private void valorSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorSaldoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valorSaldoActionPerformed
+
+    private void textDepIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDepIniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDepIniActionPerformed
    
-    private Cliente getClienteParaAtualizar() {
+    public Cliente getClienteParaAtualizar() {
         if(clienteSelecionadoParaAtualizacao==null){
             JOptionPane.showMessageDialog(null,"Selecione um cliente na tabela para atualizar.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return null;
@@ -901,7 +845,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                 
     }
     
-    private List<Cliente> getClienteParaExcluirDaTabela() {
+    public List<Cliente> getClienteParaExcluirDaTabela() {
         int[] linhasSelecionadas = this.tabCliente.getSelectedRows();
         List<Cliente> listaExcluir = new ArrayList();
         for (int i = 0; i < linhasSelecionadas.length; i++) {
@@ -949,20 +893,20 @@ public class SistemaBanco extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadastrarConta;
     private javax.swing.JButton bRemunera;
-    private javax.swing.JButton btnAtualizar;
-    private javax.swing.JButton btnCadastrar;
+    public javax.swing.JButton btnAtualizar;
+    public javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnDepositar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnListar;
-    private javax.swing.JButton btnOrdenar;
+    public javax.swing.JButton btnExcluir;
+    public javax.swing.JButton btnLimpar;
+    public javax.swing.JButton btnListar;
+    public javax.swing.JButton btnOrdenar;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSacar;
     private javax.swing.JButton btnSaldo;
-    private javax.swing.JComboBox<String> cmbCliente;
+    public javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbClienteEditar;
-    private javax.swing.JComboBox<String> cmbConta;
-    private javax.swing.JComboBox<String> cmbEstado;
+    public javax.swing.JComboBox<String> cmbConta;
+    public javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -988,15 +932,15 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JLabel lSaque;
     private javax.swing.JLabel lSobrenome;
     private javax.swing.JTable tabCliente;
-    private javax.swing.JTextField textCEP;
-    private javax.swing.JTextField textCPF;
+    public javax.swing.JTextField textCEP;
+    public javax.swing.JTextField textCPF;
     private javax.swing.JTextField textDepIni;
     private javax.swing.JTextField textLimite;
     private javax.swing.JTextField textMonMin;
-    javax.swing.JTextField textNome;
-    private javax.swing.JTextField textRG;
-    private javax.swing.JTextField textRua;
-    private javax.swing.JTextField textSobrenome;
+    public javax.swing.JTextField textNome;
+    public javax.swing.JTextField textRG;
+    public javax.swing.JTextField textRua;
+    public javax.swing.JTextField textSobrenome;
     private javax.swing.JTextField valorDeposita;
     private javax.swing.JTextField valorSaldo;
     private javax.swing.JTextField valorSaque;

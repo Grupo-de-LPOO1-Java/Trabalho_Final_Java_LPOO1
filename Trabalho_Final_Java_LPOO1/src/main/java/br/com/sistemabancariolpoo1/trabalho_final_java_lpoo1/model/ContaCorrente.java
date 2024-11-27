@@ -48,6 +48,11 @@ public class ContaCorrente extends Conta {
         double novoSaldo = saldoAtual + (saldoAtual * 0.01);
         setSaldo(novoSaldo);
     }
+
+    @Override
+    public String getCpfCliente() {
+        return getCpfCliente();
+    }
     
     
 

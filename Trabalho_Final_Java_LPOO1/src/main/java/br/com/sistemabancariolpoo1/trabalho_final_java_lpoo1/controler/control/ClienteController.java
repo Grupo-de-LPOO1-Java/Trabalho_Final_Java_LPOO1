@@ -4,61 +4,68 @@
  */
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control;
 
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ClienteDaoSql;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Endereco;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Estado;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mateus
  */
 public class ClienteController {
     
-    //private SistemaBanco sys = new SystemaBanco();
+    private SistemaBanco sys = new SistemaBanco();
+    private ClienteDaoSql modelDao = ClienteDaoSql.getClienteDaoSQL();
 
     void limpar() {
-        //sys.textNome.setText("");
-        //sys.textSobrenome.setText("");
-        //textRG.setText("");
-        //textCPF.setText("");
-        //textRua.setText("");
-        //textCEP.setText("");
-        //cmbEstado.setSelectedItem("AL");
-        //tabModel.setListaContatos(Sistema.hashClientes);
+        sys.textNome.setText("");
+        sys.textSobrenome.setText("");
+        sys.textRG.setText("");
+        sys.textCPF.setText("");
+        sys.textRua.setText("");
+        sys.textCEP.setText("");
+        sys.cmbEstado.setSelectedItem("AL");
     }
     
-     public void criarCliente() {
-        /*try{
-            Cliente cliente = view.getContatoFormulario();
-            modelDao.add(cliente);
-            view.inserirContatoView(cliente);
-            view.apresentaInfo("Adicionado com sucesso!!!");
-            
-        }catch(Exception ex){
-            view.apresentaErro("Erro ao criar cliente.");
-        }*/
+     
+     public void atualizarCliente() throws Exception{
+        Cliente cli = sys.getClienteParaAtualizar();
+        String nome = sys.textNome.getText();
+        String sobreNome = sys.textSobrenome.getText();
+        String rg = sys.textRG.getText();
+        String cpf = sys.textCPF.getText().replaceAll("\\D", "");
+        String rua = sys.textRua.getText();
+        String cep = sys.textCEP.getText();
+        String estado = sys.cmbEstado.getSelectedItem().toString();
+        if(cli==null){
+            return;
+        }
+        if (nome.isEmpty() || sobreNome.isEmpty() || rg.isEmpty() || cpf.isEmpty() || rua.isEmpty() || cep.isEmpty() || estado.isEmpty()) {
+            throw new Exception("Todos os campos devem ser preenchidos.\n");
+        }
+        if (!cli.getCpf().equalsIgnoreCase(cpf)){
+            throw new Exception("CPF não pode ser alterado");
+        }
+        
+        cli.setNome(nome);
+        cli.setSobrenome(sobreNome);
+        cli.setRg(rg);
+        cli.setEndereco(new Endereco(new Estado(estado),rua,cep,""));
+        
+        modelDao.update(cli);
+        
+        sys.tabModel.atualizarCliente(sys.linhaClicadaParaAtualizacao);
      }
      
-     public void atualizarCliente() {
-        /*try{
-            
-            Cliente cliente = view.getContatoParaAtualizar();
-            if(cliente==null){
-                view.apresentaInfo("Selecione um cliente na tabela para atualizar.");
-                return;
-            }
-            modelDao.update(cliente);
-            view.atualizarContato(cliente);
-            
+     public void excluirCliente(Cliente cliente) {
+         try{
+            modelDao.delete(cliente);
         }catch(Exception ex){
-            view.apresentaErro("Erro ao atualizar cliente.");
-        }*/
-     }
-     
-     public void excluirCliente() {
-         /*try{
-            List<Cliente> listaParaExcluir = view.getContatosParaExcluir();
-            modelDao.delete(listaParaExcluir);
-            view.excluirContatosView(listaParaExcluir);
-        }catch(Exception ex){
-            view.apresentaErro("Erro ao excluir clientes.");
-        }*/
+             System.out.println("Erro");
+        }
      }
     
      public void listarCliente() {
@@ -71,14 +78,69 @@ public class ClienteController {
             view.apresentaErro("Erro ao listar contatos.");
         }*/
      }
-     
-     public void limparCliente() {
-        
-     }
-     
+          
      public void ordenarCliente() {
         
      }
+     
+     public void cadastrarCliente() throws Exception{
+         
+         String nome = sys.textNome.getText();
+         String sobreNome = sys.textSobrenome.getText();
+         String rg = sys.textRG.getText();
+         String cpf = sys.textCPF.getText().replaceAll("\\D", "");
+         String rua = sys.textRua.getText();
+         String cep = sys.textCEP.getText();
+         String estado = sys.cmbEstado.getSelectedItem().toString();
+         
+        if (nome.isEmpty() || sobreNome.isEmpty() || rg.isEmpty() || cpf.isEmpty() || rua.isEmpty() || cep.isEmpty() || estado.isEmpty()) {
+            throw new Exception("Todos os campos devem ser preenchidos.\n");
+        }
+        if(cpf.equals("")){
+            throw new Exception("CPF não pode ser vazio.\n");            
+        }
+        if(!CPFValidator.isCPF(cpf)) {
+            throw new Exception("CPF não é válido.\n");           
+        }
+        if(Sistema.hashClientes.containsKey(cpf)){
+            throw new Exception("CPF já cadastrado.\n");           
+        }
+         
+         Cliente cliente = new Cliente(nome,sobreNome,rg,cpf,new Endereco(new Estado(estado),rua,cep,""));
+         
+         try{
+         modelDao.add(cliente);
+        } catch (Exception e){
+             System.out.println("Erro");
+        }
+        sys.tabModel.setListaContatos(Sistema.hashClientes);
+       
+        sys.cmbCliente.removeAllItems();
+        sys.cmbCliente.addItem("--");
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try{
+            clientes = modelDao.getAll();
+        }catch(Exception e){
+            System.out.println("Erro");
+        }
+        for (Cliente cli: clientes) {
+            sys.cmbCliente.addItem(cli.getCpf());
+        }
+     }
+
+    void listaClientes() {
+        List<Cliente> clientesEncontrados = new ArrayList<Cliente>();
+        try{
+            clientesEncontrados = modelDao.getAll();
+            
+        }catch(Exception e){
+            System.out.println("Deu ruim ao pegar todos.");
+       
+        }        
+        sys.tabModel.setListaContatos(clientesEncontrados);
+        sys.clienteSelecionadoParaAtualizacao = null;
+        sys.linhaClicadaParaAtualizacao=-1;   
+    }
     
     
 }

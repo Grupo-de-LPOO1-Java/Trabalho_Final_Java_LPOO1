@@ -12,7 +12,7 @@ package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model;
  * @author Mateus Bazan
  */
 public abstract class Conta implements ContaI {
-    private int numero;
+    private String cpfCliente; //cpf do cliente    
     private double saldo;
     private Cliente dono;
     
@@ -34,18 +34,17 @@ public abstract class Conta implements ContaI {
         return true;
     }
     
-    @Override
-    public int getNumero() {
-        return numero;
+    public String getcpfCliente() {
+        return cpfCliente;
     };
     
     @Override
     public double getSaldo() {
         return saldo;
     };
-
-    public void setNumero(int numero) {
-        this.numero = numero;
+    
+    public void setCpfCliente(String numero) {
+        this.cpfCliente = numero;
     }
 
     public void setSaldo(double saldo) {

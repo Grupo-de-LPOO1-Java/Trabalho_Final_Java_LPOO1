@@ -21,15 +21,15 @@ public class Cliente implements Comparable<Cliente> {
     private Endereco endereco;
     private Conta conta;
     private int is_corente;
-    private int id;
+   // private int id;
 
-    public int getId() {
+  /*  public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public int getIs_corente() {
         return is_corente;
