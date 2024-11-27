@@ -85,8 +85,9 @@ public class ClienteController {
      public void excluirCliente(Cliente cliente) {
          try{
             modelDao.delete(cliente);
+            sys.cmbClienteEditar.removeItem(cliente.getCpf());
         }catch(Exception ex){
-             System.out.println("Erro");
+             System.out.println("Erro ao deletar");
         }
      }
     

@@ -30,6 +30,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     public Cliente clienteSelecionadoParaAtualizacao;
     
     private ClienteController control = new ClienteController();
+    private ContaCorrenteController correnteControl = new ContaCorrenteController();
     /**
      * Creates new form SistemaBanco
      */
@@ -613,110 +614,20 @@ public class SistemaBanco extends javax.swing.JFrame {
 
     private void btnbCadastrarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbCadastrarContaActionPerformed
         
-        String cpf = cmbCliente.getSelectedItem().toString();
-        
-        if (cmbCliente.getSelectedItem().equals("--")){
-            JOptionPane.showMessageDialog(null, "Selecione um cliente!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        String conta = cmbConta.getSelectedItem().toString();
+        try{
+            switch(conta){
+                case "Corrente":
+                    correnteControl.criarContaCorrente();
+                    break;
+                case "Investimento":
+                    break;
+                default:
+                //Jpannel com erro de selecionar tipo de conta;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-        Cliente cliente = Sistema.hashClientes.get(cpf);
-        
-        if (cliente.getConta() != null) {
-            JOptionPane.showMessageDialog(null, "Só é permitida uma conta por cliente!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
- else if (lDepIni.getText().trim().equals("") || lLimite.getText().trim().equals("") || lMonMin.getText().trim().equals("")) {
-    JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-} else if (cmbConta.getSelectedItem().equals("--")) {
-    JOptionPane.showMessageDialog(null, "Algum tipo de conta deve ser preenchido!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-    
-    }else {
-    String contaTipo = cmbConta.getSelectedItem().toString();
-
-    if (contaTipo.equalsIgnoreCase("Corrente")) {
-        try {
-            double depositoInicial = Double.parseDouble(textDepIni.getText().trim());
-            if(depositoInicial<0){
-                JOptionPane.showMessageDialog(null, "Deposito inicial não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            double limite = Double.parseDouble(textLimite.getText().trim());
-            if(limite<0){
-                JOptionPane.showMessageDialog(null, "Limite não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            int numeroConta = Integer.parseInt(textMonMin.getText().trim());
-
-            ContaCorrente conta = new ContaCorrente();
-            conta.setDepositoInicial(depositoInicial);
-            conta.setSaldo(depositoInicial);
-            conta.setLimit(limite);
-            conta.setCpfCliente(cpf);
-
-            textDepIni.setText("");
-            textLimite.setText("");
-            textMonMin.setText("");
-
-            Sistema.listaContas.add(conta);
-            cmbConta.setSelectedItem("--");
-            JOptionPane.showMessageDialog(null, "Conta Corrente cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            cmbCliente.setSelectedItem("--");
-            
-            cmbClienteEditar.addItem(cpf);
-
-            cliente.setConta(conta);
-            conta.setDono(cliente);
-        } catch (NumberFormatException e) {
-           JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-    } else if (contaTipo.equalsIgnoreCase("Investimento")) {
-        try {
-            double depositoMinimo = Double.parseDouble(textLimite.getText().trim());
-            if(depositoMinimo<0){
-                JOptionPane.showMessageDialog(null, "Deposito minimo não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            double depositoInicial = Double.parseDouble(textMonMin.getText().trim());
-            if(depositoInicial<0){
-                JOptionPane.showMessageDialog(null, "Deposito inicial não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            double montanteMinimo = Double.parseDouble(textDepIni.getText().trim());
-            if(montanteMinimo<0){
-                JOptionPane.showMessageDialog(null, "Montante mínimo não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-
-            ContaInvestimento conta = new ContaInvestimento();
-            conta.setDepositoMinimo(depositoMinimo);
-            conta.setCpfCliente(cpf);
-            conta.setDepositoInicial(depositoInicial);
-            conta.setSaldo(depositoInicial);
-            conta.setMontanteMinimo(montanteMinimo);
-
-            textDepIni.setText("");
-            textLimite.setText("");
-            textMonMin.setText("");
-
-            Sistema.listaContas.add(conta);
-            cmbConta.setSelectedItem("--");
-            JOptionPane.showMessageDialog(null, "Conta investimento cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            cmbCliente.setSelectedItem("--");
-
-            cliente.setConta(conta);
-            conta.setDono(cliente);
-            
-            cmbClienteEditar.addItem(cpf);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios !\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-    }
-}
 
     }//GEN-LAST:event_btnbCadastrarContaActionPerformed
 
@@ -904,7 +815,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JButton btnSacar;
     private javax.swing.JButton btnSaldo;
     public javax.swing.JComboBox<String> cmbCliente;
-    private javax.swing.JComboBox<String> cmbClienteEditar;
+    public javax.swing.JComboBox<String> cmbClienteEditar;
     public javax.swing.JComboBox<String> cmbConta;
     public javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel12;
@@ -919,11 +830,11 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JLabel lCliente;
     private javax.swing.JLabel lConta;
     private javax.swing.JLabel lCpf;
-    private javax.swing.JLabel lDepIni;
+    public javax.swing.JLabel lDepIni;
     private javax.swing.JLabel lDeposito;
     private javax.swing.JLabel lEstado;
-    private javax.swing.JLabel lLimite;
-    private javax.swing.JLabel lMonMin;
+    public javax.swing.JLabel lLimite;
+    public javax.swing.JLabel lMonMin;
     private javax.swing.JLabel lNome;
     private javax.swing.JLabel lRemunera;
     private javax.swing.JLabel lRg;
@@ -934,9 +845,9 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JTable tabCliente;
     public javax.swing.JTextField textCEP;
     public javax.swing.JTextField textCPF;
-    private javax.swing.JTextField textDepIni;
-    private javax.swing.JTextField textLimite;
-    private javax.swing.JTextField textMonMin;
+    public javax.swing.JTextField textDepIni;
+    public javax.swing.JTextField textLimite;
+    public javax.swing.JTextField textMonMin;
     public javax.swing.JTextField textNome;
     public javax.swing.JTextField textRG;
     public javax.swing.JTextField textRua;
