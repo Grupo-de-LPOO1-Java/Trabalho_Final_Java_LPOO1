@@ -4,122 +4,84 @@
  */
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control;
 
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ClienteDaoSql;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ContaInvestimentoDaoSql;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaInvestimento;
+
 /**
  *
  * @author joaop
  */
 public class ContaInvestimentoController {
-    //private ContaInvestimentoDaoSql modelDao = ContaInvestimentoDaoSql.getContaDaoSql(); // DAO da Conta Investimento
+    private ContaInvestimentoDaoSql modelDao = ContaInvestimentoDaoSql.getContaDaoSql(); // DAO da Conta Investimento
     //private ContaInvestimentoView view = new ContaInvestimentoView(); // Simulação de View fictícia
-
-    //private SistemaBanco sys = new SistemaBanco();
-
-public void criarContaInvestimento() {
-      String cpf = cmbCliente.getSelectedItem().toString();
-        
-        if (cmbCliente.getSelectedItem().equals("--")){
-            JOptionPane.showMessageDialog(null, "Selecione um cliente!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
-        Cliente cliente = Sistema.hashClientes.get(cpf);
-        
-        if (cliente.getConta() != null) {
-            JOptionPane.showMessageDialog(null, "Só é permitida uma conta por cliente!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
- else if (lDepIni.getText().trim().equals("") || lLimite.getText().trim().equals("") || lMonMin.getText().trim().equals("")) {
-    JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-} else if (cmbConta.getSelectedItem().equals("--")) {
-    JOptionPane.showMessageDialog(null, "Algum tipo de conta deve ser preenchido!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
+    private SistemaBanco sys = new SistemaBanco();
+    private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
     
-    }else {
-    String contaTipo = cmbConta.getSelectedItem().toString();
 
-    if (contaTipo.equalsIgnoreCase("Corrente")) {
-        try {
-            double depositoInicial = Double.parseDouble(textDepIni.getText().trim());
-            if(depositoInicial<0){
-                JOptionPane.showMessageDialog(null, "Deposito inicial não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            double limite = Double.parseDouble(textLimite.getText().trim());
-            if(limite<0){
-                JOptionPane.showMessageDialog(null, "Limite não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            int numeroConta = Integer.parseInt(textMonMin.getText().trim());
-
-            ContaCorrente conta = new ContaCorrente();
-            conta.setDepositoInicial(depositoInicial);
-            conta.setSaldo(depositoInicial);
-            conta.setLimit(limite);
-            conta.setCpfCliente(cpf);
-
-            textDepIni.setText("");
-            textLimite.setText("");
-            textMonMin.setText("");
-
-            Sistema.listaContas.add(conta);
-            cmbConta.setSelectedItem("--");
-            JOptionPane.showMessageDialog(null, "Conta Corrente cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            cmbCliente.setSelectedItem("--");
-            
-            cmbClienteEditar.addItem(cpf);
-
-            cliente.setConta(conta);
-            conta.setDono(cliente);
-        } catch (NumberFormatException e) {
-           JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
+public void criarContaInvestimento() throws Exception{
+    String cpf = sys.cmbCliente.getSelectedItem().toString();
+        
+        if (sys.cmbCliente.getSelectedItem().equals("--")){
+            throw new Exception("Selecione um cliente!\n");
         }
-    } else if (contaTipo.equalsIgnoreCase("Investimento")) {
-        try {
-            double depositoMinimo = Double.parseDouble(textLimite.getText().trim());
-            if(depositoMinimo<0){
-                JOptionPane.showMessageDialog(null, "Deposito minimo não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
+        
+        Cliente cliente = clienteDao.getByCPF(cpf);
+        
+        if (cliente.getIs_corente() != -1) {
+            throw new Exception("Só é permitida uma conta por cliente!\n");
             }
-            double depositoInicial = Double.parseDouble(textMonMin.getText().trim());
-            if(depositoInicial<0){
-                JOptionPane.showMessageDialog(null, "Deposito inicial não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
-            double montanteMinimo = Double.parseDouble(textDepIni.getText().trim());
-            if(montanteMinimo<0){
-                JOptionPane.showMessageDialog(null, "Montante mínimo não pode ser negativo!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
-            }
+        else if (sys.lDepIni.getText().trim().equals("") || sys.lLimite.getText().trim().equals("") || sys.lMonMin.getText().trim().equals("")) {
+            throw new Exception("Todos os campos devem estar preenchidos!\n");
+        } else if (sys.cmbConta.getSelectedItem().equals("--")) {
+            throw new Exception("Algum tipo de conta deve ser preenchido!\n");
+        }else {
+            try {
+                double montanteMinimo = Double.parseDouble(sys.textDepIni.getText().trim());
+                if(montanteMinimo<0){
+                    throw new Exception("Montante mínimo não pode ser negativo!\n");
+                }
+                double depositoMinimo = Double.parseDouble(sys.textLimite.getText().trim());
+                if(depositoMinimo<0){
+                    throw new Exception("Depósito mínimo não pode ser negativo!\n");
+                }
+                double depositoInicial = Double.parseDouble(sys.textMonMin.getText().trim());
+                if(depositoInicial<0){
+                    throw new Exception("Depósito inicial não pode ser negativo!\n");
+                }
+                int numeroConta = Integer.parseInt(sys.textMonMin.getText().trim());
 
-            ContaInvestimento conta = new ContaInvestimento();
-            conta.setDepositoMinimo(depositoMinimo);
-            conta.setCpfCliente(cpf);
-            conta.setDepositoInicial(depositoInicial);
-            conta.setSaldo(depositoInicial);
-            conta.setMontanteMinimo(montanteMinimo);
+                ContaInvestimento conta = new ContaInvestimento();
+                conta.setDepositoMinimo(depositoMinimo);
+                conta.setDepositoInicial(montanteMinimo);
+                conta.setMontanteMinimo(depositoInicial);
+                conta.setCpfCliente(cpf);
 
-            textDepIni.setText("");
-            textLimite.setText("");
-            textMonMin.setText("");
+                sys.textDepIni.setText("");
+                sys.textLimite.setText("");
+                sys.textMonMin.setText("");
 
-            Sistema.listaContas.add(conta);
-            cmbConta.setSelectedItem("--");
-            JOptionPane.showMessageDialog(null, "Conta investimento cadastrada!\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            cmbCliente.setSelectedItem("--");
-
-            cliente.setConta(conta);
-            conta.setDono(cliente);
-            
-            cmbClienteEditar.addItem(cpf);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Valores inválidos / todos os campos são obrigatórios !\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            return;
+                modelDao.add(conta);
+                sys.cmbConta.setSelectedItem("--");
+                sys.cmbCliente.setSelectedItem("--");
+                cliente.setConta(conta);
+                conta.setDono(cliente);
+                sys.cmbClienteEditar.addItem(cpf);
+                
+                throw new Exception("Conta Investimento cadastrada!\n");
+                
+                
+            } catch (NumberFormatException e) {
+                throw new Exception("Valores inválidos / todos os campos são obrigatórios!\n");
         }
     }
+       
 }
-}
+     
+    
+
+
  public void sacarContaInvestimento(){ 
   /* try {
            int numeroConta = view.getNumeroConta(); // Obter o número da conta

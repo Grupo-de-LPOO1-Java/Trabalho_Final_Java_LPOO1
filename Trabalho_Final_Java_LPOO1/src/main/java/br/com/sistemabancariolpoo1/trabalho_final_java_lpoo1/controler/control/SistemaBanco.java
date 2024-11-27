@@ -31,6 +31,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     
     private ClienteController control = new ClienteController();
     private ContaCorrenteController correnteControl = new ContaCorrenteController();
+    private ContaInvestimentoController investimentoControl = new ContaInvestimentoController();
     /**
      * Creates new form SistemaBanco
      */
@@ -621,6 +622,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                     correnteControl.criarContaCorrente();
                     break;
                 case "Investimento":
+                    investimentoControl.criarContaInvestimento();
                     break;
                 default:
                 //Jpannel com erro de selecionar tipo de conta;
