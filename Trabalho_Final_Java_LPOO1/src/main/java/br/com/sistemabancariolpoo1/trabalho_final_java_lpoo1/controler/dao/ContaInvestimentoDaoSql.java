@@ -48,7 +48,7 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
             try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtExcluir = connection.prepareStatement(delete);
             ){
-                stmtExcluir.setInt(1, conta.getNumero());
+                stmtExcluir.setString(1, conta.getCpfCliente());
                 stmtExcluir.executeUpdate();
             }
         }
@@ -59,7 +59,7 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
              PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             )
         {
-            stmtAdiciona.setInt(1,cli.getId());
+            stmtAdiciona.setString(1,cli.getCpf());
             stmtAdiciona.setDouble(2,objeto.getMontanteMinimo());
             stmtAdiciona.setDouble(3,objeto.getDepositoMinimo());
             stmtAdiciona.setDouble(4,objeto.getDepositoInicial());
@@ -78,13 +78,13 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
     }
 
     @Override
-    public ContaInvestimento getById(int id) throws Exception {
+    public ContaInvestimento getByCPF(String cpf) throws Exception {
         ContaInvestimento conta = new ContaInvestimento();
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtLista = connection.prepareStatement(getContaInvestimentoByID);
             ){
             
-                stmtLista.setInt(1,id);
+                stmtLista.setString(1,cpf);
                 ResultSet rs = stmtLista.executeQuery();   
                 Double depositoInicial = rs.getDouble("depositoInicial");
                 Double montanteMinimo = rs.getDouble("montanteMinimo");
@@ -92,7 +92,7 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
                 double saldo = rs.getDouble("saldo");
                 
                 conta.setSaldo(saldo);
-                conta.setNumero(id);
+                conta.setCpfCliente(cpf);
                 conta.setDepositoMinimo(depositoMinimo);
                 conta.setMontanteMinimo(montanteMinimo);
                 conta.setDepositoInicial(depositoInicial);
@@ -108,7 +108,7 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
                 ){
 
             stmtAtualiza.setDouble(1, objeto.getSaldo());
-            stmtAtualiza.setObject(2, objeto.getNumero());
+            stmtAtualiza.setObject(2, objeto.getCpfCliente());
             stmtAtualiza.executeUpdate();
         }      
     }
@@ -134,12 +134,12 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
     }
 
     @Override
-    public ContaInvestimento getByCPF(String cpf) throws Exception {
+    public int add(ContaInvestimento objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int add(ContaInvestimento objeto) throws Exception {
+    public ContaInvestimento getById(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
