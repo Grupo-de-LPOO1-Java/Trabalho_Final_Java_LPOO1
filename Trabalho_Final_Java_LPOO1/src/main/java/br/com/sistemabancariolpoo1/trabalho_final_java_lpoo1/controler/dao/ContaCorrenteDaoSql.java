@@ -49,7 +49,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
              PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             )
         {
-            stmtAdiciona.setDouble(1,cli.getId());
+            stmtAdiciona.setString(1,cli.getCpf());
             stmtAdiciona.setDouble(2,conta.getDepositoInicial());
             stmtAdiciona.setDouble(3,conta.getLimit());
             stmtAdiciona.setDouble(4,conta.getSaldo());
@@ -98,7 +98,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtExcluir = connection.prepareStatement(delete);
             ){
-                stmtExcluir.setInt(1, conta.getNumero());
+                stmtExcluir.setString(1, conta.getcpfCliente());
                 stmtExcluir.executeUpdate();
             }
         }
@@ -116,13 +116,13 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
 
 
 
-    public ContaCorrente getById(int id) throws Exception {
+    public ContaCorrente getByCPF(String cpf) throws Exception {
         ContaCorrente conta = new ContaCorrente();
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtLista = connection.prepareStatement(getContaCorrenteByID);
             ){
             
-                stmtLista.setInt(1,id);
+                stmtLista.setString(1,cpf);
                 ResultSet rs = stmtLista.executeQuery();   
                 Double saldo = rs.getDouble("saldo");
                 Double limite = rs.getDouble("limite");
@@ -130,7 +130,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
                 
                 // adicionando o objeto à lista
                 conta.setLimit(limite);
-                conta.setNumero(id);
+                conta.setCpfCliente(cpf);
                 conta.setSaldo(saldo);
                 conta.setDepositoInicial(depositoInicial);
             }
@@ -159,21 +159,17 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
                 ){
 
             stmtAtualiza.setDouble(1, conta.getSaldo());
-            stmtAtualiza.setObject(2, conta.getNumero());      
+            stmtAtualiza.setObject(2, conta.getCpfCliente());      
             stmtAtualiza.executeUpdate();
         }     
     }
-
-    @Override
-    public ContaCorrente getByCPF(String cpf) throws Exception {
-        //Irrelevante para conta no momento
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public ContaCorrente getById(int id) throws Exception {
+        return new ContaCorrente();
+    };
 
     @Override
     public int add(ContaCorrente objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
 }
 
