@@ -32,16 +32,6 @@ public class ClienteController {
         this.sys = sys;
     }
     
-    public void criarCliente(Cliente cliente) {
-        try {
-            clienteDao.add(cliente);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Erro de validação: " + e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao salvar cliente no banco de dados: " + e.getMessage());
-        }
-     }
-    
 
     public void limpar() {
         sys.textNome.setText("");
@@ -137,7 +127,7 @@ public class ClienteController {
         } catch (Exception e){
              System.out.println("Erro");
         }
-        sys.tabModel.setListaContatos(Sistema.hashClientes);
+        sys.tabModel.setListaContatos(modelDao.getAll());
        
         sys.cmbCliente.removeAllItems();
         sys.cmbCliente.addItem("--");

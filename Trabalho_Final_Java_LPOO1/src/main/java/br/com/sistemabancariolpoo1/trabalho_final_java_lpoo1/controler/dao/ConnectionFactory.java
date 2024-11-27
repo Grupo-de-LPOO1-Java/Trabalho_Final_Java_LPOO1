@@ -27,9 +27,6 @@ public class ConnectionFactory {
         String url = properties.getProperty("db.url");
         String user = properties.getProperty("db.user");
         String pwd = properties.getProperty("db.pwd");
-        System.out.println(url);
-        System.out.println(user);
-        System.out.println(pwd);
         return DriverManager.getConnection(url, user, pwd);
     }
     
@@ -37,10 +34,8 @@ public class ConnectionFactory {
     private static void readProperties() throws IOException {
         if(properties==null) {
             Properties props = new Properties();
-            System.out.println(props);
             FileInputStream file = new FileInputStream(
             "C:\\Users\\rafae\\OneDrive\\Documentos\\NetBeansProjects\\Trabalho_Final_Java_LPOO1\\Trabalho_Final_Java_LPOO1\\src\\main\\java\\br\\com\\sistemabancariolpoo1\\trabalho_final_java_lpoo1\\controler\\dao\\DataBase.properties");
-            System.out.println(file);
             props.load(file);
             properties = props;
         }
