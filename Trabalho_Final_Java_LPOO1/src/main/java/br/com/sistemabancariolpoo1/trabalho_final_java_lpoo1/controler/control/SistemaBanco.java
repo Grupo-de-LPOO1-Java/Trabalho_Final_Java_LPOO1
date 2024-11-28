@@ -687,7 +687,6 @@ public class SistemaBanco extends javax.swing.JFrame {
 
     private void bRemuneraActionPerformed(java.awt.event.ActionEvent evt) {                                          
         String cpf = cmbClienteEditar.getSelectedItem().toString();
-        
         Cliente cli = null;
         try {
             cli = clienteDao.getByCPF(cpf);
@@ -737,7 +736,6 @@ public class SistemaBanco extends javax.swing.JFrame {
                     correnteControl.sacarContaCorrente();
                     break;
                 case 2:
-                    System.out.println("Aqui");
                     investimentoControl.sacarContaInvestimento();
                     break;
                 default:

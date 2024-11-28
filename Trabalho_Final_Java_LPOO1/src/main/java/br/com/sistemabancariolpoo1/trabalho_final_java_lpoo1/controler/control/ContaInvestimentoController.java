@@ -57,8 +57,8 @@ public void criarContaInvestimento() throws Exception{
 
                 ContaInvestimento conta = new ContaInvestimento();
                 conta.setDepositoMinimo(depositoMinimo);
-                conta.setDepositoInicial(montanteMinimo);
-                conta.setMontanteMinimo(depositoInicial);
+                conta.setDepositoInicial(depositoInicial);
+                conta.setMontanteMinimo(montanteMinimo);
                 conta.setCpfCliente(cpf);
 
                 sys.textDepIni.setText("");
