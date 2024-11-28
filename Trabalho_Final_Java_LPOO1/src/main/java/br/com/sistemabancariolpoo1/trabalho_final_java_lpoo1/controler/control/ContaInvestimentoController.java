@@ -34,7 +34,7 @@ public void criarContaInvestimento() throws Exception{
         
         if (cliente.getIs_corente() != -1) {
             throw new Exception("Só é permitida uma conta por cliente!\n");
-            }
+        }
         else if (sys.lDepIni.getText().trim().equals("") || sys.lLimite.getText().trim().equals("") || sys.lMonMin.getText().trim().equals("")) {
             throw new Exception("Todos os campos devem estar preenchidos!\n");
         } else if (sys.cmbConta.getSelectedItem().equals("--")) {
@@ -124,14 +124,11 @@ public void criarContaInvestimento() throws Exception{
     }
 
     // Verificar saldo de uma conta de investimento
-    public void VerSaldoContaInvestimento() {
-       /*  try {
-            int numeroConta = view.getNumeroConta(); // Obter o número da conta
-            ContaInvestimento conta = modelDao.getById(numeroConta); // Buscar a conta no banco
-            view.mostrarSaldoConta(conta.getSaldo()); // Exibir o saldo
-        } catch (Exception ex) {
-            view.apresentaErro("Erro ao verificar saldo: " + ex.getMessage());
-        } */
+    public void VerSaldoContaInvestimento() throws Exception {
+      String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaInvestimento conta = null;
+        conta = modelDao.getByCPF(cpf);
+        sys.valorSaldo.setText(Double.toString(conta.getSaldo()));
     }
     public void RemunerarContaInvestimento(){
 //colocar método aqui

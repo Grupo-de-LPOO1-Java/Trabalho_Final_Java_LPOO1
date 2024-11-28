@@ -109,17 +109,12 @@ public void criarContaCorrente() throws Exception {
         }*/
     }
 
-    public void verSaldoContaCorrente() {
-        /*try {
-            int numeroConta = view.solicitarNumeroConta();
-            ContaCorrente conta = modelDao.getById(numeroConta);
-            view.apresentarSaldo(conta.getSaldo());
-        } catch (Exception ex) {
-            view.apresentaErro("Erro ao consultar saldo da conta corrente.");
-        }
+    public void verSaldoContaCorrente() throws Exception {
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaCorrente conta = null;
+        conta = modelDao.getByCPF(cpf);
+        sys.valorSaldo.setText(Double.toString(conta.getSaldo()));
     }
-}*/
-}
     public void RemunerarContaCorrente(){
 //colocar método aqui
 }
