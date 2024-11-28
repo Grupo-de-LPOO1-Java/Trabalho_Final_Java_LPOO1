@@ -35,11 +35,10 @@ public class ConnectionFactory {
         if(properties==null) {
             Properties props = new Properties();
             FileInputStream file = new FileInputStream(
-            "C:\\Users\\rafae\\OneDrive\\Documentos\\NetBeansProjects\\Trabalho_Final_Java_LPOO1\\Trabalho_Final_Java_LPOO1\\src\\main\\java\\br\\com\\sistemabancariolpoo1\\trabalho_final_java_lpoo1\\controler\\dao\\DataBase.properties");
+            "C:\\Users\\joaop\\OneDrive\\Documentos\\NetBeansProjects\\Trabalho_Final_Java_LPOO1\\Trabalho_Final_Java_LPOO1\\src\\main\\java\\br\\com\\sistemabancariolpoo1\\trabalho_final_java_lpoo1\\controler\\dao\\DataBase.properties");
             props.load(file);
             properties = props;
         }
     }
-            
     
 }

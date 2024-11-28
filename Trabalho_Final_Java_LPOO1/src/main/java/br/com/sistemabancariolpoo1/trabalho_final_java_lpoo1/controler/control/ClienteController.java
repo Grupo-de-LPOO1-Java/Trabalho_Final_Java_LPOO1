@@ -14,6 +14,7 @@ import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Endereco;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Estado;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -134,7 +135,8 @@ public class ClienteController {
          try{
          modelDao.add(cliente);
         } catch (Exception e){
-             System.out.println("Erro");
+             //System.out.println("Erro");
+             JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         sys.tabModel.setListaContatos(modelDao.getAll());
         sys.tabCliente.setRowSelectionInterval(modelDao.selectNumberOfRowsInMySQL() -1 , modelDao.selectNumberOfRowsInMySQL() -1);
@@ -142,7 +144,7 @@ public class ClienteController {
         sys.linhaClicadaParaAtualizacao = modelDao.selectNumberOfRowsInMySQL()-1;
         sys.cmbCliente.removeAllItems();
         sys.cmbCliente.addItem("--");
-        /*List<Cliente> clientes = new ArrayList<Cliente>();
+        List<Cliente> clientes = new ArrayList<Cliente>();
         try{
             clientes = modelDao.getAll();
         }catch(Exception e){
@@ -150,7 +152,7 @@ public class ClienteController {
         }
         for (Cliente cli: clientes) {
             sys.cmbCliente.addItem(cli.getCpf());
-        }*/
+        }
      }
 
     void listaClientes() {
