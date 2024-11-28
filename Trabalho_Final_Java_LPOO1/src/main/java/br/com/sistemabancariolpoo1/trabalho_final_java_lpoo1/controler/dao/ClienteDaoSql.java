@@ -32,6 +32,7 @@ public class ClienteDaoSql implements ClienteDao {
     private final String updateConta = "update cliente SET is_corrente = ? WHERE cpf = ?";
     private final String delete = "delete from cliente WHERE cpf=?";
     private final String deleteAll = "Truncate cliente";
+    private final String selectNumberOfRows = "select count(*) from cliente";
     private static ClienteDaoSql dao;
     private ClienteDaoSql() {
     }
@@ -192,6 +193,20 @@ public class ClienteDaoSql implements ClienteDao {
             }
             stmtAtualizaConta.executeUpdate();
         } 
+    }
+    
+    public int selectNumberOfRowsInMySQL() throws Exception {
+        int numberOfRows = 0;
+        try (Connection connection = ConnectionFactory.getConnection();
+         PreparedStatement stmtNumeroDeLinhas = connection.prepareStatement(selectNumberOfRows);
+         ResultSet resultSet = stmtNumeroDeLinhas.executeQuery()) {
+
+        if (resultSet.next()) {
+            numberOfRows = resultSet.getInt(1);
+            }
+        }
+
+        return numberOfRows;
     }
     
 }
