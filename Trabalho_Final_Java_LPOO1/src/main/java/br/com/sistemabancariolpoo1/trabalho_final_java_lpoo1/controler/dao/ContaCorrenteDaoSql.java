@@ -181,7 +181,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
                 PreparedStatement stmtRowCount = connection.prepareStatement(contaLinhas);
                 ){
             ResultSet rs = stmtRowCount.executeQuery();
-            linhas = rs.getInt("count(*)");
+            linhas = rs.getInt(1);
         }
         return linhas;
     }

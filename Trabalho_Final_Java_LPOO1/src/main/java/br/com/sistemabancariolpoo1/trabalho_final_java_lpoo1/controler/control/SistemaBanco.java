@@ -664,6 +664,28 @@ public class SistemaBanco extends javax.swing.JFrame {
     private void bRemuneraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemuneraActionPerformed
         String cpf = cmbClienteEditar.getSelectedItem().toString();
         
+        Cliente cli = null;
+        try {
+            cli = clienteDao.getByCPF(cpf);
+        } catch (Exception ex) {
+            System.out.println("Erro ao pegar o cliente!!");
+        }
+        try{
+            switch(cli.getIs_corente()){
+                case 1:
+                    correnteControl.RemunerarContaCorrente();
+                    break;
+                case 2:
+                    investimentoControl.RemunerarContaInvestimento();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,"Cliente sem conta para Remunerar!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        /*
         Cliente cliente = Sistema.hashClientes.get(cpf);
         Conta conta = cliente.getConta();
         
@@ -672,7 +694,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         else{
             conta.remunera();
             JOptionPane.showMessageDialog(null,"Conta remunerada.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-        }
+        }*/
     }//GEN-LAST:event_bRemuneraActionPerformed
 
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed

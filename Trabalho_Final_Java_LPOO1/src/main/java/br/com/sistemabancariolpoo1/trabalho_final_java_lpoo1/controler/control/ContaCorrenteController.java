@@ -62,7 +62,7 @@ public void criarContaCorrente() throws Exception {
                 sys.textLimite.setText("");
                 sys.textMonMin.setText("");
 
-                modelDao.add(conta);
+                modelDao.add(conta,cliente);
                 sys.cmbConta.setSelectedItem("--");
                 sys.cmbCliente.setSelectedItem("--");
                 cliente.setConta(conta);
@@ -115,8 +115,15 @@ public void criarContaCorrente() throws Exception {
         conta = modelDao.getByCPF(cpf);
         sys.valorSaldo.setText(Double.toString(conta.getSaldo()));
     }
-    public void RemunerarContaCorrente(){
-//colocar método aqui
-}
+    
+    public void RemunerarContaCorrente() throws Exception{
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaCorrente conta = modelDao.getByCPF(cpf);
+        
+        conta.remunera();
+        
+        modelDao.update(conta);
+
+    }
 }
 

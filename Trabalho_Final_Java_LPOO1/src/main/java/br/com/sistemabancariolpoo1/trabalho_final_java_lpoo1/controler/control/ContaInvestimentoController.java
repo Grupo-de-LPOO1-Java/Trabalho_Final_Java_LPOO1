@@ -131,8 +131,13 @@ public void criarContaInvestimento() throws Exception{
         conta = modelDao.getByCPF(cpf);
         sys.valorSaldo.setText(Double.toString(conta.getSaldo()));
     }
-    public void RemunerarContaInvestimento(){
-//colocar método aqui
-}
+    public void RemunerarContaInvestimento() throws Exception{
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaInvestimento conta = modelDao.getByCPF(cpf);
+        
+        conta.remunera();
+        
+        modelDao.update(conta);
+    }
 
 }
