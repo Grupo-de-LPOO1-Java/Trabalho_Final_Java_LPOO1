@@ -151,7 +151,6 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
                 ResultSet rs = stmtLista.executeQuery();
                 if(rs.next()) {
                     Double saldo = rs.getDouble("saldo");
-                    System.out.println(saldo);
                     Double limite = rs.getDouble("limite");
                     Double depositoInicial = rs.getDouble("depositoInicial");
                     conta.setLimit(limite);
@@ -181,7 +180,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
                 ){
 
             stmtAtualiza.setDouble(1, conta.getSaldo());
-            stmtAtualiza.setObject(2, conta.getCpfCliente());      
+            stmtAtualiza.setObject(2, conta.getcpfCliente());      
             stmtAtualiza.executeUpdate();
         }     
     }

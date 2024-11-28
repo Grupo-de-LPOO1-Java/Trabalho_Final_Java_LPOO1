@@ -743,7 +743,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         }
     }                                        
 
-    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {                                            
         String cpf = cmbClienteEditar.getSelectedItem().toString();
         
         Cliente cli = null;
@@ -758,6 +758,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                     correnteControl.depositarContaCorrente();
                     break;
                 case 2:
+                    System.out.println("Aqui");
                     investimentoControl.DepositarContaInvestimento();
                     break;
                 default:

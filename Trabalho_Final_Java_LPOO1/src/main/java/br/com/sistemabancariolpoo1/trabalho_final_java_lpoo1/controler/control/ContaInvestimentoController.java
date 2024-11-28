@@ -116,11 +116,10 @@ public void criarContaInvestimento() throws Exception{
         if (Double.parseDouble(sys.valorDeposita.getText()) < ((ContaInvestimento) conta).getDepositoMinimo()) {
             throw new Exception("Valor do depósito deve ser maior que o mínimo.\n");
         }
-        sys.valorDeposita.setText("");
 
         Double valor = Double.parseDouble(sys.valorDeposita.getText());
         conta.setSaldo(valor + conta.getSaldo());
-        
+        sys.valorDeposita.setText("");
         modelDao.update(conta);
     }
 

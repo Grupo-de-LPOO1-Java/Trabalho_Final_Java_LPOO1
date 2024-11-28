@@ -106,7 +106,6 @@ public void criarContaCorrente() throws Exception {
         }
         Double valor = Double.parseDouble(sys.valorDeposita.getText());
         conta.setSaldo(valor + conta.getSaldo());
-        
         modelDao.update(conta);
         
     }

@@ -112,7 +112,7 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
                 ){
 
             stmtAtualiza.setDouble(1, objeto.getSaldo());
-            stmtAtualiza.setObject(2, objeto.getCpfCliente());
+            stmtAtualiza.setObject(2, objeto.getcpfCliente());
             stmtAtualiza.executeUpdate();
         }      
     }
