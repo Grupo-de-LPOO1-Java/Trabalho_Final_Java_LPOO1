@@ -5,6 +5,8 @@
 package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control.Sistema;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control.CPFValidator;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ClienteDaoSql;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ContaCorrenteDaoSql;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaInvestimento;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Estado;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Endereco;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -32,6 +36,8 @@ public class SistemaBanco extends javax.swing.JFrame {
     private ClienteController control;
     private ContaCorrenteController correnteControl;
     private ContaInvestimentoController investimentoControl;
+    private ContaCorrenteDaoSql contaCorrenteDao = ContaCorrenteDaoSql.getContaDaoSql();
+    private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
     /**
      * Creates new form SistemaBanco
      */
@@ -595,7 +601,13 @@ public class SistemaBanco extends javax.swing.JFrame {
                 textDepIni.setEnabled(true);
                 textLimite.setEnabled(true);
                 textMonMin.setEnabled(false);
-                Integer numero = Sistema.listaContas.size()+ 1; 
+                //Integer numero = Sistema.listaContas.size()+ 1; 
+                Integer numero= -1;
+                try {
+                    numero = contaCorrenteDao.getNumero() + 1; // ainda precisa implementar
+                } catch (Exception ex) {
+                    System.out.println("Erro ao pesquisar o numero de contas");
+                }
                 textMonMin.setText(numero.toString());
                 lDepIni.setText("Deposito Inicial");
                 lLimite.setText("Limite");
@@ -628,7 +640,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                     investimentoControl.criarContaInvestimento();
                     break;
                 default:
-                //Jpannel com erro de selecionar tipo de conta;
+                    JOptionPane.showMessageDialog(null, "Por favos selecione um tipo de conta.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
@@ -716,11 +728,27 @@ public class SistemaBanco extends javax.swing.JFrame {
 
     private void bntSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSaldoActionPerformed
         String cpf = cmbClienteEditar.getSelectedItem().toString();
-        
-        Cliente cliente = Sistema.hashClientes.get(cpf);
-        Conta conta = cliente.getConta();
-        
-        valorSaldo.setText(Double.toString(conta.getSaldo()));
+        Cliente cli =  null;
+        try {
+            cli = clienteDao.getByCPF(cpf);
+        } catch (Exception ex) {
+            Logger.getLogger(SistemaBanco.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try{
+            switch(cli.getIs_corente()){
+                case 1:
+                    correnteControl.verSaldoContaCorrente();
+                    break;
+                case 2:
+                    investimentoControl.VerSaldoContaInvestimento();
+                    break;
+                default:
+                    break;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+       
     }//GEN-LAST:event_bntSaldoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -808,7 +836,7 @@ public class SistemaBanco extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCadastrarConta;
-    private javax.swing.JButton bRemunera;
+    public javax.swing.JButton bRemunera;
     public javax.swing.JButton btnAtualizar;
     public javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnDepositar;
@@ -858,7 +886,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     public javax.swing.JTextField textRua;
     public javax.swing.JTextField textSobrenome;
     private javax.swing.JTextField valorDeposita;
-    private javax.swing.JTextField valorSaldo;
+    public javax.swing.JTextField valorSaldo;
     private javax.swing.JTextField valorSaque;
     // End of variables declaration//GEN-END:variables
 }

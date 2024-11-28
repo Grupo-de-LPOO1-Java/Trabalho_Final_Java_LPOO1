@@ -6,9 +6,11 @@ package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao;
 
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaCorrente;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     private final String delete = "delete from ContaCorrente WHERE NUMERO=?";
     private final String deleteAll = "TRUNCATE ContaCorrente";
     private final String getContaCorrenteByID = "SELECT * from ContaCorrente WHERE numero = ?";
+    private final String contaLinhas = "SELECT COUNT(*) FROM ContaCorrente";
     
     private static ContaCorrenteDaoSql dao;
     
@@ -170,6 +173,17 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     @Override
     public int add(ContaCorrente objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int getNumero() throws Exception {
+        int linhas = -1;
+        try(    Connection connection=ConnectionFactory.getConnection();
+                PreparedStatement stmtRowCount = connection.prepareStatement(contaLinhas);
+                ){
+            ResultSet rs = stmtRowCount.executeQuery();
+            linhas = rs.getInt("count(*)");
+        }
+        return linhas;
     }
 }
 
