@@ -847,7 +847,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private javax.swing.JLabel lSaldo;
     private javax.swing.JLabel lSaque;
     private javax.swing.JLabel lSobrenome;
-    private javax.swing.JTable tabCliente;
+    public javax.swing.JTable tabCliente;
     public javax.swing.JTextField textCEP;
     public javax.swing.JTextField textCPF;
     public javax.swing.JTextField textDepIni;
