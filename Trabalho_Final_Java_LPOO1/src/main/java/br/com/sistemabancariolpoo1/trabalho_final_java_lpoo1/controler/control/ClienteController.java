@@ -14,6 +14,7 @@ import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Endereco;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Estado;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,6 +72,18 @@ public class ClienteController {
         modelDao.update(cli);
         
         sys.tabModel.atualizarCliente(sys.linhaClicadaParaAtualizacao);
+        
+        sys.cmbCliente.removeAllItems();
+        sys.cmbCliente.addItem("--");
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try{
+            clientes = modelDao.getAll();
+        }catch(Exception e){
+            System.out.println("Erro");
+        }
+        for (Cliente cliente: clientes) {
+            sys.cmbCliente.addItem(cliente.getCpf());
+        }
      }
    
      public void excluirCliente(Cliente cliente) {
@@ -79,6 +92,18 @@ public class ClienteController {
             sys.cmbClienteEditar.removeItem(cliente.getCpf());
         }catch(Exception ex){
              System.out.println("Erro ao deletar");
+        }
+         
+        sys.cmbCliente.removeAllItems();
+        sys.cmbCliente.addItem("--");
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try{
+            clientes = modelDao.getAll();
+        }catch(Exception e){
+            System.out.println("Erro");
+        }
+        for (Cliente cli: clientes) {
+            sys.cmbCliente.addItem(cli.getCpf());
         }
      }
     
@@ -94,7 +119,28 @@ public class ClienteController {
      }
           
      public void ordenarCliente() {
+        List<Cliente> cli = null;
+        try {
+            cli = modelDao.getAllOrdered();
+        } catch (Exception e){
+             System.out.println("Erro");
+        }
         
+        sys.tabModel.setListaContatos(cli);
+        sys.clienteSelecionadoParaAtualizacao = null;
+        sys.linhaClicadaParaAtualizacao=-1;
+        
+        sys.cmbCliente.removeAllItems();
+        sys.cmbCliente.addItem("--");
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try{
+            clientes = modelDao.getAll();
+        }catch(Exception e){
+            System.out.println("Erro");
+        }
+        for (Cliente client: clientes) {
+            sys.cmbCliente.addItem(client.getCpf());
+        }
      }
      
      public void cadastrarCliente() throws Exception{
@@ -125,7 +171,8 @@ public class ClienteController {
          try{
          modelDao.add(cliente);
         } catch (Exception e){
-             System.out.println("Erro");
+             //System.out.println("Erro");
+             JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         sys.tabModel.setListaContatos(modelDao.getAll());
         sys.tabCliente.setRowSelectionInterval(modelDao.selectNumberOfRowsInMySQL() -1 , modelDao.selectNumberOfRowsInMySQL() -1);
@@ -155,7 +202,19 @@ public class ClienteController {
         }        
         sys.tabModel.setListaContatos(clientesEncontrados);
         sys.clienteSelecionadoParaAtualizacao = null;
-        sys.linhaClicadaParaAtualizacao=-1;   
+        sys.linhaClicadaParaAtualizacao=-1;
+        
+        sys.cmbCliente.removeAllItems();
+        sys.cmbCliente.addItem("--");
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try{
+            clientes = modelDao.getAll();
+        }catch(Exception e){
+            System.out.println("Erro");
+        }
+        for (Cliente cli: clientes) {
+            sys.cmbCliente.addItem(cli.getCpf());
+        }
     }
     
     

@@ -65,7 +65,7 @@ public void criarContaInvestimento() throws Exception{
                 sys.textLimite.setText("");
                 sys.textMonMin.setText("");
 
-                modelDao.add(conta);
+                modelDao.add(conta,cliente);
                 sys.cmbConta.setSelectedItem("--");
                 sys.cmbCliente.setSelectedItem("--");
                 cliente.setConta(conta);
