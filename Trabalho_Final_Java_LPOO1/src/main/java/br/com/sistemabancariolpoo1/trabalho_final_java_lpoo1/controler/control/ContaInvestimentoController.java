@@ -105,22 +105,23 @@ public void criarContaInvestimento() throws Exception{
 
 
     // Realizar depósito em uma conta de investimento
-    public void DepositarContaInvestimento() {
-       /*  try {
-            int numeroConta = view.getNumeroConta(); // Obter o número da conta
-            double valor = view.getValor(); // Obter valor a ser depositado
-            ContaInvestimento conta = modelDao.getById(numeroConta); // Buscar a conta no banco
+    public void DepositarContaInvestimento() throws Exception {
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaInvestimento conta = modelDao.getByCPF(cpf);
+        
+        if (Double.parseDouble(sys.valorDeposita.getText()) < 0.0){
+            throw new Exception("Valor do depósito deve ser positivo.\n");
+        }
+        
+        if (Double.parseDouble(sys.valorDeposita.getText()) < ((ContaInvestimento) conta).getDepositoMinimo()) {
+            throw new Exception("Valor do depósito deve ser maior que o mínimo.\n");
+        }
+        sys.valorDeposita.setText("");
 
-            if (valor >= conta.getDepositoMinimo()) {
-                conta.setSaldo(conta.getSaldo() + valor); // Atualizar o saldo
-                modelDao.update(conta); // Salvar alterações no banco
-                view.apresentaInfo("Depósito realizado com sucesso! Novo saldo: " + conta.getSaldo());
-            } else {
-                view.apresentaErro("O valor do depósito é inferior ao depósito mínimo.");
-            }
-        } catch (Exception ex) {
-            view.apresentaErro("Erro ao realizar depósito: " + ex.getMessage());
-        } */
+        Double valor = Double.parseDouble(sys.valorDeposita.getText());
+        conta.setSaldo(valor + conta.getSaldo());
+        
+        modelDao.update(conta);
     }
 
     // Verificar saldo de uma conta de investimento

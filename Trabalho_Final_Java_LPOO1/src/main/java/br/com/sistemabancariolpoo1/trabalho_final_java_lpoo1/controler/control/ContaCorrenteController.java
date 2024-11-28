@@ -95,18 +95,18 @@ public void criarContaCorrente() throws Exception {
         }*/
     }
 
-    public void depositarContaCorrente() {
-     /*   try {
-            int numeroConta = view.solicitarNumeroConta();
-            double valor = view.solicitarValorDeposito();
-            ContaCorrente conta = modelDao.getById(numeroConta);
-
-            conta.deposita(valor);
-            modelDao.update(conta);
-            view.apresentaInfo("Depósito realizado com sucesso!");
-        } catch (Exception ex) {
-            view.apresentaErro("Erro ao depositar na conta corrente.");
-        }*/
+    public void depositarContaCorrente() throws Exception {
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaCorrente conta = modelDao.getByCPF(cpf);
+        
+        if (Double.parseDouble(sys.valorDeposita.getText()) < 0.0){
+            throw new Exception("Valor do depósito deve ser positivo.\n");
+        }
+        Double valor = Double.parseDouble(sys.valorDeposita.getText());
+        conta.setSaldo(valor + conta.getSaldo());
+        
+        modelDao.update(conta);
+        
     }
 
     public void verSaldoContaCorrente() throws Exception {

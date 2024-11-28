@@ -699,11 +699,32 @@ public class SistemaBanco extends javax.swing.JFrame {
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
         String cpf = cmbClienteEditar.getSelectedItem().toString();
         
-        Cliente cliente = Sistema.hashClientes.get(cpf);
-        Conta conta = cliente.getConta();
+        Cliente cli = null;
         try {
+            cli = clienteDao.getByCPF(cpf);
+        } catch (Exception ex) {
+            System.out.println("Erro ao pegar o cliente!!");
+        }
+        try{
+            switch(cli.getIs_corente()){
+                case 1:
+                    correnteControl.depositarContaCorrente();
+                    break;
+                case 2:
+                    investimentoControl.DepositarContaInvestimento();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,"Cliente sem conta para Deposito!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        /*
+            try {
             if (Double.parseDouble(valorDeposita.getText()) < 0.0){
-                JOptionPane.showMessageDialog(null,"Valor do depósito deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                 JOptionPane.showMessageDialog(null,"Valor do depósito deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             }
             if (conta instanceof ContaInvestimento) {
                 if (Double.parseDouble(valorDeposita.getText()) < ((ContaInvestimento) conta).getDepositoMinimo()) {
@@ -721,9 +742,9 @@ public class SistemaBanco extends javax.swing.JFrame {
                 valorDeposita.setText("");
             }
             
-        } catch (Exception e){
+            } catch (Exception e){
             JOptionPane.showMessageDialog(null,"Por favor digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-        }
+            }*/
     }//GEN-LAST:event_btnDepositarActionPerformed
 
     private void bntSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSaldoActionPerformed
@@ -743,6 +764,7 @@ public class SistemaBanco extends javax.swing.JFrame {
                     investimentoControl.VerSaldoContaInvestimento();
                     break;
                 default:
+                    JOptionPane.showMessageDialog(null,"Cliente não tem uma conta cadastrada.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
         }catch(Exception e){
@@ -885,7 +907,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     public javax.swing.JTextField textRG;
     public javax.swing.JTextField textRua;
     public javax.swing.JTextField textSobrenome;
-    private javax.swing.JTextField valorDeposita;
+    public javax.swing.JTextField valorDeposita;
     public javax.swing.JTextField valorSaldo;
     private javax.swing.JTextField valorSaque;
     // End of variables declaration//GEN-END:variables

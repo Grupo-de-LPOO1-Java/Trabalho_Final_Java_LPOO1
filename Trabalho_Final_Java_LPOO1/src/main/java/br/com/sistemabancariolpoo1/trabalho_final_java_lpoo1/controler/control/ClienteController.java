@@ -133,15 +133,15 @@ public class ClienteController {
         sys.linhaClicadaParaAtualizacao = modelDao.selectNumberOfRowsInMySQL()-1;
         sys.cmbCliente.removeAllItems();
         sys.cmbCliente.addItem("--");
-        //List<Cliente> clientes = new ArrayList<Cliente>();
-        /*try{
+        List<Cliente> clientes = new ArrayList<Cliente>();
+        try{
             clientes = modelDao.getAll();
         }catch(Exception e){
             System.out.println("Erro");
-        }*/
-        /*for (Cliente cli: clientes) {
+        }
+        for (Cliente cli: clientes) {
             sys.cmbCliente.addItem(cli.getCpf());
-        }*/
+        }
      }
 
     void listaClientes() {
