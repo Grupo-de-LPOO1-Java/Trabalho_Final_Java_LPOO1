@@ -725,9 +725,30 @@ public class SistemaBanco extends javax.swing.JFrame {
     private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String cpf = cmbClienteEditar.getSelectedItem().toString();
         
-        Cliente cliente = Sistema.hashClientes.get(cpf);
-        Conta conta = cliente.getConta();
+        Cliente cli = null;
         try {
+            cli = clienteDao.getByCPF(cpf);
+        } catch (Exception ex) {
+            System.out.println("Erro ao pegar o cliente!!");
+        }
+        try{
+            switch(cli.getIs_corente()){
+                case 1:
+                    correnteControl.sacarContaCorrente();
+                    break;
+                case 2:
+                    System.out.println("Aqui");
+                    investimentoControl.sacarContaInvestimento();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,"Cliente sem conta para Deposito!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        /*try {
             if (Double.parseDouble(valorSaque.getText()) < 0.0){
                 JOptionPane.showMessageDialog(null,"Valor do saque deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             }else{
@@ -740,7 +761,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         } catch (Exception e){
             JOptionPane.showMessageDialog(null,"Digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
             
-        }
+        }*/
     }                                        
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -758,7 +779,6 @@ public class SistemaBanco extends javax.swing.JFrame {
                     correnteControl.depositarContaCorrente();
                     break;
                 case 2:
-                    System.out.println("Aqui");
                     investimentoControl.DepositarContaInvestimento();
                     break;
                 default:
@@ -949,6 +969,6 @@ public class SistemaBanco extends javax.swing.JFrame {
     public javax.swing.JTextField textSobrenome;
     public javax.swing.JTextField valorDeposita;
     public javax.swing.JTextField valorSaldo;
-    private javax.swing.JTextField valorSaque;
+    public javax.swing.JTextField valorSaque;
     // End of variables declaration                   
 }

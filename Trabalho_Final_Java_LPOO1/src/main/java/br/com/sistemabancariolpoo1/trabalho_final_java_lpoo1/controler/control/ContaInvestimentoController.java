@@ -85,22 +85,16 @@ public void criarContaInvestimento() throws Exception{
     
 
 
- public void sacarContaInvestimento(){ 
-  /* try {
-           int numeroConta = view.getNumeroConta(); // Obter o número da conta
-            double valor = view.getValor(); // Obter valor a ser sacado
-            ContaInvestimento conta = modelDao.getById(numeroConta); // Buscar a conta no banco
-
-            if (conta.getSaldo() >= valor) {
-                conta.setSaldo(conta.getSaldo() - valor); // Atualizar o saldo
-                modelDao.update(conta); // Salvar alterações no banco
-                view.apresentaInfo("Saque realizado com sucesso! Novo saldo: " + conta.getSaldo());
-            } else {
-                view.apresentaErro("Saldo insuficiente para o saque.");
-            }
-        } catch (Exception ex) {
-            view.apresentaErro("Erro ao realizar saque: " + ex.getMessage());
-        } */
+ public void sacarContaInvestimento() throws Exception { 
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaInvestimento conta = modelDao.getByCPF(cpf);
+       if (Double.parseDouble(sys.valorSaque.getText()) < 0.0){
+            throw new Exception("Valor do depósito deve ser positivo.\n");
+        }
+        Double valor = Double.parseDouble(sys.valorSaque.getText());
+        conta.setSaldo(conta.getSaldo() - valor);
+        sys.valorSaque.setText("");
+        modelDao.update(conta);
     }
 
 

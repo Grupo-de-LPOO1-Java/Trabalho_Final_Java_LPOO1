@@ -80,21 +80,16 @@ public void criarContaCorrente() throws Exception {
     }
        
 }
- public void sacarContaCorrente() {
-        /*try {
-            int numeroConta = view.solicitarNumeroConta();
-            double valor = view.solicitarValorSaque();
-            ContaCorrente conta = modelDao.getById(numeroConta);
-
-            if (conta.saca(valor)) {
-                modelDao.update(conta);
-                view.apresentaInfo("Saque realizado com sucesso!");
-            } else {
-                view.apresentaErro("Saldo insuficiente para o saque.");
-            }
-        } catch (Exception ex) {
-            view.apresentaErro("Erro ao sacar da conta corrente.");
-        }*/
+ public void sacarContaCorrente() throws Exception {
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        ContaCorrente conta = modelDao.getByCPF(cpf);
+       if (Double.parseDouble(sys.valorSaque.getText()) < 0.0){
+            throw new Exception("Valor do depósito deve ser positivo.\n");
+        }
+        Double valor = Double.parseDouble(sys.valorSaque.getText());
+        conta.setSaldo(conta.getSaldo() - valor);
+        sys.valorSaque.setText("");
+        modelDao.update(conta);
     }
 
     public void depositarContaCorrente() throws Exception {
@@ -106,8 +101,8 @@ public void criarContaCorrente() throws Exception {
         }
         Double valor = Double.parseDouble(sys.valorDeposita.getText());
         conta.setSaldo(valor + conta.getSaldo());
+        sys.valorDeposita.setText("");
         modelDao.update(conta);
-        
     }
 
     public void verSaldoContaCorrente() throws Exception {
