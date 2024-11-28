@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     
+    private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into ContaCorrente "
             + "(numero,depositoInicial,limite,saldo) values (?,?,?,?)";
@@ -58,6 +59,9 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             stmtAdiciona.setDouble(4,conta.getSaldo());
             
             stmtAdiciona.execute();
+            
+            cli.setIs_corente(1);
+            clienteDao.update(cli);
  
         }
         return 1;

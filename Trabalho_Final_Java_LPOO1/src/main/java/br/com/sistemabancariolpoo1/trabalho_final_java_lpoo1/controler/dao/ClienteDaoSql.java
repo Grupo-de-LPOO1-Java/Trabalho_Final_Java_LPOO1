@@ -28,7 +28,7 @@ public class ClienteDaoSql implements ClienteDao {
     private final String insert = "insert into cliente (nome,sobrenome,rg,cpf,rua,estado,cep,is_corrente) values (?,?,?,?,?,?,?,?)";
     private final String selectAll = "select * from cliente";
     private final String selectByCPF = "select nome,sobrenome,rg,rua,estado,cep,is_corrente from cliente WHERE cpf=?";
-    private final String update = "update cliente set nome=?, sobrenome=?, rg=?, rua=?, estado=?, cep=? WHERE cpf=?";
+    private final String update = "update cliente set nome=?, sobrenome=?, rg=?, rua=?, estado=?, cep=?, is_corrente=? WHERE cpf=?";
     private final String updateConta = "update cliente SET is_corrente = ? WHERE cpf = ?";
     private final String delete = "delete from cliente WHERE cpf=?";
     private final String deleteAll = "Truncate cliente";
@@ -136,6 +136,7 @@ public class ClienteDaoSql implements ClienteDao {
             stmtAtualiza.setString(5, cliente.getEndereco().getEstado().getNome());
             stmtAtualiza.setString(6, cliente.getEndereco().getCep());
             stmtAtualiza.setString(7, cliente.getCpf());
+            stmtAtualiza.setInt(8, cliente.getIs_corente());
             stmtAtualiza.executeUpdate();
             
         } 
