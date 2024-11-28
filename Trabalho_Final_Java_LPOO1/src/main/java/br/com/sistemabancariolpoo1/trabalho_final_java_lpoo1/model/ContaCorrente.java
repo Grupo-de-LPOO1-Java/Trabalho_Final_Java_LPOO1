@@ -14,6 +14,17 @@ package br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model;
 public class ContaCorrente extends Conta {
     private double depositoInicial;
     private double limit;
+    
+    public ContaCorrente() {
+        
+    }
+    
+    public ContaCorrente(String cpfCliente, double depositoInicial,double limit, double saldo) {
+        super(cpfCliente,saldo);
+        this.depositoInicial = depositoInicial;
+        this.limit = limit;
+    }
+    
 
     public double getDepositoInicial() {
         return depositoInicial;

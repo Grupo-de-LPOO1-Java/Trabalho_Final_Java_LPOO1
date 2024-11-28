@@ -803,6 +803,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(SistemaBanco.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(cli);
         System.out.println(cli.getIs_corente());
         try{
             switch(cli.getIs_corente()){
@@ -822,7 +823,12 @@ public class SistemaBanco extends javax.swing.JFrame {
        
     }                                        
 
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+           correnteControl.listarContaCorrente();
+       }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);           
+       }
         valorSaque.setText(""); 
         valorDeposita.setText("");
         valorSaldo.setText("");

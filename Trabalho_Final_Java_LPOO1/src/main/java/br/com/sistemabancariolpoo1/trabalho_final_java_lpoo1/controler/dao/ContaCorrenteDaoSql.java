@@ -31,6 +31,7 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
     private final String deleteAll = "TRUNCATE ContaCorrente";
     private final String getContaCorrenteByID = "SELECT * from ContaCorrente WHERE numero = ?";
     private final String contaLinhas = "SELECT COUNT(*) FROM ContaCorrente";
+    private final String selectAll = "select * from ContaCorrente";
     
     private static ContaCorrenteDaoSql dao;
     
@@ -65,6 +66,24 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
  
         }
         return 1;
+    }
+    
+    public List<ContaCorrente> getAll() throws Exception{
+        try (Connection connection=ConnectionFactory.getConnection();
+             PreparedStatement stmtLista = connection.prepareStatement(selectAll);
+             ResultSet rs = stmtLista.executeQuery();   
+            ){
+            List<ContaCorrente> contaCorrente = new ArrayList();
+            while (rs.next()) {
+                String numero = rs.getString("numero");
+                Double depositoInicial = rs.getDouble("depositoInicial");
+                Double limite = rs.getDouble("limite");
+                Double saldo = rs.getDouble("saldo");
+                contaCorrente.add(new ContaCorrente(numero, depositoInicial, limite, saldo));
+            }
+            
+            return contaCorrente;
+        } 
     }
 
     /*public ContaCorrente getContaCorrenteByID(int id) throws Exception{
@@ -153,11 +172,6 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             ){
                 stmtExcluir.executeUpdate();
         }
-    }
-
-    public List<ContaCorrente> getAll() throws Exception { 
-        //Método irrelevante para as contas, não queremos pegar todas as contas;
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public void update(ContaCorrente conta) throws Exception {

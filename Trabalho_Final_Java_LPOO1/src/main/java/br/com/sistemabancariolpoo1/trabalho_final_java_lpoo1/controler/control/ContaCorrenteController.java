@@ -8,6 +8,8 @@ import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.Clien
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ContaCorrenteDaoSql;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaCorrente;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -124,6 +126,20 @@ public void criarContaCorrente() throws Exception {
         
         modelDao.update(conta);
 
+    }
+    
+    public void listarContaCorrente() throws Exception {
+        sys.cmbClienteEditar.removeAllItems();
+        //sys.cmbClienteEditar.addItem("--");
+        List<ContaCorrente> contasCorrentes = new ArrayList<ContaCorrente>();
+        try{
+            contasCorrentes = modelDao.getAll();
+        }catch(Exception e){
+            System.out.println("Erro");
+        }
+        for (ContaCorrente contas: contasCorrentes) {
+            sys.cmbClienteEditar.addItem(contas.getcpfCliente());
+        }
     }
 }
 

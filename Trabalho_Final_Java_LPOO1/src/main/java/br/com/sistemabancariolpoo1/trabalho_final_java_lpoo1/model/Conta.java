@@ -16,6 +16,15 @@ public abstract class Conta implements ContaI {
     private double saldo;
     private Cliente dono;
     
+    public Conta() {
+        
+    }
+    
+    public Conta(String cpfCliente, double saldo) {
+        this.cpfCliente = cpfCliente;
+        this.saldo = saldo;
+    }
+    
     @Override
     public boolean deposita(double valor) {
         if(valor < 0) {

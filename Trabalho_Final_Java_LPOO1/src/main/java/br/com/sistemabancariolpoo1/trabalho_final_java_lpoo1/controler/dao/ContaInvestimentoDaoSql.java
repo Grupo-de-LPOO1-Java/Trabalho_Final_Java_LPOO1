@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
     
+    private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into ContaInvestimento "
             + "(numero,montanteMinimo,depositoMinimo,depositoInicial,saldo) values (?,?,?,?,?)";
@@ -66,6 +67,8 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
             stmtAdiciona.setDouble(5,objeto.getDepositoInicial());
             
             stmtAdiciona.execute();
+            cli.setIs_corente(2);
+            clienteDao.update(cli);
             
            return 1;
         }    
