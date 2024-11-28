@@ -89,16 +89,17 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
             
                 stmtLista.setString(1,cpf);
                 ResultSet rs = stmtLista.executeQuery();   
-                Double depositoInicial = rs.getDouble("depositoInicial");
-                Double montanteMinimo = rs.getDouble("montanteMinimo");
-                Double depositoMinimo = rs.getDouble("depositoMinimo");
-                double saldo = rs.getDouble("saldo");
-                
-                conta.setSaldo(saldo);
-                conta.setCpfCliente(cpf);
-                conta.setDepositoMinimo(depositoMinimo);
-                conta.setMontanteMinimo(montanteMinimo);
-                conta.setDepositoInicial(depositoInicial);
+                if(rs.next()) {
+                    Double depositoInicial = rs.getDouble("depositoInicial");
+                    Double montanteMinimo = rs.getDouble("montanteMinimo");
+                    Double depositoMinimo = rs.getDouble("depositoMinimo");
+                    double saldo = rs.getDouble("saldo");
+                    conta.setSaldo(saldo);
+                    conta.setCpfCliente(cpf);
+                    conta.setDepositoMinimo(depositoMinimo);
+                    conta.setMontanteMinimo(montanteMinimo);
+                    conta.setDepositoInicial(depositoInicial);
+                }
             }
             
             return conta;   

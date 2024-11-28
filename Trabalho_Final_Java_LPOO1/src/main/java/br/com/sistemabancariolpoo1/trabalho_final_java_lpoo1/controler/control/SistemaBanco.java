@@ -795,7 +795,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     }                                            
 
 
-    private void bntSaldoActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void bntSaldoActionPerformed(java.awt.event.ActionEvent evt) {
         String cpf = cmbClienteEditar.getSelectedItem().toString();
         Cliente cli =  null;
         try {
@@ -803,8 +803,6 @@ public class SistemaBanco extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(SistemaBanco.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(cli);
-        System.out.println(cli.getIs_corente());
         try{
             switch(cli.getIs_corente()){
                 case 1:

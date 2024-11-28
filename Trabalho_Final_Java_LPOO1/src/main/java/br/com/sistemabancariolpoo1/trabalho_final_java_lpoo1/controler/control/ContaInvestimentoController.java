@@ -126,7 +126,7 @@ public void criarContaInvestimento() throws Exception{
 
     // Verificar saldo de uma conta de investimento
     public void VerSaldoContaInvestimento() throws Exception {
-      String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
         ContaInvestimento conta = null;
         conta = modelDao.getByCPF(cpf);
         sys.valorSaldo.setText(Double.toString(conta.getSaldo()));
