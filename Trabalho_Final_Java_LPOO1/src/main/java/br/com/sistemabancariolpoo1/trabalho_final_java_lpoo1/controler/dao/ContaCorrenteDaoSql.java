@@ -177,12 +177,15 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
 
     public int getNumero() throws Exception {
         int linhas = -1;
-        try(    Connection connection=ConnectionFactory.getConnection();
+        try(Connection connection=ConnectionFactory.getConnection();
                 PreparedStatement stmtRowCount = connection.prepareStatement(contaLinhas);
-                ){
-            ResultSet rs = stmtRowCount.executeQuery();
-            linhas = rs.getInt("count(*)");
+                ResultSet rs = stmtRowCount.executeQuery();){
+            
+            if (rs.next()) {
+            linhas = rs.getInt(1);
+            }
         }
+
         return linhas;
     }
 }

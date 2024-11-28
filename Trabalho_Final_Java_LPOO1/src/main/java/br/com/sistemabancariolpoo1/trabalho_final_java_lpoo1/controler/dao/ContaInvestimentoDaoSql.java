@@ -63,7 +63,7 @@ public class ContaInvestimentoDaoSql implements ContaInvestimentoDao {
             stmtAdiciona.setDouble(2,objeto.getMontanteMinimo());
             stmtAdiciona.setDouble(3,objeto.getDepositoMinimo());
             stmtAdiciona.setDouble(4,objeto.getDepositoInicial());
-            stmtAdiciona.setDouble(5,objeto.getSaldo());
+            stmtAdiciona.setDouble(5,objeto.getDepositoInicial());
             
             stmtAdiciona.execute();
             
