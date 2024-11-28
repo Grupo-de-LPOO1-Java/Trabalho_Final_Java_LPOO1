@@ -111,12 +111,12 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
         }
     }
 
-    public void delete(int numero) throws Exception {
+    public void delete(String cpf) throws Exception {
         
         try (Connection connection=ConnectionFactory.getConnection();
              PreparedStatement stmtExcluir = connection.prepareStatement(delete);
             ){
-                stmtExcluir.setInt(1, numero);
+                stmtExcluir.setString(1, cpf);
                 stmtExcluir.executeUpdate();
         }
     }    
@@ -191,6 +191,11 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
         }
 
         return linhas;
+    }
+
+    @Override
+    public void delete(int objeto) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 

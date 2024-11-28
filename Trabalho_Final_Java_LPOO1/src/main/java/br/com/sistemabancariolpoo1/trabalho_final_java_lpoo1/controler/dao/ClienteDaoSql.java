@@ -25,15 +25,15 @@ import java.util.List;
 public class ClienteDaoSql implements ClienteDao {
     
     private ConnectionFactory connectionFactory;
-    private final String insert = "insert into cliente (nome,sobrenome,rg,cpf,rua,estado,cep,is_corrente) values (?,?,?,?,?,?,?,?)";
-    private final String selectAll = "select * from cliente";
-    private final String selectByCPF = "select nome,sobrenome,rg,rua,estado,cep,is_corrente from cliente WHERE cpf=?";
-    private final String update = "update cliente set nome=?, sobrenome=?, rg=?, rua=?, estado=?, cep=?, is_corrente=? WHERE cpf=?";
-    private final String updateConta = "update cliente SET is_corrente = ? WHERE cpf = ?";
-    private final String delete = "delete from cliente WHERE cpf=?";
-    private final String deleteAll = "Truncate cliente";
-    private final String selectNumberOfRows = "select count(*) from cliente";
-    private final String selectAllOrdered = "SELECT nome, sobrenome, rg, cpf, rua, estado, cep, is_corrente FROM cliente ORDER BY nome ASC, sobrenome ASC";
+    private final String insert = "insert into Cliente (nome,sobrenome,rg,cpf,rua,estado,cep,is_corrente) values (?,?,?,?,?,?,?,?)";
+    private final String selectAll = "select * from Cliente";
+    private final String selectByCPF = "select nome,sobrenome,rg,rua,estado,cep,is_corrente from Cliente WHERE cpf=?";
+    private final String update = "update Cliente set nome=?, sobrenome=?, rg=?, rua=?, estado=?, cep=?, is_corrente=? WHERE cpf=?";
+    private final String updateConta = "update Cliente SET is_corrente = ? WHERE cpf = ?";
+    private final String delete = "delete from Cliente WHERE cpf=?";
+    private final String deleteAll = "Truncate Cliente";
+    private final String selectNumberOfRows = "select count(*) from Cliente";
+    private final String selectAllOrdered = "SELECT nome, sobrenome, rg, cpf, rua, estado, cep, is_corrente FROM Cliente ORDER BY nome ASC, sobrenome ASC";
     private static ClienteDaoSql dao;
     private ClienteDaoSql() {
     }
@@ -135,8 +135,8 @@ public class ClienteDaoSql implements ClienteDao {
             stmtAtualiza.setString(4, cliente.getEndereco().getRua());
             stmtAtualiza.setString(5, cliente.getEndereco().getEstado().getNome());
             stmtAtualiza.setString(6, cliente.getEndereco().getCep());
-            stmtAtualiza.setString(7, cliente.getCpf());
-            stmtAtualiza.setInt(8, cliente.getIs_corente());
+            stmtAtualiza.setString(8, cliente.getCpf());
+            stmtAtualiza.setInt(7, cliente.getIs_corente());
             stmtAtualiza.executeUpdate();
             
         } 

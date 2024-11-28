@@ -7,16 +7,13 @@ import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control.S
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.control.CPFValidator;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ClienteDaoSql;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ContaCorrenteDaoSql;
-import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaInvestimento;
-import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Estado;
-import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Endereco;
-import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaCorrente;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.controler.dao.ContaInvestimentoDaoSql;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Cliente;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ClienteTableModel;
 import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.Conta;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaCorrente;
+import br.com.sistemabancariolpoo1.trabalho_final_java_lpoo1.model.ContaInvestimento;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +35,7 @@ public class SistemaBanco extends javax.swing.JFrame {
     private ContaInvestimentoController investimentoControl;
     private ContaCorrenteDaoSql contaCorrenteDao = ContaCorrenteDaoSql.getContaDaoSql();
     private ClienteDaoSql clienteDao = ClienteDaoSql.getClienteDaoSQL();
+    private ContaInvestimentoDaoSql contaInvestimentoDao = ContaInvestimentoDaoSql.getContaDaoSql();
     /**
      * Creates new form SistemaBanco
      */
@@ -147,7 +145,11 @@ public class SistemaBanco extends javax.swing.JFrame {
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                try {
+                    btnExcluirActionPerformed(evt);
+                } catch (Exception ex) {
+                    Logger.getLogger(SistemaBanco.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -559,7 +561,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         
     }                                         
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                           
         List<Cliente> listaExcluir = getClienteParaExcluirDaTabela();
         if(listaExcluir.isEmpty()){
             JOptionPane.showMessageDialog(null,"Selecione alguma linha para excluir.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
@@ -568,6 +570,10 @@ public class SistemaBanco extends javax.swing.JFrame {
         int resposta = JOptionPane.showConfirmDialog(null, "Todas as contas vinculadas a este(s) cliente(s) serão apagadas", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (resposta == JOptionPane.YES_OPTION) {
             for(Cliente cli:listaExcluir) {
+                if(cli.getIs_corente() == 1)
+                    contaCorrenteDao.delete(cli.getCpf());
+                else if (cli.getIs_corente() == 0)
+                    contaInvestimentoDao.delete(cli.getCpf());
                 control.excluirCliente(cli);
             }
             this.tabModel.removeClientes(listaExcluir);
@@ -608,7 +614,10 @@ public class SistemaBanco extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     System.out.println("Erro ao pesquisar o numero de contas");
                 }
-                textMonMin.setText(numero.toString());
+                if(numero == -1){
+                    textMonMin.setText("1");
+                }else
+                    textMonMin.setText(numero.toString());
                 lDepIni.setText("Deposito Inicial");
                 lLimite.setText("Limite");
                 lMonMin.setText("Numero da conta");
@@ -641,6 +650,22 @@ public class SistemaBanco extends javax.swing.JFrame {
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Por favos selecione um tipo de conta.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            }
+            cmbClienteEditar.removeAllItems();
+            cmbClienteEditar.addItem("--");
+            List<ContaCorrente> contasC = new ArrayList<ContaCorrente>();
+            List<ContaInvestimento> contasI = new ArrayList<ContaInvestimento>();
+            try{
+                contasC = contaCorrenteDao.getAll();
+                contasI = contaInvestimentoDao.getAll();
+            }catch(Exception e){
+                System.out.println("Erro");
+            }
+            for (ContaCorrente cont: contasC) {
+                cmbClienteEditar.addItem(cont.getcpfCliente());
+            }
+            for (ContaInvestimento cont: contasI){
+                cmbClienteEditar.addItem(cont.getcpfCliente());
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
@@ -778,6 +803,7 @@ public class SistemaBanco extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(SistemaBanco.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(cli.getIs_corente());
         try{
             switch(cli.getIs_corente()){
                 case 1:
