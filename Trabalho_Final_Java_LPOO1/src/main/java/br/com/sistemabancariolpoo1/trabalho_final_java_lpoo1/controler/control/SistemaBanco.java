@@ -637,12 +637,11 @@ public class SistemaBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_btnbCadastrarContaActionPerformed
 
     private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
-        HashMap<String, Cliente> hashClientes = Sistema.hashClientes;
-        List<Cliente> clientes = new ArrayList<>(hashClientes.values());
-        Collections.sort(clientes);
-        tabModel.setListaContatos(clientes);
-        this.clienteSelecionadoParaAtualizacao = null;
-        linhaClicadaParaAtualizacao=-1;
+        try{
+           control.ordenarCliente();
+       }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);           
+       }
     }//GEN-LAST:event_btnOrdenarActionPerformed
 
     private void textCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCPFActionPerformed

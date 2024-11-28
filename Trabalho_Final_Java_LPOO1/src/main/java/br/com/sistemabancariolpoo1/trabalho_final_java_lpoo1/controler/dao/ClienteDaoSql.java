@@ -33,6 +33,7 @@ public class ClienteDaoSql implements ClienteDao {
     private final String delete = "delete from cliente WHERE cpf=?";
     private final String deleteAll = "Truncate cliente";
     private final String selectNumberOfRows = "select count(*) from cliente";
+    private final String selectAllOrdered = "SELECT nome, sobrenome, rg, cpf, rua, estado, cep, is_corrente FROM cliente ORDER BY nome ASC, sobrenome ASC";
     private static ClienteDaoSql dao;
     private ClienteDaoSql() {
     }
@@ -208,5 +209,32 @@ public class ClienteDaoSql implements ClienteDao {
 
         return numberOfRows;
     }
+    
+    public List<Cliente> getAllOrdered() throws Exception {
+
+    try (Connection connection = ConnectionFactory.getConnection();
+         PreparedStatement stmt = connection.prepareStatement(selectAllOrdered);
+         ResultSet rs = stmt.executeQuery()) {
+
+        List<Cliente> clientes = new ArrayList<>();
+        while (rs.next()) {
+            String nome = rs.getString("nome");
+            String sobrenome = rs.getString("sobrenome");
+            String rg = rs.getString("rg");
+            String cpf = rs.getString("cpf");
+            String rua = rs.getString("rua");
+            String estado = rs.getString("estado");
+            String cep = rs.getString("cep");
+            int is_corrente = rs.getInt("is_corrente");
+
+
+            Estado est = new Estado(estado);
+            Endereco end = new Endereco(est, cep, rua, "");
+            clientes.add(new Cliente(nome, sobrenome, rg, cpf, end, is_corrente));
+        }
+
+        return clientes;
+    }
+}
     
 }
