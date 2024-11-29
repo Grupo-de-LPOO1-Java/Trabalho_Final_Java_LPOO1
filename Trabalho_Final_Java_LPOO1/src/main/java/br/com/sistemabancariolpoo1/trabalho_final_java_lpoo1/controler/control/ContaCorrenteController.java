@@ -81,11 +81,14 @@ public void criarContaCorrente() throws Exception {
        
 }
  public void sacarContaCorrente() throws Exception {
-        String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
-        ContaCorrente conta = modelDao.getByCPF(cpf);
+       String cpf = sys.cmbClienteEditar.getSelectedItem().toString();
+       ContaCorrente conta = modelDao.getByCPF(cpf);
        if (Double.parseDouble(sys.valorSaque.getText()) < 0.0){
-            throw new Exception("Valor do depósito deve ser positivo.\n");
-        }
+            throw new Exception("Valor do saque deve ser positivo.\n");
+       }
+       if (Double.parseDouble(sys.valorSaque.getText()) > (conta.getLimit() + conta.getSaldo())) {
+           throw new Exception("Valor do saque nao pode ser maior que o limite + o saldo da conta.\n");
+       }
         Double valor = Double.parseDouble(sys.valorSaque.getText());
         conta.setSaldo(conta.getSaldo() - valor);
         sys.valorSaque.setText("");
