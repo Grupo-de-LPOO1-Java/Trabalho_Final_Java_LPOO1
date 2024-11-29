@@ -61,13 +61,6 @@ public class ClienteDaoSql implements ClienteDao {
             stmtAdiciona.setInt(8, cliente.getIs_corente());
             // executa
             stmtAdiciona.execute();
-            //Seta o id do aluno
-            /*
-            ResultSet rs = stmtAdiciona.getGeneratedKeys();
-            rs.next();
-            long i = rs.getLong(1);
-            cliente.setId(i);
-            */
         } 
         return 1;
     }

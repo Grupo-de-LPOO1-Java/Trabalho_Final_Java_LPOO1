@@ -707,17 +707,7 @@ public class SistemaBanco extends javax.swing.JFrame {
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
-        }
-        /*
-        Cliente cliente = Sistema.hashClientes.get(cpf);
-        Conta conta = cliente.getConta();
-        
-        if(conta.getSaldo() <= 0)
-            JOptionPane.showMessageDialog(null,"Não pode remunerar saldos negativos ou 0.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-        else{
-            conta.remunera();
-            JOptionPane.showMessageDialog(null,"Conta remunerada.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-        }*/                                       
+        }                                   
         }
                                           
 
@@ -746,20 +736,6 @@ public class SistemaBanco extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
         
-        /*try {
-            if (Double.parseDouble(valorSaque.getText()) < 0.0){
-                JOptionPane.showMessageDialog(null,"Valor do saque deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                if (conta.saca(Double.parseDouble(valorSaque.getText())))
-                    JOptionPane.showMessageDialog(null,"Saque realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-                else
-                    JOptionPane.showMessageDialog(null,"Saldo não pode ser menor que o Limite.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-                valorSaque.setText("");
-            }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            
-        }*/
     }                                        
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -787,30 +763,6 @@ public class SistemaBanco extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
         
-        /*
-            try {
-            if (Double.parseDouble(valorDeposita.getText()) < 0.0){
-                 JOptionPane.showMessageDialog(null,"Valor do depósito deve ser positivo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            }
-            if (conta instanceof ContaInvestimento) {
-                if (Double.parseDouble(valorDeposita.getText()) < ((ContaInvestimento) conta).getDepositoMinimo()) {
-                    JOptionPane.showMessageDialog(null,"Valor do depósito deve ser maior que o mínimo.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else {
-                    conta.deposita(Double.parseDouble(valorDeposita.getText()));
-                    JOptionPane.showMessageDialog(null,"Depósito realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-                    valorDeposita.setText("");
-                }
-            }
-            else {
-                conta.deposita(Double.parseDouble(valorDeposita.getText()));
-                JOptionPane.showMessageDialog(null,"Depósito realizado.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-                valorDeposita.setText("");
-            }
-            
-            } catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Por favor digite um número.\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            }*/
     }                                            
 
 

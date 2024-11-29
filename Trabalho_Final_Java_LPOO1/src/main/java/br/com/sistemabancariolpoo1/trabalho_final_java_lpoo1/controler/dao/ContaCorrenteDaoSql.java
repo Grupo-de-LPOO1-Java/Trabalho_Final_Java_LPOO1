@@ -85,38 +85,6 @@ public class ContaCorrenteDaoSql implements ContaCorrenteDao {
             return contaCorrente;
         } 
     }
-
-    /*public ContaCorrente getContaCorrenteByID(int id) throws Exception{
-        ContaCorrente conta = new ContaCorrente();
-        try (Connection connection=ConnectionFactory.getConnection();
-             PreparedStatement stmtLista = connection.prepareStatement(getContaCorrenteByID);
-            ){
-            
-                stmtLista.setInt(1,id);
-                ResultSet rs = stmtLista.executeQuery();   
-                Double saldo = rs.getDouble("saldo");
-                Double limite = rs.getDouble("limite");
-                
-                // adicionando o objeto à lista
-                conta.setLimit(limite);
-                conta.setNumero(id);
-                conta.setSaldo(saldo);
-            }
-            
-            return conta;
-        }*/ //Método ja implementado da interface
-
-
-    /*public void update_movimenta(ContaCorrente conta) throws Exception{
-        try(    Connection connection=ConnectionFactory.getConnection();
-                PreparedStatement stmtAtualiza = connection.prepareStatement(update_movimenta);
-                ){
-
-            stmtAtualiza.setDouble(1, conta.getSaldo());
-            stmtAtualiza.setObject(2, conta.getNumero());      
-            stmtAtualiza.executeUpdate();
-        } 
-    }*/ //Implementado no método da interface
     
     @Override
     public void delete(List<ContaCorrente> contas) throws Exception {

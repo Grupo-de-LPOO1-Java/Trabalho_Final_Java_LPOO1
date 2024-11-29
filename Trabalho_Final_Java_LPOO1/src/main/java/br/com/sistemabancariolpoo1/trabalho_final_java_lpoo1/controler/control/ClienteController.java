@@ -108,14 +108,6 @@ public class ClienteController {
      }
     
      public void listarCliente() {
-         /*try{
-            view.limparContatoAtualizar();
-            List<Cliente> lista = this.modelDao.getAll();
-            view.mostrarListaContatos(lista);
-        }catch(Exception ex){
-            ex.printStackTrace();
-            view.apresentaErro("Erro ao listar contatos.");
-        }*/
      }
           
      public void ordenarCliente() {
