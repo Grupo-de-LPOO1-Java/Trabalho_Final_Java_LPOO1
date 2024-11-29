@@ -724,16 +724,19 @@ public class SistemaBanco extends javax.swing.JFrame {
             switch(cli.getIs_corente()){
                 case 1:
                     correnteControl.sacarContaCorrente();
+                    JOptionPane.showMessageDialog(null,"Saque realizado!", "Informação", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 2:
                     investimentoControl.sacarContaInvestimento();
+                    JOptionPane.showMessageDialog(null,"Saque realizado!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null,"Cliente sem conta para Deposito!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Cliente sem conta para saque!", "Informação", JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Digite um valor para o saque!", "Informação", JOptionPane.ERROR_MESSAGE);
         }
         
     }                                        
@@ -751,16 +754,20 @@ public class SistemaBanco extends javax.swing.JFrame {
             switch(cli.getIs_corente()){
                 case 1:
                     correnteControl.depositarContaCorrente();
+                    JOptionPane.showMessageDialog(null,"Depósito realizado!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+
                     break;
                 case 2:
                     investimentoControl.DepositarContaInvestimento();
+                    JOptionPane.showMessageDialog(null,"Depósito realizado!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+
                     break;
                 default:
                     JOptionPane.showMessageDialog(null,"Cliente sem conta para Deposito!", "Informação", JOptionPane.INFORMATION_MESSAGE);
                     break;
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage(), "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Digite um valor para o depósito!", "Informação", JOptionPane.ERROR_MESSAGE);
         }
         
     }                                            
