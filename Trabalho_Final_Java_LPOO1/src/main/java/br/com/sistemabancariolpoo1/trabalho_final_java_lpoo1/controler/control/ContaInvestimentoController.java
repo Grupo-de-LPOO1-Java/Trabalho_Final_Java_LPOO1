@@ -91,6 +91,9 @@ public void criarContaInvestimento() throws Exception{
        if (Double.parseDouble(sys.valorSaque.getText()) < 0.0){
             throw new Exception("Valor do depósito deve ser positivo.\n");
         }
+       if (Double.parseDouble(sys.valorSaque.getText()) > conta.getSaldo() - conta.getMontanteMinimo()){
+            throw new Exception("Valor do saque maior que o montante minimo.\n");
+        }
         Double valor = Double.parseDouble(sys.valorSaque.getText());
         conta.setSaldo(conta.getSaldo() - valor);
         sys.valorSaque.setText("");
